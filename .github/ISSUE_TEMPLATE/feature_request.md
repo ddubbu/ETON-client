@@ -8,6 +8,11 @@ assignees: ''
 ---
 
 ## Task Card
+### TODO
+1. [ ] Job1
+2. [ ] Job2
+3. [ ] Job3
+
 
 ### Job Description
 작업 내용을 적어주세요.
