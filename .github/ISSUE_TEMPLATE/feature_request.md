@@ -2,14 +2,14 @@
 name: Feature request
 about: Suggest an idea for this project
 title: "[Task] 작업을 작성해주세요"
-labels: server, bare-minimum
-assignees: aesopfrom0
+labels: bare-minimum, client
+assignees: ''
 
 ---
 
 ## Task Card
 
-**Assignee**: @aesopfrom0
+**Assignee**: @
 
 ### Job Description
 
