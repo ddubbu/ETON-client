@@ -1,0 +1,9 @@
+.Intro > div {
+  border: black 1px solid;
+}
+
+.Intro{
+  height: 150rem;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+} 
