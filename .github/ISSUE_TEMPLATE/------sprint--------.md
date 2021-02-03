@@ -3,7 +3,7 @@ name: "[회고록] Sprint # 스프린트명"
 about: Project 진행 중에 스프린트 하나가 끝나면 회고하는 시간을 갖는다.
 title: "[회고록] Sprint # 스프린트명"
 labels: documentation
-assignees: ddubbu, Wunhyeon, aesopfrom0
+assignees: aesopfrom0, ddubbu, Wunhyeon
 
 ---
 
