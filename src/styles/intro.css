@@ -1,0 +1,22 @@
+.ad-container {
+  font-family: "jaf-facitweb","Helvetica Neue",Arial,sans-serif;
+  color: hsl(0,0%,30%)
+
+}
+
+.ad-item {
+  padding: 3em 1em;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ad-title {
+  font-size: 1.777em;
+  margin-top: 1.6em;
+}
+
+.ad-content {
+  margin : 1em auto;
+  white-space:normal;
+  max-width: 600px;
+}
