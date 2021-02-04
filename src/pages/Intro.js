@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'; //, { useState } 
 import '../styles/intro.css';
 
@@ -20,7 +19,7 @@ const Intro = () => {
     },
     {
       title: 'Do you have the apps?',
-      img: '/logo192.png',
+      img: '/home-devices.png',
       content : `We’ve got apps for iPhone, iPad, Android phones, tablets, and watches. You probably have one of those.`,
       style: {
         background: '#BCD9EA'
@@ -34,8 +33,8 @@ const Intro = () => {
       }
     }, {
       title: `Share Trello to get free Trello Gold.`,
+      img: '/favicon.ico',
       content: `That’s right. For every member you get to sign up, you’ll get a free month of Trello Gold, up to 12 months. With Trello Gold you get three Power-Ups per board, custom backgrounds, stickers and emoji, 250MB attachments, and saved searches.
-
       Help us spread the word and get some free Gold.`,
       style: {
         background: '#F5EA92'
