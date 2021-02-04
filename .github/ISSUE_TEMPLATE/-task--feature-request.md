@@ -1,8 +1,8 @@
 ---
-name: Feature request
+name: "[Task] Feature request"
 about: Suggest an idea for this project
 title: "[Task] 작업을 작성해주세요"
-labels: front, bare-minimum
+labels: bare-minimum, front
 assignees: ''
 
 ---
