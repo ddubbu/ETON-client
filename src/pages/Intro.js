@@ -20,7 +20,7 @@ const Intro = () => {
     },
     {
       title: 'Do you have the apps?',
-      // img: '../public/images/logo192.png',
+      img: '/logo192.png',
       content : `We’ve got apps for iPhone, iPad, Android phones, tablets, and watches. You probably have one of those.`,
       style: {
         background: '#BCD9EA'
