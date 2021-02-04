@@ -1,31 +1,33 @@
 .signUpContainer {
-  background-color: #2a4066;
-  height: 100vh;
-  width: 100vw;
-  display: grid;
+  /* background-color: #2a4066; */
+  /* height: 100vh;
+  width: 100vw; */
+  /* display: grid;
   grid-template-columns: 2.5fr 4fr 2.5fr;
   grid-template-rows: 1fr 6fr 1fr;
-  grid-template-areas: ". . ." ". mid ." ". . .";
+  grid-template-areas: ". . ." ". mid ." ". . ."; */
 }
 
 .signUpDiv {
-  padding: 3rem;
-  background-color: white;
-  border: solid black 3px;
-  grid-area: mid;
+  /* padding: 3rem; */
+  width: 17rem;
+  margin: 10vh auto;
+  /* border: solid black 3px; */
+  /* grid-area: mid;
   display: grid;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr); */
 }
 
 .signUpDiv>div {
   /* border: solid black 1px; */
   border-radius: 0.3rem;
+
 }
 
 .signUpDiv>.inputDiv {
   text-align: left;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
 }
 
 .validError {
