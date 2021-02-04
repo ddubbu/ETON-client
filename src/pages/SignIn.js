@@ -23,13 +23,14 @@ const SignIn = () => {
     <section className="signin-wrapper">
       <Logo/>
       <section className="signin-form">
-        <p>Log in to ETON</p>
+        <label>이메일</label>
         <input type="email" onChange={inputHandler} placeholder="Enter email"/>
+        <label>비밀번호</label>
         <input type="password" onChange={inputHandler} placeholder="Enter password"/>
-        <button onClick={signInHandler}> Sign In </button>
+        <button onClick={signInHandler}> Log In </button>
         <p>or</p>
         <button>Continue with github 🤖</button>
-        <a href="https://www.naver.com">Sign up for an account</a>
+        <a href="/users/signup">Sign up for an account</a>
       </section>
     </section>
   )
