@@ -1,8 +1,8 @@
 
 .ad-container {
   font-family: "jaf-facitweb","Helvetica Neue",Arial,sans-serif;
-  color: hsl(0,0%,30%)
-
+  color: hsl(0,0%,30%);
+  height: 100%;
 }
 
 .ad-item {
