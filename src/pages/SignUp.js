@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/signUp.css";
+import Logo from '../components/common/Logo.js'
+
 import axios from "axios";
 
 const SignUp = () => {
@@ -424,9 +426,9 @@ const SignUp = () => {
   return (
     <div className="signUpContainer">
       <div className="signUpDiv">
-        LOGO
-        <br />
-        SignUp
+        <Logo />
+        {/* <br /> */}
+        {/* SignUp */}
         {/* <div className = "socialLoginDiv">
                     <button onClick = {socialSignUp}>GitHub</button>
                 </div> */}
