@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../styles/common.css';
+
 export default function Logo(){
   return (
     <section className="logo">

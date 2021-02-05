@@ -16,22 +16,23 @@
   grid-template-columns: 1fr 2.5fr 1fr;
 }
 
-.logoimg{
-  width: 5rem;
-  height: 5rem;
-}
 
-.logo {
+.logo a {
   display: flex;
+  align-items: center;
+
+  /* a tag 속성 제거 */
+  text-decoration:none;
+  color:black;
 }
 
 .logo img {
-  width: 4em
+  width: 2.5em
 }
 
 .logo span {
   font-family: 'Playfair Display', serif;
-  font-size: 3em;
+  font-size: 1.4em;
   margin-left: 10px;
 }
 

@@ -7,10 +7,8 @@ const Header = () => {
 
   return (
     <div className="Header">
-      <div>
-        {/* <Logo /> */}
-      </div>
-      <div>여백. 뭐 넣을까?</div>
+      <Logo />
+      <div style={{color:"white"}}>여백. 뭐 넣을까?</div>
       <div>
         <button
           onClick={() => {

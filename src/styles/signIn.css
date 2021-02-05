@@ -18,7 +18,7 @@
   font-size: 0.6em;
 }
 
-.logo { /*common.css 에 넣을까?*/
+.logo a { /*common.css 에 넣을까?*/
   justify-content: center;
 }
 
@@ -39,7 +39,7 @@
   background: rgba(112, 112, 112, 0.2);
 }
 
-a:last-child {
+.signin-form a:last-child {
   width: 100%;
   border-top: 1px rgba(0,0,0,0.2) solid;
   margin-top: 2em;
