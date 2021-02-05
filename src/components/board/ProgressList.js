@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TaskList from './TaskList.js';
 
-import sortObject from '../../heper/sortObject.js';
+import sortObject from '../../helper/sortObject.js';
 
 export default function ProgressList( { progress, tasks }){
 

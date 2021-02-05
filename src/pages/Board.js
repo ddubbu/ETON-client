@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import ProgressList from '../components/board/ProgressList.js';
 
-import sortObject from '../heper/sortObject';
+import sortObject from '../helper/sortObject';
+
+import '../styles/board.css'
 
 export default function Board({ board_title='board', }){
   // 상위 컴포넌트에서 한꺼번에 관리하자!
@@ -49,7 +51,7 @@ export default function Board({ board_title='board', }){
   return (
     <div id="main-content">
       <section id="sub-nav-bar">
-        <button className="btn-sub-nav-bar board_title">{board_title}</button>
+        <button className="btn-sub-nav-bar board_title">{board.title}</button>
         <button className="btn-sub-nav-bar member">member</button>
         <button className="btn-sub-nav-bar invite">invite</button>
       </section>
