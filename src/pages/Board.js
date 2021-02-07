@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ProgressList from '../components/board/ProgressList.js';
 
 import sortObject from '../helper/sortObject';
+import drag_n_drop from '../helper/drag-n-drop.js';
 
 import '../styles/board.css'
 
@@ -48,6 +49,10 @@ export default function Board(){
     }
   })
 
+  // drag-n-drop
+  document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
+
+
   return (
     <div id="main-content">
       <section id="sub-nav-bar">
@@ -59,9 +64,15 @@ export default function Board(){
       <section id="progress-wrapper">
         {
           sortObject(progresses, board.prg_priority).map((progress, idx)=>{
-            return <ProgressList key={idx} progress={progress} tasks={tasks}/>
+            return (
+              <>
+                <article className={`prg-dropzone prg-dropzone-${idx}`}></article>
+                <ProgressList key={idx} progress={progress} tasks={tasks}/>
+              </>
+            )
           })
         }
+        <article className={`prg-dropzone prg-dropzone-${board.prg_priority.length}`}></article>
         <button className="btn-add-progress"> + Add another progress </button>
       </section>
     </div>
