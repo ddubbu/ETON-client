@@ -333,7 +333,7 @@ const Main = () => {
                         <div className="myTaskList">
                             {/* <div className="taskItem">TaskItem</div> */}
                             {mockData.data.slice(0, numberOfTaskThumbNails).map((el,i) => {
-                                return <TaskThumNail bordId = {el.bordId} bordName = {el.bordName} taskId = {el.taskId} taskName = {el.taskname} />
+                                return <TaskThumNail bordId = {el.bordId} bordName = {el.bordName} taskId = {el.taskId} taskName = {el.taskname} key = {i}/>
                             })}
                         </div>
                         {/* <button className={`mainButton`}>Show More</button> */}
