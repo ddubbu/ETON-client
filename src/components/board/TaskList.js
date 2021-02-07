@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-export default function TaskList({ task }){
+import drag_n_drop from '../../helper/drag-n-drop.js';
+
+export default function TaskList({ task, progressId }){
   return (
-    <article className={`task ${task.id} drag-drop`}>
+    <article className={`task prg-${progressId}-task-${task.id} drag-drop`}>
       <section className="task-head">
         <div className="task-title">{task.title}</div>
         <button className="btn-task-menu">···</button>

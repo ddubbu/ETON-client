@@ -58,6 +58,17 @@ export default function Board(){
     console.log("Update newPrgPriority", newPrgPriority); 
   }
 
+  // function changeTaskPriority (){ //{ source, target }
+  //   // setProgresses({
+  //   //   ...progresses,
+  //   //   source.prgId : 
+  //   // })
+  //   setProgresses((prev)=>{
+  //     console.log(prev)
+  //   })
+  // }
+  // changeTaskPriority()
+
   // drag-n-drop
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
 

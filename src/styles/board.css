@@ -133,6 +133,7 @@ input.progress-title:focus {
   background: white;
   padding: 6px 8px 2px;
   margin-bottom: 5px;
+  width: 256px; /* drag drop 시 크기 고정을 위해 */
 
   /* 그림자 */
   box-shadow: 0 1px rgb(189, 189, 189);
@@ -178,10 +179,18 @@ input.progress-title:focus {
   /* border: 1px white solid; */
 }
 .prg-dropzone:hover {
-  background: rgba(161, 161, 161, 0.2);
-  width: 272px;
+  /* js 파일 에서 정의함! */
+  /* background: rgba(161, 161, 161, 0.2);
+  width: 272px; */
 }
 
 .hold {
   position: absolute;
+}
+
+.task-dropzone { /* mouse hover 인식을 위해서 */
+  width: 256px;
+  height: 3px;
+  /* margin:2px; */
+  border: 1px rgb(246, 76, 76) solid;
 }

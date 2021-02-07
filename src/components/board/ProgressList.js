@@ -19,10 +19,15 @@ export default function ProgressList( { progress, tasks, changePrgPriority, prg_
       <section className="progress-tasks-wrapper">
         {
           sortObject(tasks, progress.task_priority).map((task, idx)=>{
-            return <TaskList key={idx} task={task}/>
+            return (
+              <>
+                <article className={`task-dropzone prg-${progress.id}-taskDropZone-${idx}`}></article>
+                <TaskList key={idx} task={task} progressId={progress.id}/>
+              </>
+            )
           })
         }
-        <artice className={`task-dropzone prpgress-${1}-dropzone-${3}`}></artice>
+        <article className={`task-dropzone prg-${progress.id}-taskDropZone-${progress.task_priority.split(',').length}`}></article>
       </section>
       <button className="btn-add-task"> + Add a task </button>
     </article>    
