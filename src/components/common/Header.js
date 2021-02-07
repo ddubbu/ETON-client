@@ -1,15 +1,24 @@
+import axios from "axios";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "./Logo.js";
 
-const Header = () => {
+const Header = ({isLogin}) => {
   const history = useHistory();
+
+  const handleLogout = () => {
+    // axios.
+  }
 
   return (
     <div className="Header">
       <Logo />
-      {/* <div style={{color:"white"}}>여백. 뭐 넣을까?</div> */}
-      <div>
+      {isLogin ? 
+      <button onClick={handleLogout}>
+        Log out
+      </button>
+        :
+        <div>
         <button
           onClick={() => {
             history.push("/users/signup");
@@ -25,6 +34,7 @@ const Header = () => {
           Log In
         </button>
       </div>
+      }
     </div>
   );
 };
