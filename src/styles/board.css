@@ -13,20 +13,31 @@
   padding: 5px 10px;
 }
 
-/*! 공통 및 positioning with flex */
+/*! 공통, 위치잡기(flex) */
 /* 투명 버튼/input 요소 */
 #sub-nav-bar *:not(.divider), .btn-add-progress {
-  outline: none;
-  border: none;
+  outline: none; 
+  border: none; 
   background-color: rgba(255, 255, 255, 0.4);
   
   line-height: 32px;
   padding: 0 12px;
   margin: 0 16px 0 0 ;
+
+  color: white;
+}
+
+#sub-nav-bar *:not(.divider):hover, .btn-add-progress:hover {
+  background-color: rgba(255, 255, 255, 0.609);
 }
 
 /* border-radius */
-.progress, .btn-add-progress, #sub-nav-bar button, .task {
+#sub-nav-bar button, 
+/* input.progress-title, */
+.progress, 
+.btn-add-progress, 
+.task,
+.btn-add-task {
   border-radius: 5px;
 }
 
@@ -40,7 +51,6 @@
   justify-content: space-between
 }
 
-
 /*! sub-nav-bar*/
 
 #sub-nav-bar {
@@ -51,7 +61,7 @@
   font-size: 18px; 
   font-weight: 700;
 
-  width: fit-content
+  width: fit-content;
 }
 
 .btn-sub-nav-bar.divider {
@@ -70,7 +80,6 @@
   overflow-y: hidden;
   display: flex;
   align-items: flex-start; /* btn-add-progress (오른쪽 끝 버튼) 쭉 늘어남 방지 */ 
-  /* margin: 10px; */
 }
 
 .progress {
@@ -82,6 +91,20 @@
 
 .progress-head {
   margin-bottom: 5px;
+  height: 40px;
+}
+
+/* ? input.board_title:focus 적용하고 싶음 
+  위에 투명 버튼 설정보다 우선순위 밀려난듯.
+
+  #sub-nav-bar .board_title:focus,
+  위에로 select 하면 적용되는데 대신 input 값이 안 받아짐.
+*/
+
+input.progress-title:focus {
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 5px;
+  background-color: white;
 }
 
 .progress-title, .btn-progress-menu {
@@ -90,14 +113,10 @@
   outline: none;
 }
 
-
-
 .btn-progress-menu {
   border: none;
   outline: none;
 }
-
-
 
 .btn-add-progress {
   margin-left: 4px;
@@ -109,7 +128,10 @@
   font-size: 18px; /*나중에 전체적으로 적용할거임*/
   background: white;
   padding: 6px 8px 2px;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
+
+  /* 그림자 */
+  box-shadow: 0 1px rgb(189, 189, 189);
 }
 
 .btn-task-menu {
@@ -126,19 +148,16 @@
   font-weight: 700;
 }
 .task-body {
-
-  border: 1px brown solid;
-  
+  /* border: 1px brown solid; */
 }
 
 .btn-add-task {
   width: 100%;
+  line-height: 32px;
+  /* padding: 4px 8px; */
   outline: none;
   border: none;
-
-  border-radius: 3px;
   color: #5e6c84;
-  padding: 4px 8px;
 }
 
 .btn-add-task:hover, .btn-progress-menu:hover {
