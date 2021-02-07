@@ -4,16 +4,13 @@ import TaskList from './TaskList.js';
 import sortObject from '../../helper/sortObject.js';
 import drag_n_drop from '../../helper/drag-n-drop.js';
 
-export default function ProgressList( { progress, tasks }){
+export default function ProgressList( { progress, tasks, changePrgPriority, prg_priority }){
 
   return (
     <article className={"progress" + " " + progress.id} 
       onMouseDown={drag_n_drop.handleMouseDown}
-      onMouseUp={drag_n_drop.handleMouseUp}
+      onMouseUp={(e)=>{drag_n_drop.handleMouseUp(e, changePrgPriority, prg_priority)}}
       onMouseMove={drag_n_drop.handleMouseMove}
-      // 아래는 투명해
-      // onDrag={drag_n_drop.drag_handler}
-      // draggable='true'
       >
       <section className="progress-head drag-drop">
         <input className="progress-title" value={progress.title}></input>

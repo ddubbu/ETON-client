@@ -172,16 +172,16 @@ input.progress-title:focus {
 /*! drg-drop action */
 
 .prg-dropzone { /* mouse hover 인식을 위해서 */
-  width:5px;
-  height: 100vh;
+  /* width:5px; */
+  height: 40vh;
   margin:2px;
-  border: 1px white solid;
+  /* border: 1px white solid; */
 }
 .prg-dropzone:hover {
-  background: rgba(83, 83, 83, 0.2);
+  background: rgba(161, 161, 161, 0.2);
   width: 272px;
 }
 
 .hold {
-  position: absolute
+  position: absolute;
 }

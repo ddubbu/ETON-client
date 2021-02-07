@@ -20,13 +20,13 @@ export default function Board(){
     // 객체 형태로 주어야할 것 같음. >> 원활한 state update를 위해서
     1 : { // key = progress_id
       id : 1, // <ProgressList /> name 세팅을 위해서 
-      title : 'progress 1',
+      title : '안녕',
       task_priority : '1,2'
     },
     2 : {
       id : 2,
       title : 'progress 2',
-      task_priority : '3,4',
+      task_priority : '3', //'3,4'
     },
   })
   
@@ -49,9 +49,17 @@ export default function Board(){
     }
   })
 
+  
+  async function changePrgPriority (newPrgPriority){ // string type 기대
+    await setBoard({
+      ...board,
+      prg_priority: newPrgPriority
+    })
+    console.log("Update newPrgPriority", newPrgPriority); 
+  }
+
   // drag-n-drop
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
-
 
   return (
     <div id="main-content">
@@ -67,7 +75,10 @@ export default function Board(){
             return (
               <>
                 <article className={`prg-dropzone prg-dropzone-${idx}`}></article>
-                <ProgressList key={idx} progress={progress} tasks={tasks}/>
+                <ProgressList key={idx} progress={progress} tasks={tasks} 
+                  changePrgPriority={changePrgPriority}
+                  prg_priority={board.prg_priority}
+                />
               </>
             )
           })
