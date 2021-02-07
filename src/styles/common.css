@@ -5,6 +5,10 @@
 .App{
   display: grid;
   grid-template-rows: 0.3fr 10fr;
+
+  /* board page background 꽉차게 */
+  width:100vw;
+  height:100vh;
 }
 
 
