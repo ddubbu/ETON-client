@@ -83,7 +83,7 @@ export default function Board(){
             )
           })
         }
-        <article className={`prg-dropzone prg-dropzone-${board.prg_priority.length}`}></article>
+        <article className={`prg-dropzone prg-dropzone-${board.prg_priority.split(',').length}`}></article>
         <button className="btn-add-progress"> + Add another progress </button>
       </section>
     </div>
