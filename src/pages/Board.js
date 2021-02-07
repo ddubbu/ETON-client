@@ -5,12 +5,12 @@ import sortObject from '../helper/sortObject';
 
 import '../styles/board.css'
 
-export default function Board({ board_title='board', }){
+export default function Board(){
   // 상위 컴포넌트에서 한꺼번에 관리하자!
 
   const [ board, setBoard ] = useState({
     id : 1, // 숫자, 문자열 혼동 조심
-    title : 'board 명',
+    title : 'project',
     admin_userId : 1,
     prg_priority : '2,1' // (progress_id 순서) 관계는 부모가 갖고 있음 board - prg 관계는 board가 관여
   })
@@ -51,7 +51,8 @@ export default function Board({ board_title='board', }){
   return (
     <div id="main-content">
       <section id="sub-nav-bar">
-        <button className="btn-sub-nav-bar board_title">{board.title}</button>
+        <input className="btn-sub-nav-bar board_title" value={board.title}></input>
+        <span className="btn-sub-nav-bar divider"></span>
         <button className="btn-sub-nav-bar member">member</button>
         <button className="btn-sub-nav-bar invite">invite</button>
       </section>

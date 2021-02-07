@@ -4,40 +4,143 @@
 
 
 #main-content {
+  background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg");
   /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1280x1920/64ee91344d42e824ae569901b3e909c3/photo-1611907045982-8ecba81fd8c6.jpg"); */
-  /* background-position: 50%; */
-  /* background-size: cover; */
-  /* height: 100%; */
   /* background-color: rgb(218, 217, 217); */
+  background-position: 50%;
+  height: 100%;
+
+  padding: 5px 10px;
 }
 
-#progress-wrapper{
-
-    /* -webkit-user-select: none; */
-    user-select: none; /* drag and drop 관련 속성 */
-    white-space: nowrap; /* 열간 줄바꿈 적용 안함 */
-    overflow-x: auto;
-    overflow-y: hidden;
-    display: flex;
-    align-items: flex-start; /* 오른쪽 끝 버튼 쭉 늘어남 방지 */
-    
-  }
+/*! 공통 및 positioning with flex */
+/* 투명 버튼/input 요소 */
+#sub-nav-bar *:not(.divider), .btn-add-progress {
+  outline: none;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.4);
   
+  line-height: 32px;
+  padding: 0 12px;
+  margin: 0 16px 0 0 ;
+}
+
+/* border-radius */
+.progress, .btn-add-progress, #sub-nav-bar button, .task {
+  border-radius: 5px;
+}
+
+#sub-nav-bar, #progress-wrapper {
+  padding: 8px;
+  /* padding: 8px 4px 4px 8px; */
+}
+
+.progress-head, .task-head {
+  display: flex;
+  justify-content: space-between
+}
+
+
+/*! sub-nav-bar*/
+
+#sub-nav-bar {
+  display: flex;
+}
+
+.board_title {
+  font-size: 18px; 
+  font-weight: 700;
+
+  width: fit-content
+}
+
+.btn-sub-nav-bar.divider {
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  margin: 0 16px 0 0 ;
+}
+
+
+/*! progress 관련 */
+
+#progress-wrapper{
+  /* -webkit-user-select: none; */
+  user-select: none; /* drag and drop 관련 속성 */
+  /* white-space: nowrap; 열간 줄바꿈 적용 안함 */
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  align-items: flex-start; /* btn-add-progress (오른쪽 끝 버튼) 쭉 늘어남 방지 */ 
+  /* margin: 10px; */
+}
+
 .progress {
   background-color: #ebecf0;
   width: 272px;
-  margin: auto 4px; 
+  margin: auto 8px 0 0; 
+  padding: 8px;
 }
 
-.progress-title{
-  background: transparent;
+.progress-head {
+  margin-bottom: 5px;
 }
+
+.progress-title, .btn-progress-menu {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+
+
+.btn-progress-menu {
+  border: none;
+  outline: none;
+}
+
+
 
 .btn-add-progress {
   margin-left: 4px;
   width: 272px;
 }
 
+/*! task 관련 */
+.task {
+  font-size: 18px; /*나중에 전체적으로 적용할거임*/
+  background: white;
+  padding: 6px 8px 2px;
+  margin-bottom: 2px;
+}
+
+.btn-task-menu {
+  display: none;
+  border: none;
+  outline: none;
+}
+
+.task:hover .btn-task-menu {
+  display: block;
+}
+
+.task-title {
+  font-weight: 700;
+}
+.task-body {
+
+  border: 1px brown solid;
+  
+}
+
 .btn-add-task {
   width: 100%;
+  outline: none;
+  border: none;
+
+  border-radius: 3px;
+  color: #5e6c84;
+  padding: 4px 8px;
+}
+
+.btn-add-task:hover, .btn-progress-menu:hover {
+  background: rgba(133, 132, 132, 0.2);
 }

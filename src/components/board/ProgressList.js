@@ -6,10 +6,10 @@ import sortObject from '../../helper/sortObject.js';
 export default function ProgressList( { progress, tasks }){
 
   return (
-    <section className={"progress" + " " + progress.id}>
+    <article className={"progress" + " " + progress.id}>
       <section className="progress-head drag-drop">
         <input className="progress-title" value={progress.title}></input>
-        <button className="btn-progress-menu"></button>
+        <button className="btn-progress-menu">···</button>
       </section>
       <section className="progress-tasks-wrapper">
         {
@@ -18,7 +18,7 @@ export default function ProgressList( { progress, tasks }){
           })
         }
       </section>
-      <button className="btn-add-task"> + Add another task </button>
-    </section>    
+      <button className="btn-add-task"> + Add a task </button>
+    </article>    
   )
 }
