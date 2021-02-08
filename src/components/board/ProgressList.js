@@ -6,8 +6,6 @@ import drag_n_drop from '../../helper/drag-n-drop.js';
 
 export default function ProgressList( { progress, tasks, changePrgPriority, prg_priority, changeTaskPriority }){
 
-  console.log("ProgressList with ", progress)
-  console.log("progress.task_priority", progress.task_priority)
   return (
     <article className={"progress" + " " + progress.id} 
       onMouseDown={drag_n_drop.handleMouseDown}
@@ -21,11 +19,10 @@ export default function ProgressList( { progress, tasks, changePrgPriority, prg_
       <section className="progress-tasks-wrapper">
         {
           sortObject(tasks, progress.task_priority).map((task, idx)=>{
-            // console.log(task)
             return (
               <>
                 <article className={`task-dropzone prg-${progress.id}-taskDropZone-${idx}`}></article>
-                <TaskList key={idx} task={task} progressId={progress.id}/>
+                <TaskList taskDropZone={idx} task={task} progressId={progress.id}/>
               </>
             )
           })
