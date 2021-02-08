@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import drag_n_drop from '../../helper/drag-n-drop.js';
 
 export default function TaskList({ task, progressId }){
+  // console.log(task)
   return (
     <article className={`task prg-${progressId}-task-${task.id} drag-drop`}>
       <section className="task-head">

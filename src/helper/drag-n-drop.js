@@ -85,7 +85,7 @@ export default {
       }
     }
   },
-  handleMouseUp : function(e, changePriority, prev_priority){ // 손을 놓았을 때 > new priority : state 변경
+  handleMouseUp : function(e, changePriority, prev_priority, changeTaskPriority){ // 손을 놓았을 때 > new priority : state 변경
     // progress, task 일반화
     const $el = document.querySelector(".hold");
     if( $el ){
@@ -182,9 +182,12 @@ export default {
 
             const target = { //도착지 정보
               prgId: progressId_taskId.split('-')[1],
-              taskId: progressId_taskId.split('-')[3]
+              taskDropZone: progressId_taskId.split('-')[3]
             }
-            console.log(`출발지 progressId-${target.prgId}-taskZone-${target.taskId}`)
+            console.log(`도착지 progressId-${target.prgId}-taskZone-${target.taskDropZone}`)
+
+            // statte 변경
+            changeTaskPriority({source, target})
 
           }else {
             // 감지된거 다시 reset 해줘야함.

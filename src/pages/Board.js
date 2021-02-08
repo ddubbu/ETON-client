@@ -58,20 +58,45 @@ export default function Board(){
     console.log("Update newPrgPriority", newPrgPriority); 
   }
 
-  // function changeTaskPriority (){ //{ source, target }
-  //   // setProgresses({
-  //   //   ...progresses,
-  //   //   source.prgId : 
-  //   // })
-  //   setProgresses((prev)=>{
-  //     console.log(prev)
-  //   })
-  // }
+  async function changeTaskPriority ({ source, target }){
+    // 삭제
+    const source_new_task_priority = progresses[source.prgId].task_priority.split(',');
+    source_new_task_priority.splice(source_new_task_priority.indexOf(source.taskId), 1);
+    
+    // 추가 - taskDropZone id 에 넣으면 된다!
+    let target_new_task_priority = [];
+    console.log(progresses[target.prgId].task_priority.length)
+    if(progresses[target.prgId].task_priority.length === 0) target_new_task_priority = [source.taskId];
+    else {
+      target_new_task_priority = progresses[target.prgId].task_priority.split(',');
+      target_new_task_priority.splice(target.taskDropZone, 0, source.taskId)
+    }
+    
+    console.log("Before progresses.task_priority", progresses)
+    
+    // console.log(source_new_task_priority, target_new_task_priority)
+    await setProgresses({
+      ...progresses,
+      [source.prgId] : {
+        ...progresses[source.prgId],
+        task_priority : source_new_task_priority.join(',')
+      },
+      [target.prgId] : {
+        ...progresses[target.prgId],
+        task_priority : target_new_task_priority.join(',')
+      }
+    })
+    // setProgresses((prev)=>{
+    //   console.log(prev)
+    //   return prev;
+    // })
+    console.log("Update progresses.task_priority", progresses)
+  }
   // changeTaskPriority()
 
   // drag-n-drop
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
-
+  console.log("Board")
   return (
     <div id="main-content">
       <section id="sub-nav-bar">
@@ -83,12 +108,15 @@ export default function Board(){
       <section id="progress-wrapper">
         {
           sortObject(progresses, board.prg_priority).map((progress, idx)=>{
+            // console.log("progress.task_priority", progress)
+            // console.log("tasks", tasks)
             return (
               <>
                 <article className={`prg-dropzone prg-dropzone-${idx}`}></article>
                 <ProgressList key={idx} progress={progress} tasks={tasks} 
                   changePrgPriority={changePrgPriority}
                   prg_priority={board.prg_priority}
+                  changeTaskPriority={changeTaskPriority}
                 />
               </>
             )
