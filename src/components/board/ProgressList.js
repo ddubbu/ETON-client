@@ -4,7 +4,7 @@ import TaskList from './TaskList.js';
 import sortObject from '../../helper/sortObject.js';
 import drag_n_drop from '../../helper/drag-n-drop.js';
 
-export default function ProgressList( { progress, tasks, changePrgPriority, prg_priority, changeTaskPriority }){
+export default function ProgressList( { progress, tasks, changePrgPriority, prg_priority, changeTaskPriority, inputChangeHandler }){
 
   return (
     <article className={"progress" + " " + progress.id} 
@@ -13,7 +13,7 @@ export default function ProgressList( { progress, tasks, changePrgPriority, prg_
       onMouseMove={drag_n_drop.handleMouseMove}
       >
       <section className="progress-head drag-drop">
-        <input className="progress-title" value={progress.title}></input>
+        <input className="progress-title" value={progress.title} onChange={(e)=>{inputChangeHandler(e, 'progress', progress.id)}}></input>
         <button className="btn-progress-menu">···</button>
       </section>
       <section className="progress-tasks-wrapper">

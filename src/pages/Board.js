@@ -53,6 +53,20 @@ export default function Board(){
     }
   })
 
+  /* 공통 */
+  async function inputChangeHandler(e, target, id){
+    if(target === 'board') setBoard({ ... board, title: e.value });
+    if(target === 'progress') setProgresses({ ...progresses, [id]: { ...progresses[id], title: e.value } })
+
+    e.target.onkeypress = (e)=>{
+      if(e.keyCode === 13){
+        // 😁 title 수정 
+        console.log('타이틀 수정 완료');
+      }
+    }
+  }
+
+  /* (시작) drag-drop */
   //! Board 입장에서 Progress 순서 저장
   // 새로운 순서 인자로 넘김.
   async function changePrgPriority (newPrgPriority){ // string type 기대
@@ -123,10 +137,12 @@ export default function Board(){
   // drag-n-drop
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
 
+  /* (끝) drag-drop */
+
   return (
     <div id="main-content">
       <section id="sub-nav-bar">
-        <input className="btn-sub-nav-bar board_title" value={board.title}></input>
+        <input className="btn-sub-nav-bar board_title" value={board.title} onChange={(e)=>{inputChangeHandler(e,'board')}}></input>
         <span className="btn-sub-nav-bar divider"></span>
         <button className="btn-sub-nav-bar member">member</button>
         <button className="btn-sub-nav-bar invite">invite</button>
@@ -141,6 +157,7 @@ export default function Board(){
                   changePrgPriority={changePrgPriority}
                   prg_priority={board.prg_priority}
                   changeTaskPriority={changeTaskPriority}
+                  inputChangeHandler={inputChangeHandler}
                 />
               </>
             )
