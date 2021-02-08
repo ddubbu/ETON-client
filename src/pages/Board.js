@@ -21,7 +21,7 @@ export default function Board(){
     1 : { // key = progress_id
       id : 1, // <ProgressList /> name 세팅을 위해서 
       title : '안녕',
-      task_priority : '1,2'
+      task_priority : '1,2,4'
     },
     2 : {
       id : 2,
@@ -34,18 +34,22 @@ export default function Board(){
     1: { // key = card_id
       id : 1,
       title : 'task card 1',
+      description: 'task 내용입니다. 나중에 description, member 적용할 것임.'
     },
     2: {
       id : 2,
       title : 'task card 2',
+      description: 'task 내용입니다. 나중에 description, member 적용할 것임.'
     },
     3: {
       id : 3,
       title : 'task card 3',
+      description: 'task 내용입니다. 나중에 description, member 적용할 것임.'
     },
     4: {
       id : 4,
       title : 'task card 4',
+      description: 'task 내용입니다. 나중에 description, member 적용할 것임.'
     }
   })
 

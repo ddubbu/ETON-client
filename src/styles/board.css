@@ -4,6 +4,8 @@
 
 
 #main-content {
+  background:#C6CDD1;
+  /*1번 보라*/
   background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg");
   /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1280x1920/64ee91344d42e824ae569901b3e909c3/photo-1611907045982-8ecba81fd8c6.jpg"); */
   /* background-color: rgb(218, 217, 217); */
@@ -26,7 +28,8 @@
   padding: 0 12px;
   margin: 0 16px 0 0 ;
 
-  color: white;
+  color: black
+  /* color: white; */
 }
 
 #sub-nav-bar *:not(.divider):hover, .btn-add-progress:hover {
@@ -192,5 +195,40 @@ input.progress-title:focus {
   width: 256px;
   height: 3px;
   /* margin:2px; */
-  border: 1px rgb(246, 76, 76) solid;
+  /* border: 1px rgb(246, 76, 76) solid; */
 }
+
+
+/* drag & drop 하도록 잡을 수 있는 부분 */
+
+.progress {
+  border-top: 20px  #A6A3A1 solid
+  /* #5e6c84 solid; */
+}
+
+.task {
+  border-top: 20px #E3CDB8 solid;
+  /* rgb(104, 93, 255) solid; */
+  /* background: repeating-linear-gradient(
+  45deg,
+  #606dbc,
+  #606dbc 10px,
+  #465298 10px,
+  #465298 20px
+  );
+  */
+}
+
+.task:after {
+  /*선보다 작은 잡는 버튼 두자!!*/
+  /* content : "";
+  position: absolute;
+  left    : 0;
+  top  : 0;
+  height  : 1px;
+  width   : 50%;  /* or 100px */
+  /* border-top:5px solid magenta; */
+}
+/* .task-head, .task-body{
+  background-color: white;;
+} */

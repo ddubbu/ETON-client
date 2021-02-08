@@ -10,7 +10,7 @@ export default function TaskList({ task, progressId, taskDropZone }){
         <button className="btn-task-menu">···</button>
       </section>
       <section className="task-body">
-        task 내용입니다. 나중에 description, member 적용할 것임.
+        {task.discription}
       </section>
     </article>
   )
