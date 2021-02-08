@@ -55,15 +55,35 @@ export default function Board(){
 
   /* 공통 */
   async function inputChangeHandler(e, target, id){
-    if(target === 'board') setBoard({ ... board, title: e.value });
-    if(target === 'progress') setProgresses({ ...progresses, [id]: { ...progresses[id], title: e.value } })
 
+    if(target === 'board') await setBoard({ ... board, title: e.target.value });
+    if(target === 'progress') await setProgresses({ ...progresses, [id]: { ...progresses[id], title: e.target.value } })
+    const inputValue = e.target.value;
     e.target.onkeypress = (e)=>{
       if(e.keyCode === 13){
         // 😁 title 수정 
+
+        if(inputValue === '') return alert('빈칸은 입력이 불가능해요')
         console.log('타이틀 수정 완료');
+        e.target.blur() // input focus 해제
       }
     }
+  }
+
+  async function clickAddHandler(e, target, id){
+    // 서버에서 새로 생성한 새로운 id 먼저 주시고
+    if(target === 'progress') {
+      await setProgresses({ 
+        ...progresses, 
+        4: {
+          id : 4,
+          title : '새로 추가된 progress',
+          task_priority : '', 
+        }})
+      await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` });
+    }
+    // if(target === 'task') setProgresses({ ...progresses, [id]: { ...progresses[id], title: e.value } })
+    console.log(progresses, board)
   }
 
   /* (시작) drag-drop */
@@ -138,7 +158,7 @@ export default function Board(){
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
 
   /* (끝) drag-drop */
-
+  console.log(board, progresses)
   return (
     <div id="main-content">
       <section id="sub-nav-bar">
@@ -164,7 +184,7 @@ export default function Board(){
           })
         }
         <article className={`prg-dropzone prg-dropzone-${board.prg_priority.split(',').length}`}></article>
-        <button className="btn-add-progress"> + Add another progress </button>
+        <button className="btn-add-progress" onClick={(e)=>{clickAddHandler(e, 'progress')}}> + Add another progress </button>
       </section>
     </div>
   )
