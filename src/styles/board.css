@@ -130,6 +130,38 @@ input.progress-title:focus {
   width: 272px;
 }
 
+.form-add-progress {
+  display: none;
+  width: 272px;
+
+  /* X 버튼 가운데다 두려고 */
+  flex-wrap:wrap;
+  align-items: flex-end;
+
+}
+
+.form-add-progress-btn-add {
+  border: none;
+  outline: none;
+  height: 27px;
+  margin: 5px 3px 0 0;
+  padding: 2px 5px;
+  background-color: #5aac44;
+  color: #fff;
+}
+
+.form-add-progress-btn-add:hover {
+  background-color: #68b852;
+}
+
+.form-add-progress-btn-cancle {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 22px;
+  /* margin: 7px 0 0 0; */
+}
+
 /*! task 관련 */
 .task {
   font-size: 18px; /*나중에 전체적으로 적용할거임*/
@@ -168,7 +200,7 @@ input.progress-title:focus {
   color: #5e6c84;
 }
 
-.btn-add-task:hover, .btn-progress-menu:hover {
+.btn-add-task:hover, .btn-progress-menu:hover, .form-add-progress-btn-cancle:hover {
   background: rgba(133, 132, 132, 0.2);
 }
 
@@ -178,7 +210,7 @@ input.progress-title:focus {
 .prg-dropzone { /* mouse hover 인식을 위해서 */
   /* width:5px; */
   height: 40vh;
-  margin:2px;
+  margin:4px; /*progress 간 간격 늘림*/
   /* border: 1px white solid; */
 }
 .prg-dropzone:hover {

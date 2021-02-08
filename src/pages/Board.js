@@ -71,19 +71,32 @@ export default function Board(){
   }
 
   async function clickAddHandler(e, target, id){
-    // 서버에서 새로 생성한 새로운 id 먼저 주시고
+    
+    // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
+
+    // return 한 new progressId/taskId 를 기반으로 정보를 update 하자!
     if(target === 'progress') {
+      // TODO 타이틀 받는 모달창
       await setProgresses({ 
         ...progresses, 
-        4: {
-          id : 4,
+        4: { // here
+          id : 4, // here
           title : '새로 추가된 progress',
           task_priority : '', 
         }})
-      await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` });
+      await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` }); // here
+    } else if(target === 'task'){
+      // TODO 타이틀, 내용 받는 모달창
+      await setTasks({ 
+        ...tasks, 
+        4: { // here
+          id : 4, // here
+          title : '새로 추가된 progress',
+          task_priority : '', 
+        }})
+      await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` }); // here
+    
     }
-    // if(target === 'task') setProgresses({ ...progresses, [id]: { ...progresses[id], title: e.value } })
-    console.log(progresses, board)
   }
 
   /* (시작) drag-drop */
@@ -158,7 +171,6 @@ export default function Board(){
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
 
   /* (끝) drag-drop */
-  console.log(board, progresses)
   return (
     <div id="main-content">
       <section id="sub-nav-bar">
@@ -184,7 +196,23 @@ export default function Board(){
           })
         }
         <article className={`prg-dropzone prg-dropzone-${board.prg_priority.split(',').length}`}></article>
-        <button className="btn-add-progress" onClick={(e)=>{clickAddHandler(e, 'progress')}}> + Add another progress </button>
+        {/* 누르기전까지 숨어 있음 */}
+        <article className='progress form-add-progress'>
+          <input className='form-add-progress-input'></input>
+          <button className='form-add-progress-btn-add'>Add progress</button>
+          <button className='form-add-progress-btn-cancle'>X</button>
+        </article>
+        <button 
+          className="btn-add-progress" 
+          onClick={(e)=>{
+            const $form_add_progress = document.querySelector('.form-add-progress');
+            // 위에서 아래로 생기는 action은 나중에
+            $form_add_progress.style.display = 'flex'
+            e.target.style.display = 'none'
+          }}
+        > 
+          + Add another progress 
+          </button>
       </section>
     </div>
   )
