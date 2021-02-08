@@ -80,3 +80,25 @@
   grid-area: modal;
   background: white;
 }
+
+.logoutDropDownDiv{
+  font-family: "jaf-facitweb","Helvetica Neue",Arial,sans-serif;
+  position: absolute;
+  height: 5rem;
+  width: 20rem;
+  right: 3%;
+  z-index: 2;
+  box-shadow: 1.6px 2.4px 5px rgba(0, 0, 0, 0.14);
+  background-color: rgb(250, 248, 246);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.253);
+  padding: 1rem;
+}
+
+.logoutDropDownArticleDiv{
+  text-align: center;
+}
+
+.logoutButton{
+  width: 100%;
+}

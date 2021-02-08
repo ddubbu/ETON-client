@@ -19,15 +19,20 @@ function App() {
     setLogin(true);
   }
 
+  const HandleLogout = () => {
+    setAccessToken('');
+    setLogin(false);
+  }
+
   useEffect(() => {
     console.log("useEffect");
-    axios.post('http://localhost5000/users/signin/refreshToken')
-    .then(res => {
-      console.log(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    // axios.post('http://localhost5000/users/signin/refreshToken')
+    // .then(res => {
+    //   console.log(res.data);
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // })
   })
 
   // axios.post('http://localhost5000/users/signin/refreshToken')
@@ -42,7 +47,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header isLogin = {isLogin}/>
+      <Header isLogin = {isLogin} HandleLogout = {HandleLogout}/>
       <div className="body">
         
         <Route path="/intro" render = {() => <Intro />} />
