@@ -29,7 +29,24 @@ export default function ProgressList( { progress, tasks, changePrgPriority, prg_
         }
         <article className={`task-dropzone prg-${progress.id}-taskDropZone-${progress.task_priority.split(',').length}`}></article>
       </section>
-      <button className="btn-add-task"> + Add a task </button>
+
+      {/* 누르기전까지 숨어 있음 */}
+      <article className={`task task-${progress.id} form-add-task`}>
+        <input className='form-add-task-input-title' placeholder='Enter a title...'></input>
+        <input className='form-add-task-input-description' placeholder='Enter a description...'></input>
+        <button className='form-add-task-btn-add'>Add Task</button>
+        <button className='form-add-task-btn-cancle'>X</button>
+      </article>
+      <button 
+        className="btn-add-task"
+        onClick={(e)=>{
+          const $form_add_progress = document.querySelector(`.form-add-task.task-${progress.id}`);
+          // 위에서 아래로 생기는 action은 나중에
+          $form_add_progress.style.display = 'flex'
+          e.target.style.display = 'none'
+        }}
+      > + Add a task 
+      </button>
     </article>    
   )
 }

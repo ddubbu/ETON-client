@@ -198,7 +198,7 @@ export default function Board(){
         <article className={`prg-dropzone prg-dropzone-${board.prg_priority.split(',').length}`}></article>
         {/* 누르기전까지 숨어 있음 */}
         <article className='progress form-add-progress'>
-          <input className='form-add-progress-input'></input>
+          <input className='form-add-progress-input' placeholder='Enter progress title...'></input>
           <button className='form-add-progress-btn-add'>Add progress</button>
           <button className='form-add-progress-btn-cancle'>X</button>
         </article>
