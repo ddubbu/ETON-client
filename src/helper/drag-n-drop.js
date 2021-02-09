@@ -160,8 +160,8 @@ export default {
 
         //! 출발지 
         const source = { //출발지 정보
-          prgId: ids.progress_id, //progressId_taskId.split('-')[1],
-          taskId: ids.task_id, //progressId_taskId.split('-')[3],
+          prgId: String(ids.progress_id), //progressId_taskId.split('-')[1],
+          taskId: String(ids.task_id), //progressId_taskId.split('-')[3],
           taskDropZone: taskDropZone_Id.split('-')[1]
         }
 

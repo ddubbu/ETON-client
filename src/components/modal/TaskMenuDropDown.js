@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 
-export default function TaskMenuDropDown () {
+export default function TaskMenuDropDown ({event}) {
 	return (
-		<section name="task" className="drop-down">
-      <div name="task" className="delete">삭제하기</div>
-      <div name="task" className="modify">수정하기</div>
-    </section>
+		<ul name="task" className="drop-down">
+      <li name="task" className="delete">삭제하기</li>
+      <li name="task" className="modify">수정하기</li>
+    </ul>
 	)
 }
 

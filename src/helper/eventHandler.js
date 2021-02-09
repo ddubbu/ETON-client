@@ -9,10 +9,10 @@ export default {
     }
   
     return function submitAddInfo(e){  //$(.form-add-progress-btn-add)
-      // console.log('click')
   
       if(input.title.length !== 0){
         // TODO 😁 progress 새로이 추가하고 응답으로 state(board.prg_priority, progresses) 업데이트하기 
+        // TODO 😁 task도 마찬가지
         console.log('axios POST target', target,'input 수정 완료', input);
       } else if(e && e.target.tagName === 'BUTTON'){
         alert('title 을 입력해주세요')
@@ -56,18 +56,31 @@ export default {
       e.target.style.display = 'none'
     }
   },
-  openModal : async (e, store)=>{ //modals222, setModals222, ids, store
+  openModal : async (e, store, ids)=>{
     // modal 띄울만한거 : member, progress-menu, task-menu
     const { state: modals, setState: setModals } = store.modals;
+    const { state: event, setState: setEvent } = store.event;
 
     await setModals({
       [e.target.name] : !modals[e.target.name]
     })
     if(!modals[e.target.name]){ // 만약 떠있으면
       const $drop_down = document.querySelector('.drop-down')
-      $drop_down.style.left =  `${e.target.getBoundingClientRect().x}px`; ////`${e.clientX}px`
-      $drop_down.style.top = `${e.target.getBoundingClientRect().y + 20 }px` ///20
+      $drop_down.style.left =  `${e.target.getBoundingClientRect().x}px`; //`${e.clientX}px`
+      $drop_down.style.top = `${e.target.getBoundingClientRect().y  }px`
     }
+
+    // 상태변경하고 event 에 넣어두기 -> dropDown요소 event 발생할 수 있어서 (삭제, 수정)
+    if(ids){ // member 모달은 click event 할 때 member_id 갖고 있으니깐 따로 작업 안해줘도 됨.
+      setEvent({
+        ...event,
+        board_id : ids.board_id,
+        progress_id : ids.progress_id,
+        task_id : ids.task_id
+      })
+    }
+
+    
   },
   clickDeleteSomething: (e)=>{
     // modal 에서 delete 를 누르면? 해당 ids 를 갖고 행동 이행 : 어디서할까? board? 여기서 하자(그럼, state, setState 모두 가져오자)
