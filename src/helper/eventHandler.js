@@ -96,11 +96,11 @@ export default {
     //! progress 삭제
     if( !t ) {
       //TODO eventState ids 로 axios 요청 보내시오
-      console.log("delete", b, p);
+      //TODO progress 자체를 삭제하면 연관된 task도 삭제해야해서, 한번 다시 GET, render 하는게 빠를 수도
+      // console.log("delete", b, p);
       const newPrgPriority = board.prg_priority.split(',')
       .filter(el=>String(p) === el ? false : true)
       .join(',');
-      console.log("newPrgPriority", newPrgPriority)
 
       // 1. board 변경
       await setBoard({
@@ -120,7 +120,30 @@ export default {
       
     } else { //! task 삭제
       //TODO eventState ids 로 axios 요청 보내시오
-      console.log("delete", b, p, t)
+      // console.log("delete", b, p, t)
+
+      const newTaskPriority = progresses[p].task_priority.split(',')
+      .filter(el=>String(t) === el ? false : true)
+      .join(',');
+
+      // 1. progress 변경
+      await setProgresses({
+        ...progresses,
+        [p]: { // p 말고 [p] 변수값 입니다 ^^
+          ...progresses[p],
+          task_priority: newTaskPriority
+        }
+      })
+
+      // 2. task 변경
+      delete tasks[t];
+      await setTasks({
+        ...tasks
+      })
+
+      await setModals({
+        task: false
+      })
     }
   },
   clickModifyTask: (e)=>{
