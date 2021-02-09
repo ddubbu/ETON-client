@@ -165,6 +165,7 @@ input.progress-title:focus {
   height: 60px;
   width: 100%;
   min-width: 100%;
+  border-radius: 5px;
 }
 
 /*! task 관련 */

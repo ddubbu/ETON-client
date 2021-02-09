@@ -4,7 +4,7 @@ export default {
     const classList = $el.classList;
 
     if( !classList.contains('progress') && !classList.contains('task') 
-        || classList.contains('form-add-task')) {
+        || classList.contains('form-add-task')) { // Create 를 위한 공간 움직이지 않도록 
       return console.log('progress, task 둘다 아님')
     }
     if( !classList.contains('hold') ){

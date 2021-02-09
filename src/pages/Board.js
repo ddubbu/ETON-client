@@ -14,7 +14,7 @@ export default function Board(){
     id : 1, // 숫자, 문자열 혼동 조심
     title : 'project',
     admin_userId : 1,
-    prg_priority : '2,1' // (progress_id 순서) 관계는 부모가 갖고 있음 board - prg 관계는 board가 관여
+    prg_priority : '2,1,3' // (progress_id 순서) 관계는 부모가 갖고 있음 board - prg 관계는 board가 관여
   })
 
   const [ progresses, setProgresses ] = useState({
@@ -22,12 +22,17 @@ export default function Board(){
     1 : { // key = progress_id
       id : 1, // <ProgressList /> name 세팅을 위해서 
       title : '안녕',
-      task_priority : '1,2,4'
+      task_priority : '1,2'
     },
     2 : {
       id : 2,
       title : 'progress 2',
       task_priority : '3', //'3,4'
+    },
+    3 : {
+      id : 3,
+      title : 'progress 3',
+      task_priority : '4', //'3,4'
     },
   })
   
@@ -177,7 +182,7 @@ export default function Board(){
   /* (끝) drag-drop */
 
   // clickAddProgress event - 함수 분리를 위해서
-  const clickAddHandler = eventHandler.add_progress_or_task('progress');
+  const submitAddInfo = eventHandler.submitAddInfo('progress');
 
   return (
     <div id="main-content">
@@ -210,19 +215,17 @@ export default function Board(){
             name='title'
             className='form-add-progress-input' 
             placeholder='Enter progress title...'
-            onChange={clickAddHandler()}
+            onChange={submitAddInfo()}
           ></input>
-          <button className='form-add-progress-btn-add' onClick={clickAddHandler}>Add progress</button>
-          <button className='form-add-progress-btn-cancle'>X</button>
+          <button className='form-add-progress-btn-add' onClick={submitAddInfo}>Add progress</button>
+          <button 
+            className='form-add-progress-btn-cancle'
+            onClick={eventHandler.cancleAddInfo}
+          >X</button>
         </article>
         <button 
           className="btn-add-progress" 
-          onClick={(e)=>{
-            const $form_add_progress = document.querySelector('.form-add-progress');
-            // 위에서 아래로 생기는 action은 나중에
-            $form_add_progress.style.display = 'flex'
-            e.target.style.display = 'none'
-          }}
+          onClick={e=>{eventHandler.clickAddSomething(e, 'progress')}}
         > 
           + Add another progress 
           </button>

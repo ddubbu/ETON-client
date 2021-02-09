@@ -8,7 +8,7 @@ import eventHandler from '../../helper/eventHandler.js'
 export default function ProgressList( { progress, tasks, changePrgPriority, prg_priority, changeTaskPriority, inputChangeHandler }){
 
   // clickAddProgress event - 함수 분리를 위해서
-  const clickAddHandler = eventHandler.add_progress_or_task('task');
+  const submitAddInfo = eventHandler.submitAddInfo('task');
 
   return (
     <article className={"progress" + " " + progress.id} 
@@ -35,33 +35,31 @@ export default function ProgressList( { progress, tasks, changePrgPriority, prg_
       </section>
 
       {/* 누르기전까지 숨어 있음 */}
-      <article className={`task task-${progress.id} form-add-task`}>
+      <article className={`task prg-${progress.id} form-add-task`}>
         <input 
           name='title'
           className='form-add-task-input-title' 
           placeholder='Enter a title...'
-          onChange={clickAddHandler()}
+          onChange={submitAddInfo()}
         ></input>
         <textarea 
           name='description'
           className='form-add-task-input-description' 
           placeholder='Enter a description...'
-          onChange={clickAddHandler()}
+          onChange={submitAddInfo()}
         ></textarea>
         <button 
           className='form-add-task-btn-add'
-          onClick={clickAddHandler}
+          onClick={submitAddInfo}
         >Add Task</button>
-        <button className='form-add-task-btn-cancle'>X</button>
+        <button 
+          className='form-add-task-btn-cancle'
+          onClick={eventHandler.cancleAddInfo}
+        >X</button>
       </article>
       <button 
         className="btn-add-task"
-        onClick={(e)=>{
-          const $form_add_progress = document.querySelector(`.form-add-task.task-${progress.id}`);
-          // 위에서 아래로 생기는 action은 나중에
-          $form_add_progress.style.display = 'flex'
-          e.target.style.display = 'none'
-        }}
+        onClick={(e)=>{eventHandler.clickAddSomething(e, 'task', progress.id)}}
       > + Add a task 
       </button>
     </article>    
