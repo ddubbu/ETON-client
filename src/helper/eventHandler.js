@@ -14,8 +14,8 @@ export default {
       if(input.title.length !== 0){
         // TODO 😁 progress 새로이 추가하고 응답으로 state(board.prg_priority, progresses) 업데이트하기 
         console.log('axios POST target', target,'input 수정 완료', input);
-      } else{
-        // alert('title 을 입력해주세요')
+      } else if(e && e.target.tagName === 'BUTTON'){
+        alert('title 을 입력해주세요')
       }
   
       return function inputChangeHandler(e){ //$(.form-add-progress .form-add-progress-input)

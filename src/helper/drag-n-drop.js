@@ -3,7 +3,8 @@ export default {
     const $el = e.target;
     const classList = $el.classList;
 
-    if( !classList.contains('progress') && !classList.contains('task')) {
+    if( !classList.contains('progress') && !classList.contains('task') 
+        || classList.contains('form-add-task')) {
       return console.log('progress, task 둘다 아님')
     }
     if( !classList.contains('hold') ){
