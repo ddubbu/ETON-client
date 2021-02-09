@@ -176,7 +176,8 @@ const SignUp = (props) => {
     const checkEmailDuplicate = (data) => {
         if(checkEmailLength(email)&&checkEmailForm(email)&&checkEmailScript(email)){
             setDoEmailDuplicateCheck(true);
-            axios.post('http://localhost:5000/users/signup/email',{
+            // axios.post('https://localhost:4000/users/signup/email',{
+            axios.post('https://geteton.ga/users/signup/email',{
                 email 
             })
             .then(res => {
@@ -373,7 +374,7 @@ const SignUp = (props) => {
         if(checkValidEmail() && checkValidName() && checkValidPassword() && checkValidPasswordCheck()){
             //제출
             console.log("제출가능");
-            axios.post('http://localhost:5000/users/signup',{
+            axios.post('https://geteton.ga/users/signup',{
               email,
               password,
               username : name

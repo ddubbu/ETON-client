@@ -19,14 +19,17 @@ const LogoutDropDown = (props) => {
       })
 
     const handleLogout = () => {
-        // axios.post('http://localhost:5000/signout',{
-            
-        // })   //일단 accesstoken안담고
-        axios.post('http://localhost:5000/users/signout')
+        
+        axios.post('https://geteton.ga/users/signout',{},
+        {headers : {'authorization' : props.accessToken},
+        withCredentials:true})
         .then(res => {
             console.log("LOGOUT!!!!!!!@@@@##");
             props.HandleLogout();
             props.history.push('/');
+        })
+        .catch(err => {
+            console.log("LOGOUT - err : ", err);
         })
     }
 
