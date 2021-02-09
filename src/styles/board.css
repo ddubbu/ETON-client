@@ -120,11 +120,6 @@ input.progress-title:focus {
   outline: none;
 }
 
-.btn-progress-menu {
-  border: none;
-  outline: none;
-}
-
 /*! Add button 관련 : both Progress, Task*/
 .btn-add-progress{
   margin-left: 4px;
@@ -166,7 +161,10 @@ input.progress-title:focus {
 
 .form-add-task-input-description {
   margin-top: 3px;
+  padding: 3px;
   height: 60px;
+  width: 100%;
+  min-width: 100%;
 }
 
 /*! task 관련 */

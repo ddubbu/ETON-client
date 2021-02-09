@@ -33,7 +33,7 @@ export default function ProgressList( { progress, tasks, changePrgPriority, prg_
       {/* 누르기전까지 숨어 있음 */}
       <article className={`task task-${progress.id} form-add-task`}>
         <input className='form-add-task-input-title' placeholder='Enter a title...'></input>
-        <input className='form-add-task-input-description' placeholder='Enter a description...'></input>
+        <textarea className='form-add-task-input-description' placeholder='Enter a description...'></textarea>
         <button className='form-add-task-btn-add'>Add Task</button>
         <button className='form-add-task-btn-cancle'>X</button>
       </article>
