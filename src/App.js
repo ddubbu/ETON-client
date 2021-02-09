@@ -15,7 +15,7 @@ function App() {
 
   const HandleLogin = (data) => {
     console.log(data);
-    setAccessToken(data.accessToken);
+    setAccessToken(data.data.accessToken);
     setLogin(true);
   }
 
@@ -47,7 +47,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header isLogin = {isLogin} HandleLogout = {HandleLogout}/>
+      <Header isLogin = {isLogin} HandleLogout = {HandleLogout} accessToken = {accessToken}/>
       <div className="body">
         
         <Route path="/intro" render = {() => <Intro />} />
@@ -61,7 +61,7 @@ function App() {
         }}/>
 
         <Switch>
-          <Route path="/users/signin" render={() => <SignIn handleLogin = {HandleLogin}/>} />
+          <Route path="/users/signin" render={() => <SignIn handleLogin = {HandleLogin} isLogin = {isLogin}/>} />
           <Route path="/users/signup" component={SignUp} />
         </Switch>
 

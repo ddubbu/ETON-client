@@ -10,7 +10,7 @@ const SignIn = (props) => {
 		password: ''
 	});
 
-	const [isLogin, setLogin] = useState(false);
+	// const [isLogin, setLogin] = useState(false);
 
 	const inputHandler = (e) => {
 		setInput({
@@ -20,13 +20,16 @@ const SignIn = (props) => {
 	}
 
 	const signInHandler = (e) => {
-		axios.post("http://localhost:5000/users/signin/basic",{
+		axios.post("https://geteton.ga/users/signin/basic",{
+		// axios.post("http://localhost:4000/users/signin/basic",{
 			email : input.email,
 			password : input.password
+		},{
+			withCredentials : true
 		}).then(res => {
 			console.log("SIGN IN - res : ", res);
 			props.handleLogin(res.data);
-			setLogin(true);
+			// setLogin(true);
 		}).catch(err => {
 			console.log("SIGN IN - err : ", err);
 		})
@@ -59,7 +62,7 @@ const SignIn = (props) => {
 		.then(res => {
 			console.log("res : ", res.data);
 			props.handleLogin(res.data);
-			setLogin(true);
+			// setLogin(true);
 		})
 		.catch(err => {
 			console.log("ERR : ", err);
@@ -68,7 +71,7 @@ const SignIn = (props) => {
 		;
 		
 
-	if(isLogin) return <Redirect to = "/" />
+	if(props.isLogin) return <Redirect to = "/" />
 
 	return (
 		<section className="signin-wrapper">

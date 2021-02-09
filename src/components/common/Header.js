@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import LogoutDropDown from "../modal/logoutDropDown.js";
 import Logo from "./Logo.js";
 
-const Header = ({isLogin, HandleLogout}) => {
+const Header = ({isLogin, HandleLogout, accessToken}) => {
   const history = useHistory();
 
   const [showLogoutDropDown, setShowLogoutDropDown] = useState(false); 
@@ -18,6 +18,8 @@ const Header = ({isLogin, HandleLogout}) => {
     setShowLogoutDropDown(false);
   }
 
+  console.log("HEADER - accessToken : ", accessToken);
+
   return (
     <div className="Header">
       <Logo />
@@ -26,7 +28,7 @@ const Header = ({isLogin, HandleLogout}) => {
         <button onClick={openLogoutDropDown}>
           Log out
         </button>
-        {showLogoutDropDown && <LogoutDropDown closeLogoutDropDown = {closeLogoutDropDown} HandleLogout = {HandleLogout}/>}
+        {showLogoutDropDown && <LogoutDropDown closeLogoutDropDown = {closeLogoutDropDown} HandleLogout = {HandleLogout} accessToken = {accessToken}/>}
       </div>
         :
         <div>
