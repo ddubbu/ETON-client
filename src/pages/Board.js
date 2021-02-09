@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import ProgressList from '../components/board/ProgressList.js';
+import MemberDorpDown from '../components/modal/MemberDropDown.js';
+import PrgMenuDropDown from '../components/modal/PrgMenuDropDown.js'
+import TaskMenuDropDown from '../components/modal/TaskMenuDropDown.js'
 
 import sortObject from '../helper/sortObject';
 import drag_n_drop from '../helper/drag-n-drop.js';
-import eventHandler from '../helper/eventHandler.js'
+import eventHandler from '../helper/eventHandler.js';
 
 import '../styles/board.css'
 
@@ -59,22 +62,58 @@ export default function Board(){
     }
   })
 
-  /* 공통 */
-  async function inputChangeHandler(e, target, id){
+  const [ members, setMembers ] = useState([ 
+    { id: 1, name: '사람1' },
+    { id: 2, name: '사람2'}
+  ] );
 
-    if(target === 'board') await setBoard({ ... board, title: e.target.value });
-    if(target === 'progress') await setProgresses({ ...progresses, [id]: { ...progresses[id], title: e.target.value } })
-    const inputValue = e.target.value;
-    e.target.onkeypress = (e)=>{
-      if(e.keyCode === 13){
-        // 😁 title 수정 
+  // 모달 띄우고 있는지 여부
+  const [ modals, setModals ] = useState({ 
+    member : false,
+    memberSearch : false,
+    progress : false,
+    task : false
+  })
 
-        if(inputValue === '') return alert('빈칸은 입력이 불가능해요')
-        console.log('타이틀 수정 완료');
-        e.target.blur() // input focus 해제
-      }
+  // event state 감지
+  const [ event, setEvent ] = useState({
+    method : '', // GET, POST, PUT, DELETE
+    target : '', // board, progress, target
+    content : null, // 무엇이든
+    board_id : board.id,
+    progress_id : null,
+    task_id : null
+  })
+
+  // redux 처럼 전체 state 통솔 객체
+  const store = {
+    board: { // 모두 객체 주소니깐 업데이트 안해줘도 괜찮겠지?
+      state : board,
+      setState : setBoard
+    },
+    progresses: { // 모두 객체 주소니깐 업데이트 안해줘도 괜찮겠지?
+      state : progresses,
+      setState : setProgresses
+    },
+    tasks : {
+      state: tasks,
+      setState : setTasks
+    },
+    members : {
+      state: members,
+      setState: setMembers
+    },
+    modals : {
+      state : modals,
+      setState: setModals
+    },
+    event: {
+      state: event,
+      setState: setEvent
     }
   }
+
+  /* 공통 */
 
                  //! (시작) 삭제해도 될듯
   // async function clickAddHandler(e, target, id){
@@ -148,6 +187,7 @@ export default function Board(){
     // 다른 progress
     else{
       // source(출발지) 삭제
+      console.log(progresses, source.prgId)
       const source_new_task_priority = progresses[source.prgId].task_priority.split(',');
       source_new_task_priority.splice(source_new_task_priority.indexOf(source.taskId), 1);
       
@@ -187,11 +227,16 @@ export default function Board(){
   return (
     <div id="main-content">
       <section id="sub-nav-bar">
-        <input className="btn-sub-nav-bar board_title" value={board.title} onChange={(e)=>{inputChangeHandler(e,'board')}}></input>
+        <input className="btn-sub-nav-bar board_title" value={board.title} onChange={(e)=>{eventHandler.inputChangeHandler(e, store, 'board')}}></input>
         <span className="btn-sub-nav-bar divider"></span>
-        <button className="btn-sub-nav-bar member">member</button>
+        <button name='member' className="btn-sub-nav-bar member" onClick={(e)=>eventHandler.openModal(e, store, modals, setModals)}>member</button>
+        
         <button className="btn-sub-nav-bar invite">invite</button>
       </section>
+      {/* 모달은 position:absolute 이므로 한꺼번에 정의하자, 누르면 활성화되도록 */}
+      { modals.member ? <MemberDorpDown members={members} />  : '' }
+      { modals.progress ? <PrgMenuDropDown /> : '' }
+      { modals.task ? <TaskMenuDropDown /> : '' }
       <section id="progress-wrapper">
         {
           sortObject(progresses, board.prg_priority).map((progress, idx)=>{
@@ -202,7 +247,8 @@ export default function Board(){
                   changePrgPriority={changePrgPriority}
                   prg_priority={board.prg_priority}
                   changeTaskPriority={changeTaskPriority}
-                  inputChangeHandler={inputChangeHandler}
+                  ids={{board_id: board.id, progress_id: progress.id}}
+                  store={store}
                 />
               </>
             )
@@ -226,8 +272,7 @@ export default function Board(){
         <button 
           className="btn-add-progress" 
           onClick={e=>{eventHandler.clickAddSomething(e, 'progress')}}
-        > 
-          + Add another progress 
+        > + Add another progress 
           </button>
       </section>
     </div>

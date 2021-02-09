@@ -56,16 +56,19 @@ export default {
       e.target.style.display = 'none'
     }
   },
-  openModal : async (e, modals222, setModals222, ids, store)=>{
+  openModal : async (e, store)=>{ //modals222, setModals222, ids, store
     // modal 띄울만한거 : member, progress-menu, task-menu
     const modals = store.modals.state;
     const setModals = store.modals.setState;
     // console.log(modals, setModals)
+
+    store.event.setState({...store.event.state, target: 'hello'})
     await setModals({
       [e.target.name] : !modals[e.target.name]
     })
     if(!modals[e.target.name]){ // 만약 떠있으면
       const $drop_down = document.querySelector('.drop-down')
+      store.event.setState({...store.event.state, target: 'hello222222222'})
       $drop_down.style.left =  `${e.target.getBoundingClientRect().x}px`; ////`${e.clientX}px`
       $drop_down.style.top = `${e.target.getBoundingClientRect().y + 20 }px` ///20
     }
@@ -78,5 +81,22 @@ export default {
   },
   clickModifyTask: (e)=>{
 
+  }, 
+  inputChangeHandler: async (e, store, target, id)=>{
+
+    const { state: board, setState: setBoard } = store.board;
+    const { state: progresses, setState: setProgresses } = store.progresses;
+    if(target === 'board') await setBoard({ ... board, title: e.target.value });
+    if(target === 'progress') await setProgresses({ ...progresses, [id]: { ...progresses[id], title: e.target.value } })
+    const inputValue = e.target.value;
+    e.target.onkeypress = (e)=>{
+      if(e.keyCode === 13){
+        // 😁 title 수정 
+
+        if(inputValue === '') return alert('빈칸은 입력이 불가능해요')
+        console.log(board.title, '타이틀 수정 완료');
+        e.target.blur() // input focus 해제
+      }
+    }
   }
 }
