@@ -229,7 +229,7 @@ export default function Board(){
       <section id="sub-nav-bar">
         <input className="btn-sub-nav-bar board_title" value={board.title} onChange={(e)=>{eventHandler.inputChangeHandler(e, store, 'board')}}></input>
         <span className="btn-sub-nav-bar divider"></span>
-        <button name='member' className="btn-sub-nav-bar member" onClick={(e)=>eventHandler.openModal(e, store, modals, setModals)}>member</button>
+        <button name='member' className="btn-sub-nav-bar member" onClick={(e)=>eventHandler.openModal(e, store)}>member</button>
         
         <button className="btn-sub-nav-bar invite">invite</button>
       </section>
@@ -243,9 +243,8 @@ export default function Board(){
             return (
               <>
                 <article className={`prg-dropzone prg-dropzone-${idx}`}></article>
-                <ProgressList key={idx} progress={progress} tasks={tasks} 
+                <ProgressList key={idx}
                   changePrgPriority={changePrgPriority}
-                  prg_priority={board.prg_priority}
                   changeTaskPriority={changeTaskPriority}
                   ids={{board_id: board.id, progress_id: progress.id}}
                   store={store}

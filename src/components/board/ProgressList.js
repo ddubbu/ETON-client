@@ -5,15 +5,18 @@ import sortObject from '../../helper/sortObject.js';
 import drag_n_drop from '../../helper/drag-n-drop.js';
 import eventHandler from '../../helper/eventHandler.js'
 
-export default function ProgressList( { progress, tasks, changePrgPriority, prg_priority, changeTaskPriority, 
-                                        ids, store }){
+export default function ProgressList( { changePrgPriority, changeTaskPriority, ids, store }){
+  const { state: board, setState: setBoard } = store.board;
+  const { state: progresses, setState: setProgresses } = store.progresses;
+  const { state: tasks, setState: setTasks } = store.tasks;
+  const progress = progresses[ids.progress_id]
 
   // clickAddProgress event - 함수 분리를 위해서
   const submitAddInfo = eventHandler.submitAddInfo('task');
   return (
     <article className={"progress" + " " + progress.id} 
       onMouseDown={drag_n_drop.handleMouseDown}
-      onMouseUp={(e)=>{drag_n_drop.handleMouseUp(e, changePrgPriority, prg_priority, changeTaskPriority)}}
+      onMouseUp={(e)=>{drag_n_drop.handleMouseUp(e, changePrgPriority, board.prg_priority, changeTaskPriority)}}
       onMouseMove={drag_n_drop.handleMouseMove}
       >
       <section className="progress-head drag-drop">
@@ -33,9 +36,7 @@ export default function ProgressList( { progress, tasks, changePrgPriority, prg_
                 <article className={`task-dropzone prg-${progress.id}-taskDropZone-${idx}`}></article>
                 <TaskList 
                   taskDropZone={idx} 
-                  task={task} 
-                  progressId={progress.id}
-                  ids={{...ids, prg_id: progress.id}}
+                  ids={{...ids, task_id: task.id}}
                   store={store}
                   />
               </>

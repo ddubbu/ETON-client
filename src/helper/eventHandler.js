@@ -58,17 +58,15 @@ export default {
   },
   openModal : async (e, store)=>{ //modals222, setModals222, ids, store
     // modal 띄울만한거 : member, progress-menu, task-menu
-    const modals = store.modals.state;
-    const setModals = store.modals.setState;
-    // console.log(modals, setModals)
+    const { state: modals, setState: setModals } = store.modals;
 
-    store.event.setState({...store.event.state, target: 'hello'})
+    // store.event.setState({...store.event.state, target: 'hello'})
     await setModals({
       [e.target.name] : !modals[e.target.name]
     })
     if(!modals[e.target.name]){ // 만약 떠있으면
       const $drop_down = document.querySelector('.drop-down')
-      store.event.setState({...store.event.state, target: 'hello222222222'})
+      // store.event.setState({...store.event.state, target: 'hello222222222'})
       $drop_down.style.left =  `${e.target.getBoundingClientRect().x}px`; ////`${e.clientX}px`
       $drop_down.style.top = `${e.target.getBoundingClientRect().y + 20 }px` ///20
     }
