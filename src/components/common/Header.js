@@ -1,15 +1,35 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import LogoutDropDown from "../modal/logoutDropDown.js";
 import Logo from "./Logo.js";
 
-const Header = () => {
+const Header = ({isLogin, HandleLogout}) => {
   const history = useHistory();
+
+  const [showLogoutDropDown, setShowLogoutDropDown] = useState(false); 
+  // const logoutContainer = React.createRef();
+
+  const openLogoutDropDown = () => {
+    setShowLogoutDropDown(true);
+  }
+
+  const closeLogoutDropDown = () => {
+    setShowLogoutDropDown(false);
+  }
 
   return (
     <div className="Header">
       <Logo />
-      {/* <div style={{color:"white"}}>여백. 뭐 넣을까?</div> */}
-      <div>
+      {isLogin ? 
+      <div className = "logoutDiv">
+        <button onClick={openLogoutDropDown}>
+          Log out
+        </button>
+        {showLogoutDropDown && <LogoutDropDown closeLogoutDropDown = {closeLogoutDropDown} HandleLogout = {HandleLogout}/>}
+      </div>
+        :
+        <div>
         <button
           onClick={() => {
             history.push("/users/signup");
@@ -25,6 +45,11 @@ const Header = () => {
           Log In
         </button>
       </div>
+      }
+      {/* {showLogoutModal ? 
+      <LogoutModal closeLogoutModal = {closeLogoutModal}/>
+      : 
+      null} */}
     </div>
   );
 };

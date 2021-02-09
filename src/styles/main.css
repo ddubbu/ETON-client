@@ -1,0 +1,108 @@
+
+.mainContainer {
+  display: grid ;
+  grid-template-columns: 1fr 4fr;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+
+.sticky {
+  position: sticky;
+  top: 0;
+  padding: 5px;
+}
+
+.mainBody{
+    border-left: black solid 1px;
+    height: 100%;
+    padding: 1rem;
+}
+
+.mainBody > div{
+    border: 1px solid black;
+}
+
+.myBord{
+    
+}
+
+.myBordList{
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+.bordThumbNail{
+    border: 1px solid blue;
+    width: 15rem;
+    height: 8rem;
+}
+
+.myTask{
+
+}
+
+.mainSidebar{
+    padding: 1rem;
+}
+
+.profileHeader{
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+}
+
+.mainButton{
+    appearance: none;
+    
+    background-color: white;
+    border: none;
+    size: 3rem;
+    outline: none;
+}
+
+.mainButton:hover{
+    cursor: pointer;
+}
+
+.profileEditButton{
+    font-size: larger;
+    font-weight: bold;
+}
+
+.pictureDiv{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+    ". picture .";
+}
+
+.profilePicuture{
+    grid-area: picture;
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+    text-align: center;
+}
+
+.myTaskThumbNail {
+    border: 1px silver dotted;
+}
+
+
+.myTaskThumbNail > .taskNameDiv > h3{
+    margin: 0;
+}
+
+.myTaskThumbNail > .taskEtc{
+    color: gray;
+}
