@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/signIn.css';
 import Logo from '../components/common/Logo.js'
 import axios from 'axios';
@@ -32,6 +32,42 @@ const SignIn = (props) => {
 		})
 	}
 
+	const socialSignUp = () => {
+		window.location.assign('https://github.com/login/oauth/authorize?client_id=ba16cbd9921edd657827');
+	}
+
+	useEffect(() => {
+		console.log("use Effect");
+		const url = new URL(window.location.href);
+		const authorizationCode = url.searchParams.get("code");
+		if (authorizationCode) {
+		  getAccessToken(authorizationCode);
+		}
+	  });
+
+	  const getAccessToken = (authorizationCode) => {
+		console.log("getAccessToken!");
+		axios.post(
+		  "https://geteton.ga/users/signin/github/callback",
+		  {
+			authorizationCode,
+		  },
+		  {
+			withCredentials: true,
+		  }
+		)
+		.then(res => {
+			console.log("res : ", res.data);
+			props.handleLogin(res.data);
+			setLogin(true);
+		})
+		.catch(err => {
+			console.log("ERR : ", err);
+		})
+		}
+		;
+		
+
 	if(isLogin) return <Redirect to = "/" />
 
 	return (
@@ -44,7 +80,7 @@ const SignIn = (props) => {
 				<input type="password" onChange={inputHandler} placeholder="Enter password" />
 				<button onClick={signInHandler}> Log In </button>
 				<p>or</p>
-				<button>Continue with github 🤖</button>
+				<button onClick = {socialSignUp}>Continue with github 🤖</button>
 				<a href="/users/signup">Sign up for an account</a>
 			</section>
 		</section>

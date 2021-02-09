@@ -1,22 +1,33 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import LogoutDropDown from "../modal/logoutDropDown.js";
 import Logo from "./Logo.js";
 
-const Header = ({isLogin}) => {
+const Header = ({isLogin, HandleLogout}) => {
   const history = useHistory();
 
-  const handleLogout = () => {
-    // axios.
+  const [showLogoutDropDown, setShowLogoutDropDown] = useState(false); 
+  // const logoutContainer = React.createRef();
+
+  const openLogoutDropDown = () => {
+    setShowLogoutDropDown(true);
+  }
+
+  const closeLogoutDropDown = () => {
+    setShowLogoutDropDown(false);
   }
 
   return (
     <div className="Header">
       <Logo />
       {isLogin ? 
-      <button onClick={handleLogout}>
-        Log out
-      </button>
+      <div className = "logoutDiv">
+        <button onClick={openLogoutDropDown}>
+          Log out
+        </button>
+        {showLogoutDropDown && <LogoutDropDown closeLogoutDropDown = {closeLogoutDropDown} HandleLogout = {HandleLogout}/>}
+      </div>
         :
         <div>
         <button
@@ -35,6 +46,10 @@ const Header = ({isLogin}) => {
         </button>
       </div>
       }
+      {/* {showLogoutModal ? 
+      <LogoutModal closeLogoutModal = {closeLogoutModal}/>
+      : 
+      null} */}
     </div>
   );
 };
