@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
-export default function TaskList({ task }){
+import drag_n_drop from '../../helper/drag-n-drop.js';
+
+export default function TaskList({ task, progressId, taskDropZone }){
   return (
-    <article className={`task ${task.id} drag-drop`}>
+    <article className={`task prg-${progressId}-task-${task.id} drag-drop taskDropZone-${taskDropZone}`}>
       <section className="task-head">
         <div className="task-title">{task.title}</div>
         <button className="btn-task-menu">···</button>
       </section>
       <section className="task-body">
-        task 내용입니다. 나중에 description, member 적용할 것임.
+        {task.discription}
       </section>
     </article>
   )

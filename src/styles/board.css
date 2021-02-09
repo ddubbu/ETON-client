@@ -4,11 +4,15 @@
 
 
 #main-content {
+  background:#C6CDD1;
+  /*1번 보라*/
   background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg");
   /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1280x1920/64ee91344d42e824ae569901b3e909c3/photo-1611907045982-8ecba81fd8c6.jpg"); */
   /* background-color: rgb(218, 217, 217); */
   background-position: 50%;
+  /* width: 100%; */
   height: 100%;
+  background-repeat: no-repeat;
 
   padding: 5px 10px;
 }
@@ -24,7 +28,8 @@
   padding: 0 12px;
   margin: 0 16px 0 0 ;
 
-  color: white;
+  color: black
+  /* color: white; */
 }
 
 #sub-nav-bar *:not(.divider):hover, .btn-add-progress:hover {
@@ -85,8 +90,10 @@
 .progress {
   background-color: #ebecf0;
   width: 272px;
-  margin: auto 8px 0 0; 
+  /* margin: auto 8px 0 0;  */
   padding: 8px;
+
+  user-select: auto;
 }
 
 .progress-head {
@@ -129,6 +136,7 @@ input.progress-title:focus {
   background: white;
   padding: 6px 8px 2px;
   margin-bottom: 5px;
+  width: 256px; /* drag drop 시 크기 고정을 위해 */
 
   /* 그림자 */
   box-shadow: 0 1px rgb(189, 189, 189);
@@ -163,3 +171,64 @@ input.progress-title:focus {
 .btn-add-task:hover, .btn-progress-menu:hover {
   background: rgba(133, 132, 132, 0.2);
 }
+
+
+/*! drg-drop action */
+
+.prg-dropzone { /* mouse hover 인식을 위해서 */
+  /* width:5px; */
+  height: 40vh;
+  margin:2px;
+  /* border: 1px white solid; */
+}
+.prg-dropzone:hover {
+  /* js 파일 에서 정의함! */
+  /* background: rgba(161, 161, 161, 0.2);
+  width: 272px; */
+}
+
+.hold {
+  position: absolute;
+}
+
+.task-dropzone { /* mouse hover 인식을 위해서 */
+  width: 256px;
+  height: 3px;
+  /* margin:2px; */
+  /* border: 1px rgb(246, 76, 76) solid; */
+}
+
+
+/* drag & drop 하도록 잡을 수 있는 부분 */
+
+.progress {
+  border-top: 20px  #A6A3A1 solid
+  /* #5e6c84 solid; */
+}
+
+.task {
+  border-top: 20px #E3CDB8 solid;
+  /* rgb(104, 93, 255) solid; */
+  /* background: repeating-linear-gradient(
+  45deg,
+  #606dbc,
+  #606dbc 10px,
+  #465298 10px,
+  #465298 20px
+  );
+  */
+}
+
+.task:after {
+  /*선보다 작은 잡는 버튼 두자!!*/
+  /* content : "";
+  position: absolute;
+  left    : 0;
+  top  : 0;
+  height  : 1px;
+  width   : 50%;  /* or 100px */
+  /* border-top:5px solid magenta; */
+}
+/* .task-head, .task-body{
+  background-color: white;;
+} */
