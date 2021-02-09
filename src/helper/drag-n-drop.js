@@ -94,7 +94,11 @@ export default {
     // const progress = progresses[ids.progress_id]
 
     const changePrgPriority = eventHandler.changePrgPriority;
-    const prev_priority = board.progress_priority;
+    const prev_priority = board.prg_priority;
+    console.log(ids)
+
+    console.log("prev_priority", prev_priority);
+
     // progress, task 일반화
     // prv_priority는 progress 변화를 위해서임.
     const $el = document.querySelector(".hold");
@@ -111,14 +115,7 @@ export default {
       if($el.classList.contains('progress')){
 
         // 놓여진 progressId
-        const progressId = Number(
-          Array.from($el.classList).filter(className=>{
-            if(!Number.isNaN(Number(className))) {
-              return true
-            } 
-            return false;
-          })
-        )
+        const progressId = ids.progress_id;
 
         // 놓여진 $dropzone 찾고, 새로운 priority 로 state 변경
         const $dropzones = document.querySelectorAll('.prg-dropzone');
@@ -143,7 +140,7 @@ export default {
         // state 변경
         if(new_priority.length === split_prev_priority.length 
           && new_priority.join(',') !== prev_priority){
-          changePrgPriority(new_priority.join(','));
+            changePrgPriority(store, new_priority.join(','), ids)
         }
 
         // dropzone 크기 바꾸기 : 마지막이나 처음 $dropzone reset 을 위해

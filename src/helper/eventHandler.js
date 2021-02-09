@@ -105,7 +105,7 @@ export default {
 
     await setBoard({
       ...board,
-      [board.prg_priority] : newPrgPriority
+      prg_priority : newPrgPriority
     })
     console.log("Update newPrgPriority", newPrgPriority); 
   }
