@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
+import eventHandler from '../../helper/eventHandler.js';
 
-export default function PrgMenuDropDown ({event: eventState}) {
+export default function PrgMenuDropDown ({store}) {
 	return (
-		<ul className="drop-down">
-      <li onClick={console.log(eventState)}>
+		<ul name="progress" className="drop-down">
+      <li name="progress" onClick={(e)=>eventHandler.clickDeleteSomething(e, store)}>
         삭제하기
       </li>
     </ul>

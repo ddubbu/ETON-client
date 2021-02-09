@@ -82,9 +82,46 @@ export default {
 
     
   },
-  clickDeleteSomething: (e)=>{
+  clickDeleteSomething: async (e, store)=>{
+    
+    const { state: board, setState: setBoard } = store.board;
+    const { state: progresses, setState: setProgresses } = store.progresses;
+    const { state: tasks, setState: setTasks } = store.tasks;
+    const { state: modals, setState: setModals } = store.modals;
+    const { state: event, setState: setEvent } = store.event;
+    const { board_id: b, progress_id: p, task_id: t } = event;
+
     // modal 에서 delete 를 누르면? 해당 ids 를 갖고 행동 이행 : 어디서할까? board? 여기서 하자(그럼, state, setState 모두 가져오자)
 
+    //! progress 삭제
+    if( !t ) {
+      //TODO eventState ids 로 axios 요청 보내시오
+      console.log("delete", b, p);
+      const newPrgPriority = board.prg_priority.split(',')
+      .filter(el=>String(p) === el ? false : true)
+      .join(',');
+      console.log("newPrgPriority", newPrgPriority)
+
+      // 1. board 변경
+      await setBoard({
+        ...board, 
+        prg_priority: newPrgPriority
+      })
+
+      // 2. progress 변경
+      delete progresses[p];
+      await setProgresses({
+        ...progresses
+      })
+
+      await setModals({
+        progress: false
+      })
+      
+    } else { //! task 삭제
+      //TODO eventState ids 로 axios 요청 보내시오
+      console.log("delete", b, p, t)
+    }
   },
   clickModifyTask: (e)=>{
 
@@ -98,7 +135,7 @@ export default {
     const inputValue = e.target.value;
     e.target.onkeypress = (e)=>{
       if(e.keyCode === 13){
-        // 😁 title 수정 
+        // TODO 😁 axios : board, progress title 수정 
 
         if(inputValue === '') return alert('빈칸은 입력이 불가능해요')
         console.log(board.title, '타이틀 수정 완료');

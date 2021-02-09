@@ -168,8 +168,8 @@ export default function Board(){
       </section>
       {/* 모달은 position:absolute 이므로 한꺼번에 정의하자, 누르면 활성화되도록 */}
       { modals.member ? <MemberDorpDown members={members} />  : '' }
-      { modals.progress ? <PrgMenuDropDown event={event} /> : '' }
-      { modals.task ? <TaskMenuDropDown event={event} /> : '' }
+      { modals.progress ? <PrgMenuDropDown store={store} /> : '' }
+      { modals.task ? <TaskMenuDropDown store={store} /> : '' }
       <section id="progress-wrapper">
         {
           sortObject(progresses, board.prg_priority).map((progress, idx)=>{
