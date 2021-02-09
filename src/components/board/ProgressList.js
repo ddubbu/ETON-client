@@ -5,7 +5,7 @@ import sortObject from '../../helper/sortObject.js';
 import drag_n_drop from '../../helper/drag-n-drop.js';
 import eventHandler from '../../helper/eventHandler.js'
 
-export default function ProgressList( { changePrgPriority, changeTaskPriority, ids, store }){
+export default function ProgressList( { store, ids }){
   const { state: board, setState: setBoard } = store.board;
   const { state: progresses, setState: setProgresses } = store.progresses;
   const { state: tasks, setState: setTasks } = store.tasks;
@@ -16,7 +16,7 @@ export default function ProgressList( { changePrgPriority, changeTaskPriority, i
   return (
     <article className={"progress" + " " + progress.id} 
       onMouseDown={drag_n_drop.handleMouseDown}
-      onMouseUp={(e)=>{drag_n_drop.handleMouseUp(e, store, ids, changeTaskPriority)}}
+      onMouseUp={(e)=>{drag_n_drop.handleMouseUp(e, store, ids)}}
       onMouseMove={drag_n_drop.handleMouseMove}
       >
       <section className="progress-head drag-drop">
@@ -25,7 +25,7 @@ export default function ProgressList( { changePrgPriority, changeTaskPriority, i
         <button 
           name='progress'
           className="btn-progress-menu"
-          onClick={(e)=>eventHandler.openModal(e, store, {...ids, prg_id: progress.id})}
+          onClick={(e)=>eventHandler.openModal(e, store, ids)} //{...ids, prg_id: progress.id}
         >···</button>
       </section>
       <section className="progress-tasks-wrapper">

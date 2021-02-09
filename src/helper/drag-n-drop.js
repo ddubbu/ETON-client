@@ -87,21 +87,22 @@ export default {
       }
     }
   },
-  handleMouseUp : function(e, store, ids, changeTaskPriority){ // 손을 놓았을 때 > new priority : state 변경
+  handleMouseUp : function(e, store, ids){ 
+    // 손을 놓았을 때 > new priority : state 변경
+    // ids : 출발지 정보
+    //TODO dropzone은 className 에서 추출하는 수 밖에 없겠지? 우선은?
     const { state: board, setState: setBoard } = store.board;
     const { state: progresses, setState: setProgresses } = store.progresses;
     const { state: tasks, setState: setTasks } = store.tasks;
-    // const progress = progresses[ids.progress_id]
-
-    const changePrgPriority = eventHandler.changePrgPriority;
+    const { changePrgPriority, changeTaskPriority }  = eventHandler;
     const prev_priority = board.prg_priority;
-    console.log(ids)
 
-    console.log("prev_priority", prev_priority);
+    const $el = document.querySelector(".hold");
+    if (!$el) return;
 
     // progress, task 일반화
     // prv_priority는 progress 변화를 위해서임.
-    const $el = document.querySelector(".hold");
+
     if( $el ){
       // 움직이면 적용된 속성 및 class를 삭제
       $el.removeAttribute("gap-x")
@@ -112,7 +113,8 @@ export default {
       const mouseX = e.clientX;
       const mouseY = e.clientY;
 
-      if($el.classList.contains('progress')){
+
+      if(Object.keys(ids).length ===2){ //$el.classList.contains('progress')){
 
         // 놓여진 progressId
         const progressId = ids.progress_id;
@@ -149,12 +151,9 @@ export default {
         })
 
       } /* [끝] $el.classList.contains('progress') */
-      else if($el.classList.contains('task')){
-        let progressId_taskId = Array.from($el.classList).filter((str, idx) =>{
-          if(!str.match(/^prg-/)) return false;
-          else return true;
-        })[0];
-
+      else if(Object.keys(ids).length === 3) { // target 이동
+        console.log(e.target)
+        e.stopPropagation();
         let taskDropZone_Id = Array.from($el.classList).filter((str, idx)=>{
           if(!str.match(/^taskDropZone-/)) return false;
           else return true;
@@ -162,8 +161,8 @@ export default {
 
         //! 출발지 
         const source = { //출발지 정보
-          prgId: progressId_taskId.split('-')[1],
-          taskId: progressId_taskId.split('-')[3],
+          prgId: ids.progress_id, //progressId_taskId.split('-')[1],
+          taskId: ids.task_id, //progressId_taskId.split('-')[3],
           taskDropZone: taskDropZone_Id.split('-')[1]
         }
 
@@ -176,7 +175,7 @@ export default {
 
           // 가로 세로 dropzone 내부 체크
           if( (mouseX > x && mouseX < x + 272) && (mouseY > y && mouseY < y + 100 ) ) { 
-
+            console.log('mouse up', ids)
             //! 도착지
             let progressId_taskId = Array.from($dropzone.classList).filter(str=>{
               if(!str.match(/^prg-/)) return false;
@@ -193,7 +192,7 @@ export default {
                && source.taskDropZone === target.taskDropZone){ // 같은 progress에 두었고
               console.log("출발지 도착지 같으면 pass")
             }else {
-              changeTaskPriority({source, target})
+              changeTaskPriority(store, ids, {source, target})
             }
             // statte 변경
 

@@ -12,7 +12,11 @@ export default function TaskList({ taskDropZone, ids, store }){
   const task = tasks[ids.task_id];
 
   return (
-    <article className={`task prg-${ids.progress_id}-task-${ids.task_id} drag-drop taskDropZone-${taskDropZone}`}>
+    <article className={`task prg-${ids.progress_id}-task-${ids.task_id} drag-drop taskDropZone-${taskDropZone}`}
+      // onMouseDown={drag_n_drop.handleMouseDown}
+      onMouseUp={(e)=>{drag_n_drop.handleMouseUp(e, store, ids)}}
+      // onMouseMove={drag_n_drop.handleMouseMove}
+      >
       <section className="task-head">
         <div className="task-title">{task.title}</div>
         <button 

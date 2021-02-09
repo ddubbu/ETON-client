@@ -147,68 +147,7 @@ export default function Board(){
 
                 //!(끝) 삭제해도 될듯
 
-  /* (시작) drag-drop */
-  //! Board 입장에서 Progress 순서 저장
-  // 새로운 순서 인자로 넘김.
-  // async function changePrgPriority (newPrgPriority){ // string type 기대
-
-  //! Progress 입장에서 Task 순서 저장
-  // 여기서 새로운 순서 생성
-  async function changeTaskPriority ({ source, target }){
-
-    //같은 progress & 다른 taskDropZone 
-    if(source.prgId === target.prgId){ 
-      const prev_task_priority = progresses[source.prgId].task_priority.split(',');
-      let new_task_priority = [];
-      for(let i=0; i<prev_task_priority.length; i++){
-        // 새로운 위치에 넣고
-        if(i === Number(target.taskDropZone)) new_task_priority.push(source.taskId);
-        // 다른 task 들은 순서대로 넣기
-        if(prev_task_priority[i] !== source.taskId) new_task_priority.push(prev_task_priority[i]);
-        // 예전 task는 지우기
-        // else continue;
-      }
-      // 같은 progress 니깐 한곳만 update 하면 됨.
-      await setProgresses({
-        ...progresses,
-        [source.prgId] : {
-          ...progresses[source.prgId],
-          task_priority : new_task_priority.join(',')
-        },
-      })
-    }
-
-    // 다른 progress
-    else{
-      // source(출발지) 삭제
-      console.log(progresses, source.prgId)
-      const source_new_task_priority = progresses[source.prgId].task_priority.split(',');
-      source_new_task_priority.splice(source_new_task_priority.indexOf(source.taskId), 1);
-      
-      // target(도착지) 추가 - taskDropZone id 에 넣으면 된다!
-      let target_new_task_priority = [];
-        // 원래 빈 task_priority 였으면 바로 추가
-      if(progresses[target.prgId].task_priority.length === 0) target_new_task_priority = [source.taskId];
-      else {
-        target_new_task_priority = progresses[target.prgId].task_priority.split(',');
-        target_new_task_priority.splice(target.taskDropZone, 0, source.taskId)
-      }
-
-      // 출발지, 도착지 모두 update
-      await setProgresses({
-        ...progresses,
-        [source.prgId] : {
-          ...progresses[source.prgId],
-          task_priority : source_new_task_priority.join(',')
-        },
-        [target.prgId] : {
-          ...progresses[target.prgId],
-          task_priority : target_new_task_priority.join(',')
-        }
-      })
-    }
-
-  }
+ 
 
   // drag-n-drop
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
@@ -238,8 +177,6 @@ export default function Board(){
               <>
                 <article className={`prg-dropzone prg-dropzone-${idx}`}></article>
                 <ProgressList key={idx}
-                  // changePrgPriority={changePrgPriority}
-                  changeTaskPriority={changeTaskPriority}
                   ids={{board_id: board.id, progress_id: progress.id}}
                   store={store}
                 />
