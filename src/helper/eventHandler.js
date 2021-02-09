@@ -9,7 +9,7 @@ export default {
     }
   
     return function submitAddInfo(e){  //$(.form-add-progress-btn-add)
-      console.log('click')
+      // console.log('click')
   
       if(input.title.length !== 0){
         // TODO 😁 progress 새로이 추가하고 응답으로 state(board.prg_priority, progresses) 업데이트하기 
@@ -56,5 +56,19 @@ export default {
       $form_add_progress.style.display = 'flex'
       e.target.style.display = 'none'
     }
+  },
+  openModal : async (e, modals, setModals, ids)=>{
+    console.log("setModals", setModals)
+    // modal 띄울만한거 : member, progress-menu, task-menu
+    await setModals({
+      [e.target.name] : !modals[e.target.name]
+    })
+    if(!modals[e.target.name]){ // 만약 떠있으면
+      const $drop_down = document.querySelector('.drop-down')
+      $drop_down.style.left =  `${e.target.getBoundingClientRect().x}px`; ////`${e.clientX}px`
+      $drop_down.style.top = `${e.target.getBoundingClientRect().y + 30}px`
+    }
+
+    console.log(ids)
   }
 }

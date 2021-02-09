@@ -102,3 +102,15 @@
 .logoutButton{
   width: 100%;
 }
+
+
+/* board page dorp down */
+.drop-down{
+  /* display: none; */
+  background-color: rgb(163, 247, 7);
+  position: absolute;
+  width: 300px;
+  /* z-index: 2; */
+  /* right: 3%; */
+  /* color:red; */
+}

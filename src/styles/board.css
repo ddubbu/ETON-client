@@ -4,7 +4,7 @@
 
 
 #main-content {
-  background:#C6CDD1;
+  background:white;
   /*1번 보라*/
   background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg");
   /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1280x1920/64ee91344d42e824ae569901b3e909c3/photo-1611907045982-8ecba81fd8c6.jpg"); */
@@ -22,18 +22,21 @@
 #sub-nav-bar *:not(.divider), .btn-add-progress {
   outline: none; 
   border: none; 
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: #ebecf0;
+  /*TODO 배경에 따라 바꿔주자
+   이거 수정 background-color: rgba(255, 255, 255, 0.4); */
   
   line-height: 32px;
   padding: 0 12px;
   margin: 0 16px 0 0 ;
 
-  color: black
   /* color: white; */
 }
 
 #sub-nav-bar *:not(.divider):hover, .btn-add-progress:hover {
-  background-color: rgba(255, 255, 255, 0.609);
+  background-color: #d6d7db;
+  /* TODO 배경에 따라 바꿔주자
+  */
 }
 
 /* border-radius */
