@@ -150,13 +150,7 @@ export default function Board(){
   /* (시작) drag-drop */
   //! Board 입장에서 Progress 순서 저장
   // 새로운 순서 인자로 넘김.
-  async function changePrgPriority (newPrgPriority){ // string type 기대
-    await setBoard({
-      ...board,
-      prg_priority: newPrgPriority
-    })
-    console.log("Update newPrgPriority", newPrgPriority); 
-  }
+  // async function changePrgPriority (newPrgPriority){ // string type 기대
 
   //! Progress 입장에서 Task 순서 저장
   // 여기서 새로운 순서 생성
@@ -244,7 +238,7 @@ export default function Board(){
               <>
                 <article className={`prg-dropzone prg-dropzone-${idx}`}></article>
                 <ProgressList key={idx}
-                  changePrgPriority={changePrgPriority}
+                  // changePrgPriority={changePrgPriority}
                   changeTaskPriority={changeTaskPriority}
                   ids={{board_id: board.id, progress_id: progress.id}}
                   store={store}

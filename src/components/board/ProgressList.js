@@ -16,7 +16,7 @@ export default function ProgressList( { changePrgPriority, changeTaskPriority, i
   return (
     <article className={"progress" + " " + progress.id} 
       onMouseDown={drag_n_drop.handleMouseDown}
-      onMouseUp={(e)=>{drag_n_drop.handleMouseUp(e, changePrgPriority, board.prg_priority, changeTaskPriority)}}
+      onMouseUp={(e)=>{drag_n_drop.handleMouseUp(e, store, ids, changeTaskPriority)}}
       onMouseMove={drag_n_drop.handleMouseMove}
       >
       <section className="progress-head drag-drop">

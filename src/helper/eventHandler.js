@@ -96,5 +96,17 @@ export default {
         e.target.blur() // input focus 해제
       }
     }
+  },
+  changePrgPriority: async function changePrgPriority (store, newPrgPriority, ids){ // string type 기대
+    const { state: board, setState: setBoard } = store.board;
+    const { state: progresses, setState: setProgresses } = store.progresses;
+    const { state: tasks, setState: setTasks } = store.tasks;
+    const progress = progresses[ids.progress_id]
+
+    await setBoard({
+      ...board,
+      [board.prg_priority] : newPrgPriority
+    })
+    console.log("Update newPrgPriority", newPrgPriority); 
   }
 }

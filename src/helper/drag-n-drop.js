@@ -1,3 +1,5 @@
+import eventHandler from '../helper/eventHandler.js';
+
 export default {
   handleMouseDown : (e) => { // 클릭한 요소 감지, .hold 이름 붙여주기
     const $el = e.target;
@@ -85,7 +87,14 @@ export default {
       }
     }
   },
-  handleMouseUp : function(e, changePriority, prev_priority, changeTaskPriority){ // 손을 놓았을 때 > new priority : state 변경
+  handleMouseUp : function(e, store, ids, changeTaskPriority){ // 손을 놓았을 때 > new priority : state 변경
+    const { state: board, setState: setBoard } = store.board;
+    const { state: progresses, setState: setProgresses } = store.progresses;
+    const { state: tasks, setState: setTasks } = store.tasks;
+    // const progress = progresses[ids.progress_id]
+
+    const changePrgPriority = eventHandler.changePrgPriority;
+    const prev_priority = board.progress_priority;
     // progress, task 일반화
     // prv_priority는 progress 변화를 위해서임.
     const $el = document.querySelector(".hold");
@@ -134,7 +143,7 @@ export default {
         // state 변경
         if(new_priority.length === split_prev_priority.length 
           && new_priority.join(',') !== prev_priority){
-          changePriority(new_priority.join(','));
+          changePrgPriority(new_priority.join(','));
         }
 
         // dropzone 크기 바꾸기 : 마지막이나 처음 $dropzone reset 을 위해
