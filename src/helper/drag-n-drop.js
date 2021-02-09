@@ -152,7 +152,6 @@ export default {
 
       } /* [끝] $el.classList.contains('progress') */
       else if(Object.keys(ids).length === 3) { // target 이동
-        console.log(e.target)
         e.stopPropagation();
         let taskDropZone_Id = Array.from($el.classList).filter((str, idx)=>{
           if(!str.match(/^taskDropZone-/)) return false;
@@ -175,7 +174,6 @@ export default {
 
           // 가로 세로 dropzone 내부 체크
           if( (mouseX > x && mouseX < x + 272) && (mouseY > y && mouseY < y + 100 ) ) { 
-            console.log('mouse up', ids)
             //! 도착지
             let progressId_taskId = Array.from($dropzone.classList).filter(str=>{
               if(!str.match(/^prg-/)) return false;

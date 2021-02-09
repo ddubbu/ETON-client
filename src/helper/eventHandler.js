@@ -50,9 +50,9 @@ export default {
       $form_add_progress.style.display = 'flex'
       e.target.style.display = 'none'
     } else if (target === 'task'){
-      const $form_add_progress = document.querySelector(`.form-add-task.prg-${prg_id}`);
+      const $form_add_task = document.querySelector(`.form-add-task.prg-${prg_id}`);
       // 위에서 아래로 생기는 action은 나중에
-      $form_add_progress.style.display = 'flex'
+      $form_add_task.style.display = 'flex'
       e.target.style.display = 'none'
     }
   },
@@ -60,18 +60,14 @@ export default {
     // modal 띄울만한거 : member, progress-menu, task-menu
     const { state: modals, setState: setModals } = store.modals;
 
-    // store.event.setState({...store.event.state, target: 'hello'})
     await setModals({
       [e.target.name] : !modals[e.target.name]
     })
     if(!modals[e.target.name]){ // 만약 떠있으면
       const $drop_down = document.querySelector('.drop-down')
-      // store.event.setState({...store.event.state, target: 'hello222222222'})
       $drop_down.style.left =  `${e.target.getBoundingClientRect().x}px`; ////`${e.clientX}px`
       $drop_down.style.top = `${e.target.getBoundingClientRect().y + 20 }px` ///20
     }
-
-    // console.log(ids)
   },
   clickDeleteSomething: (e)=>{
     // modal 에서 delete 를 누르면? 해당 ids 를 갖고 행동 이행 : 어디서할까? board? 여기서 하자(그럼, state, setState 모두 가져오자)
@@ -103,7 +99,6 @@ export default {
    changePrgPriority: async function changePrgPriority (store, newPrgPriority, ids){ // string type 기대
     //! Board 입장에서 Progress 순서 저장
     // 새로운 순서 인자로 넘김.
-    // async function changePrgPriority (newPrgPriority){ // string type 기대
     const { state: board, setState: setBoard } = store.board;
     const { state: progresses, setState: setProgresses } = store.progresses;
     const { state: tasks, setState: setTasks } = store.tasks;
@@ -112,8 +107,7 @@ export default {
     await setBoard({
       ...board,
       prg_priority : newPrgPriority
-    })
-    // console.log("Update newPrgPriority", newPrgPriority); 
+    }) 
   },
 
   changeTaskPriority : async function changeTaskPriority (store, ids,{  source, target }){

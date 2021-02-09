@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import drag_n_drop from '../../helper/drag-n-drop.js';
 import eventHandler from '../../helper/eventHandler.js'
 
-export default function TaskList({ taskDropZone, ids, store }){
+export default function TaskList({ store, ids, taskDropZone }){
 
   const { state: board, setState: setBoard } = store.board;
   const { state: progresses, setState: setProgresses } = store.progresses;
