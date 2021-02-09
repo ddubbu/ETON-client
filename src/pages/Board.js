@@ -3,6 +3,7 @@ import ProgressList from '../components/board/ProgressList.js';
 
 import sortObject from '../helper/sortObject';
 import drag_n_drop from '../helper/drag-n-drop.js';
+import eventHandler from '../helper/eventHandler.js'
 
 import '../styles/board.css'
 
@@ -70,34 +71,37 @@ export default function Board(){
     }
   }
 
-  async function clickAddHandler(e, target, id){
+                 //! (시작) 삭제해도 될듯
+  // async function clickAddHandler(e, target, id){
     
-    // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
+  //   // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
 
-    // return 한 new progressId/taskId 를 기반으로 정보를 update 하자!
-    if(target === 'progress') {
-      // TODO 타이틀 받는 모달창
-      await setProgresses({ 
-        ...progresses, 
-        4: { // here
-          id : 4, // here
-          title : '새로 추가된 progress',
-          task_priority : '', 
-        }})
-      await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` }); // here
-    } else if(target === 'task'){
-      // TODO 타이틀, 내용 받는 모달창
-      await setTasks({ 
-        ...tasks, 
-        4: { // here
-          id : 4, // here
-          title : '새로 추가된 progress',
-          task_priority : '', 
-        }})
-      await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` }); // here
+  //   // return 한 new progressId/taskId 를 기반으로 정보를 update 하자!
+  //   if(target === 'progress') {
+  //     // TODO 타이틀 받는 모달창
+  //     await setProgresses({ 
+  //       ...progresses, 
+  //       4: { // here
+  //         id : 4, // here
+  //         title : '새로 추가된 progress',
+  //         task_priority : '', 
+  //       }})
+  //     await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` }); // here
+  //   } else if(target === 'task'){
+  //     // TODO 타이틀, 내용 받는 모달창
+  //     await setTasks({ 
+  //       ...tasks, 
+  //       4: { // here
+  //         id : 4, // here
+  //         title : '새로 추가된 progress',
+  //         task_priority : '', 
+  //       }})
+  //     await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` }); // here
     
-    }
-  }
+  //   }
+  // }
+
+                //!(끝) 삭제해도 될듯
 
   /* (시작) drag-drop */
   //! Board 입장에서 Progress 순서 저장
@@ -171,6 +175,10 @@ export default function Board(){
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
 
   /* (끝) drag-drop */
+
+  // clickAddProgress event - 함수 분리를 위해서
+  const clickAddHandler = eventHandler.add_progress_or_task('progress');
+
   return (
     <div id="main-content">
       <section id="sub-nav-bar">
@@ -198,8 +206,13 @@ export default function Board(){
         <article className={`prg-dropzone prg-dropzone-${board.prg_priority.split(',').length}`}></article>
         {/* 누르기전까지 숨어 있음 */}
         <article className='progress form-add-progress'>
-          <input className='form-add-progress-input' placeholder='Enter progress title...'></input>
-          <button className='form-add-progress-btn-add'>Add progress</button>
+          <input 
+            name='title'
+            className='form-add-progress-input' 
+            placeholder='Enter progress title...'
+            onChange={clickAddHandler()}
+          ></input>
+          <button className='form-add-progress-btn-add' onClick={clickAddHandler}>Add progress</button>
           <button className='form-add-progress-btn-cancle'>X</button>
         </article>
         <button 
@@ -217,3 +230,5 @@ export default function Board(){
     </div>
   )
 }
+
+

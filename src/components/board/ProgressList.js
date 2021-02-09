@@ -3,8 +3,12 @@ import TaskList from './TaskList.js';
 
 import sortObject from '../../helper/sortObject.js';
 import drag_n_drop from '../../helper/drag-n-drop.js';
+import eventHandler from '../../helper/eventHandler.js'
 
 export default function ProgressList( { progress, tasks, changePrgPriority, prg_priority, changeTaskPriority, inputChangeHandler }){
+
+  // clickAddProgress event - 함수 분리를 위해서
+  const clickAddHandler = eventHandler.add_progress_or_task('task');
 
   return (
     <article className={"progress" + " " + progress.id} 
@@ -32,9 +36,22 @@ export default function ProgressList( { progress, tasks, changePrgPriority, prg_
 
       {/* 누르기전까지 숨어 있음 */}
       <article className={`task task-${progress.id} form-add-task`}>
-        <input className='form-add-task-input-title' placeholder='Enter a title...'></input>
-        <textarea className='form-add-task-input-description' placeholder='Enter a description...'></textarea>
-        <button className='form-add-task-btn-add'>Add Task</button>
+        <input 
+          name='title'
+          className='form-add-task-input-title' 
+          placeholder='Enter a title...'
+          onChange={clickAddHandler()}
+        ></input>
+        <textarea 
+          name='description'
+          className='form-add-task-input-description' 
+          placeholder='Enter a description...'
+          onChange={clickAddHandler()}
+        ></textarea>
+        <button 
+          className='form-add-task-btn-add'
+          onClick={clickAddHandler}
+        >Add Task</button>
         <button className='form-add-task-btn-cancle'>X</button>
       </article>
       <button 
