@@ -102,6 +102,8 @@
 .progress-head {
   margin-bottom: 5px;
   height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 /* ? input.board_title:focus 적용하고 싶음 
@@ -121,6 +123,10 @@ input.progress-title:focus {
   background: transparent;
   border: none;
   outline: none;
+}
+
+.btn-progress-menu{
+  height: 24px;
 }
 
 /*! Add button 관련 : both Progress, Task*/

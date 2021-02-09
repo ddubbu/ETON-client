@@ -6,11 +6,10 @@ import drag_n_drop from '../../helper/drag-n-drop.js';
 import eventHandler from '../../helper/eventHandler.js'
 
 export default function ProgressList( { progress, tasks, changePrgPriority, prg_priority, changeTaskPriority, 
-                                        inputChangeHandler, modals, setModals, ids }){
+                                        inputChangeHandler, modals, setModals, ids, store }){
 
   // clickAddProgress event - 함수 분리를 위해서
   const submitAddInfo = eventHandler.submitAddInfo('task');
-
   return (
     <article className={"progress" + " " + progress.id} 
       onMouseDown={drag_n_drop.handleMouseDown}
@@ -22,7 +21,7 @@ export default function ProgressList( { progress, tasks, changePrgPriority, prg_
         <button 
           name='progress'
           className="btn-progress-menu"
-          onClick={(e)=>eventHandler.openModal(e, modals, setModals, {...ids, prg_id: progress.id})}
+          onClick={(e)=>eventHandler.openModal(e, modals, setModals, {...ids, prg_id: progress.id}, store)}
         >···</button>
       </section>
       <section className="progress-tasks-wrapper">
@@ -38,6 +37,7 @@ export default function ProgressList( { progress, tasks, changePrgPriority, prg_
                   modals={modals}
                   setModals={setModals}
                   ids={{...ids, prg_id: progress.id}}
+                  store={store}
                   />
               </>
             )
