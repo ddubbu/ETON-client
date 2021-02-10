@@ -436,6 +436,7 @@ const SignUp = (props) => {
                                     className = "emailInput"
                                     onChange = {handleEmail}
                                     value = {email}
+                                    placeholder="Enter email"
                             />
                         <div className="duplicateCheck">
                             <button onClick={checkEmailDuplicate}>중복확인</button>
@@ -456,6 +457,7 @@ const SignUp = (props) => {
                                 className = "nameInput"
                                 onChange = {handleName}
                                 value = {name}
+                                placeholder="Enter name"
                         />
                     </div>
                     <div className = "errorSection">
@@ -470,6 +472,7 @@ const SignUp = (props) => {
                                 className = "passwordInput"
                                 onChange = {handlePassword}
                                 value = {password}
+                                placeholder="Enter password"
                         />
                     </div>
                     <div className = "errorSection">
@@ -484,6 +487,7 @@ const SignUp = (props) => {
                                 className = "passwordCheckInput"
                                 onChange = {handlePasswordCheck}
                                 value = {passwordCheck}
+                                placeholder="Enter same password "
                         />
                     </div>
                     <div className = "errorSection">
