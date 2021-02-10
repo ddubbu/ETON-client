@@ -28,6 +28,7 @@ export default {
         // TODO 😁 progress 새로이 추가하고 응답으로 state(board.prg_priority, progresses) 업데이트하기 
         // TODO 😁 task도 마찬가지
         console.log('axios POST target', target,'input 수정 완료', input);
+
       } else if(e && e.target.tagName === 'BUTTON'){
         alert('title 을 입력해주세요')
       }
@@ -182,9 +183,8 @@ export default {
     e.target.onkeypress = (e)=>{
       if(e.keyCode === 13){
         // TODO 😁 axios : board, progress title 수정 
-
+        console.log(e.target.value, "title 수정")
         if(inputValue === '') return alert('빈칸은 입력이 불가능해요')
-        console.log(board.title, '타이틀 수정 완료');
         e.target.blur() // input focus 해제
       }
     }

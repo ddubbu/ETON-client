@@ -119,49 +119,58 @@ export default function Board(){
     }
   }
 
-  /* 공통 */
+  //! 여기서부터 progress 추가 코드
 
-                 //! (시작) 삭제해도 될듯
-  // async function clickAddHandler(e, target, id){
+  // local state
+  const [input, setInput] = useState({
+    title: '',
+    description: ''
+  })
+
+  const inputChangeHandler = (e)=>{
+    setInput({
+      ... input,
+      [e.target.name] : e.target.value
+    })
+  }
+
+  //! 도대체 옛날 코드랑 차이점이 무엇일까...
+  async function clickAddHandler(e, target='progress', id){
     
-  //   // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
+    // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
+    const new_prg_id = '5'
+    // return 한 new progressId/taskId 를 기반으로 정보를 update 하자!
+    if(target === 'progress') {
+      // TODO 타이틀 받는 모달창
 
-  //   // return 한 new progressId/taskId 를 기반으로 정보를 update 하자!
-  //   if(target === 'progress') {
-  //     // TODO 타이틀 받는 모달창
-  //     await setProgresses({ 
-  //       ...progresses, 
-  //       4: { // here
-  //         id : 4, // here
-  //         title : '새로 추가된 progress',
-  //         task_priority : '', 
-  //       }})
-  //     await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` }); // here
-  //   } else if(target === 'task'){
-  //     // TODO 타이틀, 내용 받는 모달창
-  //     await setTasks({ 
-  //       ...tasks, 
-  //       4: { // here
-  //         id : 4, // here
-  //         title : '새로 추가된 progress',
-  //         task_priority : '', 
-  //       }})
-  //     await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` }); // here
+      await setProgresses({ 
+        ...progresses, 
+        [new_prg_id]: { // here
+          id : new_prg_id, // here
+          title : input.title,
+          task_priority : '', 
+        }})
+      await setBoard({ ... board, prg_priority: board['prg_priority'] + `,${new_prg_id}` }); // here
+    } 
+    // else if(target === 'task'){
+    //   // TODO 타이틀, 내용 받는 모달창
+    //   await setTasks({ 
+    //     ...tasks, 
+    //     4: { // here
+    //       id : 4, // here
+    //       title : '새로 추가된 progress',
+    //       task_priority : '', 
+    //     }})
+    //   await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` }); // here
     
-  //   }
-  // }
-
-                //!(끝) 삭제해도 될듯
-
+    // }
+  }
  
 
   // drag-n-drop
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
 
   /* (끝) drag-drop */
-
-  // clickAddProgress event - 함수 분리를 위해서
-  const submitAddInfo = eventHandler.submitAddInfo('progress');
 
   return (
     <div id="main-content">
@@ -177,7 +186,7 @@ export default function Board(){
       { modals.progress ? <PrgMenuDropDown store={store} /> : '' }
       { modals.task ? <TaskMenuDropDown store={store} /> : '' }
       { modals.task_edit ? <TaskInfoEdit store={store} /> : '' }
-      {/* ReactDOM.render(<App />);  */}
+      
       <section id="progress-wrapper">
         {
           sortObject(progresses, board.prg_priority).map((progress, idx)=>{
@@ -199,9 +208,9 @@ export default function Board(){
             name='title'
             className='form-add-progress-input' 
             placeholder='Enter progress title...'
-            onChange={submitAddInfo()}
+            onChange={inputChangeHandler}
           ></input>
-          <button className='form-add-progress-btn-add' onClick={submitAddInfo}>Add progress</button>
+          <button className='form-add-progress-btn-add' onClick={clickAddHandler}>Add progress</button> {/* submitAddInfo */}
           <button 
             className='form-add-progress-btn-cancle'
             onClick={eventHandler.cancleAddInfo}
