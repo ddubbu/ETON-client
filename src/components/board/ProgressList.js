@@ -9,7 +9,8 @@ export default function ProgressList( { store, ids }){
   const { state: board, setState: setBoard } = store.board;
   const { state: progresses, setState: setProgresses } = store.progresses;
   const { state: tasks, setState: setTasks } = store.tasks;
-  const progress = progresses[ids.progress_id]
+  const { state: event, setState: setEvent } = store.event;
+  const progress = progresses[ids.progress_id];
 
   //! 여기서부터 progress 추가 코드
   // local state
@@ -28,13 +29,14 @@ export default function ProgressList( { store, ids }){
   }
 
   useEffect( async ()=>{
-
+    const eventProgress = progresses[event.progress_id]
     if(!newTaskId) return;
+    // console.log("progressId", progress.id)
     await setProgresses({ // 이제서야 progress 추가
       ... progresses, 
-      [ids.progress_id]:{
-        ...progress,
-        task_priority: progress['task_priority'] + `,${newTaskId}` 
+      [event.progress_id]:{
+        ...eventProgress,
+        task_priority: eventProgress['task_priority'] + `,${newTaskId}` 
       }
     }); // here
 
@@ -42,6 +44,11 @@ export default function ProgressList( { store, ids }){
 
 
   async function clickAddHandler(e, target='task', id){
+    setEvent({
+      ...event,
+      progress_id: ids.progress_id
+    })
+    // console.log('click', event.progress_id)
     e.stopPropagation();
     // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
     // id를 기반으로 정보를 update 하자!
@@ -61,11 +68,18 @@ export default function ProgressList( { store, ids }){
       }})
     }
 
+    // 입력창 닫기
+    eventHandler.cancleAddInfo(e, 'form-add-task')
+    // 입력 다 지우기
+    await setInput({
+      title: '',
+      description: ''
+    })
 
   }
 
-  console.log('여기 의심해봐, progress is undefined ? ', progress)
-  return ( //! 혹시 여기 (!progress ? '' :) 
+  // console.log('여기 의심해봐, progress is undefined ? ', progress)
+  return !progress ? '' : ( //! 혹시 여기 (!progress ? '' :) 
     <article className={"progress" + " " + progress.id} 
       onMouseDown={drag_n_drop.handleMouseDown}
       onMouseUp={(e)=>{drag_n_drop.handleMouseUp(e, store, ids)}}
@@ -83,7 +97,7 @@ export default function ProgressList( { store, ids }){
       <section className="progress-tasks-wrapper">
         {
           sortObject(tasks, progress.task_priority).map((task, idx)=>{
-            return (
+            return !task ? '' : (
               <>
                 <article className={`task-dropzone prg-${progress.id}-taskDropZone-${idx}`}></article>
                 <TaskList 
@@ -114,14 +128,12 @@ export default function ProgressList( { store, ids }){
           value={input.description}
           onChange={inputChangeHandler}
         ></textarea>
-        {
-          <React.Fragment>
+
             <button 
               className='form-add-task-btn-add'
               onClick={clickAddHandler}
             >Add Task</button>
-          </React.Fragment>
-        }
+
 
         <button 
           className='form-add-task-btn-cancle'

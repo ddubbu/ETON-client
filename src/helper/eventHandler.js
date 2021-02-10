@@ -14,14 +14,15 @@ export default {
       e.target.style.display = 'none'
     }
   },
-  cancleAddInfo : (e) => {
-    if(e.target.classList.contains('form-add-progress-btn-cancle')){
+  cancleAddInfo : (e, target) => {
+    console.log(e, "here")
+    if(target === 'form-add-progress' || e.target.classList.contains('form-add-progress-btn-cancle')){
       document.querySelector('.form-add-progress')
       .style.display = 'none';
 
       document.querySelector('.btn-add-progress')
       .style.display = 'block'
-    } else if(e.target.classList.contains('form-add-task-btn-cancle')){
+    } else if(target === 'form-add-task' || e.target.classList.contains('form-add-task-btn-cancle')){
       document.querySelectorAll('.form-add-task') // 특정 아이디 지정 안하고 모두 순회
       .forEach($el=>{
         $el.style.display = 'none';
