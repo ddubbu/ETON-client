@@ -133,15 +133,11 @@ export default function Board(){
     })
   }
 
-  //! 도대체 옛날 코드랑 차이점이 무엇일까...
   async function clickAddHandler(e, target='progress', id){
-    
     // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
     const new_prg_id = '5'
-    // return 한 new progressId/taskId 를 기반으로 정보를 update 하자!
+    
     if(target === 'progress') {
-      // TODO 타이틀 받는 모달창
-      console.log(progresses)
       await setProgresses({ 
         ...progresses, 
         [new_prg_id]: { // here
@@ -150,23 +146,9 @@ export default function Board(){
           task_priority : '', 
         }})
       await setBoard({ ... board, prg_priority: board['prg_priority'] + `,${new_prg_id}` }); // here
-      console.log(progresses)
     } 
-    // else if(target === 'task'){
-    //   // TODO 타이틀, 내용 받는 모달창
-    //   await setTasks({ 
-    //     ...tasks, 
-    //     4: { // here
-    //       id : 4, // here
-    //       title : '새로 추가된 progress',
-    //       task_priority : '', 
-    //     }})
-    //   await setBoard({ ... board, prg_priority: board['prg_priority'] + `,4` }); // here
-    
-    // }
   }
  
-
   // drag-n-drop
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
 
@@ -210,7 +192,7 @@ export default function Board(){
             placeholder='Enter progress title...'
             onChange={inputChangeHandler}
           ></input>
-          <button className='form-add-progress-btn-add' onClick={clickAddHandler}>Add progress</button> {/* submitAddInfo */}
+          <button className='form-add-progress-btn-add' onClick={clickAddHandler}>Add progress</button>
           <button 
             className='form-add-progress-btn-cancle'
             onClick={eventHandler.cancleAddInfo}

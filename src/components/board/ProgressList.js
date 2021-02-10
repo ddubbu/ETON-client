@@ -27,37 +27,31 @@ export default function ProgressList( { store, ids }){
     })
   }
 
-  // if(!progress) {
-  //   return '';
-  //   console.log('progress is undefined')
-  // }
-
   useEffect( async ()=>{
-    console.log(tasks);
+
     if(!newTaskId) return;
-    await setProgresses({ 
+    await setProgresses({ // 이제서야 progress 추가
       ... progresses, 
       [ids.progress_id]:{
         ...progress,
         task_priority: progress['task_priority'] + `,${newTaskId}` 
       }
     }); // here
-    console.log(progresses)
+
   }, [tasks])
 
-  //! 도대체 옛날 코드랑 차이점이 무엇일까...
+
   async function clickAddHandler(e, target='task', id){
     e.stopPropagation();
     // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
+    // id를 기반으로 정보를 update 하자!
     const new_task_id = '100';
 
+    // progress.task_priority 에 추가하기위해
     await setNewTaskId(new_task_id);
 
-    // console.log(progress)
-    // return 한 new progressId/taskId 를 기반으로 정보를 update 하자!
     if(target === 'task'){
-      console.log('here')
-      // TODO 타이틀, 내용 받는 모달창
+      // task 추가하기
       await setTasks({ 
         ...tasks, 
         [new_task_id]: { // here
@@ -65,11 +59,13 @@ export default function ProgressList( { store, ids }){
           title : input.title,
           description: input.description
       }})
-    
     }
+
+
   }
 
-  return !progress ? '' : (
+  console.log('여기 의심해봐, progress is undefined ? ', progress)
+  return ( //! 혹시 여기 (!progress ? '' :) 
     <article className={"progress" + " " + progress.id} 
       onMouseDown={drag_n_drop.handleMouseDown}
       onMouseUp={(e)=>{drag_n_drop.handleMouseUp(e, store, ids)}}
