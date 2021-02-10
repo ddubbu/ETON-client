@@ -125,7 +125,7 @@ export default {
 
         // progressId 지움
         const other_priority = split_prev_priority.filter(pri=>{
-          if(Number(pri) === progressId) return false;
+          if(Number(pri) === Number(progressId)) return false;
           else return true;
         })
 
@@ -137,6 +137,10 @@ export default {
           }else if(other_priority.length !== 0){
             new_priority.push(other_priority.shift())
           }
+        }
+
+        if(new_priority.length === 1 + split_prev_priority.length){
+          new_priority.pop(); // 끝에 왜 붙어있는지 모르겠음
         }
 
         // state 변경
@@ -151,7 +155,7 @@ export default {
         })
 
       } /* [끝] $el.classList.contains('progress') */
-      else if(Object.keys(ids).length === 3) { // target 이동
+      else if(Object.keys(ids).length === 3) { // task 이동
         e.stopPropagation();
         let taskDropZone_Id = Array.from($el.classList).filter((str, idx)=>{
           if(!str.match(/^taskDropZone-/)) return false;
