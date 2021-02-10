@@ -56,15 +56,18 @@ export default {
       e.target.style.display = 'none'
     }
   },
-  openModal : async (e, store, ids)=>{
+  toggleModal : async (e, store, ids)=>{
     // modal 띄울만한거 : member, progress-menu, task-menu
+    // task-edit 모달은 그냥 닫기만 해주세요
     const { state: modals, setState: setModals } = store.modals;
     const { state: event, setState: setEvent } = store.event;
 
     await setModals({
       [e.target.name] : !modals[e.target.name]
     })
-    if(!modals[e.target.name]){ // 만약 떠있으면
+
+    console.log(e.target.name)
+    if(e.target.name !== 'task_edit' && !modals[e.target.name]){ // 만약 떠있으면
       const $drop_down = document.querySelector('.drop-down')
       $drop_down.style.left =  `${e.target.getBoundingClientRect().x}px`; //`${e.clientX}px`
       $drop_down.style.top = `${e.target.getBoundingClientRect().y  }px`
@@ -146,7 +149,22 @@ export default {
       })
     }
   },
-  clickModifyTask: (e)=>{
+  clickModifyTask: async (e, store)=>{
+
+    const { state: board, setState: setBoard } = store.board;
+    const { state: progresses, setState: setProgresses } = store.progresses;
+    const { state: tasks, setState: setTasks } = store.tasks;
+    const { state: modals, setState: setModals } = store.modals;
+    const { state: event, setState: setEvent } = store.event;
+    const { board_id: b, progress_id: p, task_id: t } = event;
+
+    console.log('modify card', b, p, t)
+
+    await setModals({
+      ... modals,
+      task: false,
+      task_edit: true
+    })
 
   }, 
   inputChangeHandler: async (e, store, target, id)=>{

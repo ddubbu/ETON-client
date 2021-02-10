@@ -25,7 +25,7 @@ export default function ProgressList( { store, ids }){
         <button 
           name='progress'
           className="btn-progress-menu"
-          onClick={(e)=>eventHandler.openModal(e, store, ids)} //{...ids, prg_id: progress.id}
+          onClick={(e)=>eventHandler.toggleModal(e, store, ids)} //{...ids, prg_id: progress.id}
         >···</button>
       </section>
       <section className="progress-tasks-wrapper">

@@ -22,7 +22,7 @@ export default function TaskList({ store, ids, taskDropZone }){
         <button 
           name='task'
           className="btn-task-menu"
-          onClick={(e)=>eventHandler.openModal(e, store, ids)}
+          onClick={(e)=>eventHandler.toggleModal(e, store, ids)}
         >···</button>
       </section>
       <section className="task-body">

@@ -60,7 +60,7 @@
   margin: 0 10px;
 }
 
-/* 모달 */
+/* 모달 modal */
 .userInfoEditDiv{
   width: 100%;
   height: 100%;
@@ -104,7 +104,7 @@
 }
 
 
-/* board page dorp down */
+/* board page dorp down 및 modal */
 .drop-down{
   /* display: none; */
   background-color: rgb(163, 247, 7);
@@ -114,3 +114,21 @@
   /* right: 3%; */
   /* color:red; */
 }
+
+#task-edit-form-wrapper{
+  position: absolute;
+  /* width: 100vh; */
+  /* height: 100vh; */
+  width: 100%;
+  height: 100%;
+  background:rgba(0, 0, 0, 0.418);
+
+  display: flex;
+  align-items: center;
+}
+
+#task-edit-form{
+  margin: auto;
+  background: white;
+}
+

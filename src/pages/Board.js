@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+// import ReactDOM from 'react-dom'
 import ProgressList from '../components/board/ProgressList.js';
 import MemberDorpDown from '../components/modal/MemberDropDown.js';
-import PrgMenuDropDown from '../components/modal/PrgMenuDropDown.js'
-import TaskMenuDropDown from '../components/modal/TaskMenuDropDown.js'
+import PrgMenuDropDown from '../components/modal/PrgMenuDropDown.js';
+import TaskMenuDropDown from '../components/modal/TaskMenuDropDown.js';
+import TaskInfoEdit from '../components/modal/TaskInfoEdit.js';
 
 import sortObject from '../helper/sortObject';
 import drag_n_drop from '../helper/drag-n-drop.js';
@@ -72,7 +74,8 @@ export default function Board(){
     member : false,
     memberSearch : false,
     progress : false,
-    task : false
+    task : false,
+    task_edit: false,
   })
 
   // event state 감지
@@ -162,7 +165,7 @@ export default function Board(){
       <section id="sub-nav-bar">
         <input className="btn-sub-nav-bar board_title" value={board.title} onChange={(e)=>{eventHandler.inputChangeHandler(e, store, 'board')}}></input>
         <span className="btn-sub-nav-bar divider"></span>
-        <button name='member' className="btn-sub-nav-bar member" onClick={(e)=>eventHandler.openModal(e, store)}>member</button>
+        <button name='member' className="btn-sub-nav-bar member" onClick={(e)=>eventHandler.toggleModal(e, store)}>member</button>
         
         <button className="btn-sub-nav-bar invite">invite</button>
       </section>
@@ -170,6 +173,8 @@ export default function Board(){
       { modals.member ? <MemberDorpDown members={members} />  : '' }
       { modals.progress ? <PrgMenuDropDown store={store} /> : '' }
       { modals.task ? <TaskMenuDropDown store={store} /> : '' }
+      { modals.task_edit ? <TaskInfoEdit store={store} /> : '' }
+      {/* ReactDOM.render(<App />);  */}
       <section id="progress-wrapper">
         {
           sortObject(progresses, board.prg_priority).map((progress, idx)=>{
