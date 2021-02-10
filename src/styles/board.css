@@ -204,6 +204,7 @@ input.progress-title:focus {
 }
 .task-body {
   /* border: 1px brown solid; */
+  white-space: inherit
 }
 
 .btn-add-task {

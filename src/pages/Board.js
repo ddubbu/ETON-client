@@ -120,7 +120,6 @@ export default function Board(){
   }
 
   //! 여기서부터 progress 추가 코드
-
   // local state
   const [input, setInput] = useState({
     title: '',
@@ -142,7 +141,7 @@ export default function Board(){
     // return 한 new progressId/taskId 를 기반으로 정보를 update 하자!
     if(target === 'progress') {
       // TODO 타이틀 받는 모달창
-
+      console.log(progresses)
       await setProgresses({ 
         ...progresses, 
         [new_prg_id]: { // here
@@ -151,6 +150,7 @@ export default function Board(){
           task_priority : '', 
         }})
       await setBoard({ ... board, prg_priority: board['prg_priority'] + `,${new_prg_id}` }); // here
+      console.log(progresses)
     } 
     // else if(target === 'task'){
     //   // TODO 타이틀, 내용 받는 모달창
@@ -186,7 +186,7 @@ export default function Board(){
       { modals.progress ? <PrgMenuDropDown store={store} /> : '' }
       { modals.task ? <TaskMenuDropDown store={store} /> : '' }
       { modals.task_edit ? <TaskInfoEdit store={store} /> : '' }
-      
+
       <section id="progress-wrapper">
         {
           sortObject(progresses, board.prg_priority).map((progress, idx)=>{

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TaskList from './TaskList.js';
 
 import sortObject from '../../helper/sortObject.js';
@@ -11,9 +11,65 @@ export default function ProgressList( { store, ids }){
   const { state: tasks, setState: setTasks } = store.tasks;
   const progress = progresses[ids.progress_id]
 
-  // clickAddProgress event - 함수 분리를 위해서
-  const submitAddInfo = eventHandler.submitAddInfo('task');
-  return (
+  //! 여기서부터 progress 추가 코드
+  // local state
+  const [input, setInput] = useState({
+    title: '',
+    description: ''
+  })
+
+  const [newTaskId, setNewTaskId] = useState(undefined);
+
+  const inputChangeHandler = (e)=>{
+    setInput({
+      ... input,
+      [e.target.name] : e.target.value
+    })
+  }
+
+  // if(!progress) {
+  //   return '';
+  //   console.log('progress is undefined')
+  // }
+
+  useEffect( async ()=>{
+    console.log(tasks);
+    if(!newTaskId) return;
+    await setProgresses({ 
+      ... progresses, 
+      [ids.progress_id]:{
+        ...progress,
+        task_priority: progress['task_priority'] + `,${newTaskId}` 
+      }
+    }); // here
+    console.log(progresses)
+  }, [tasks])
+
+  //! 도대체 옛날 코드랑 차이점이 무엇일까...
+  async function clickAddHandler(e, target='task', id){
+    e.stopPropagation();
+    // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
+    const new_task_id = '100';
+
+    await setNewTaskId(new_task_id);
+
+    // console.log(progress)
+    // return 한 new progressId/taskId 를 기반으로 정보를 update 하자!
+    if(target === 'task'){
+      console.log('here')
+      // TODO 타이틀, 내용 받는 모달창
+      await setTasks({ 
+        ...tasks, 
+        [new_task_id]: { // here
+          id : new_task_id, // here
+          title : input.title,
+          description: input.description
+      }})
+    
+    }
+  }
+
+  return !progress ? '' : (
     <article className={"progress" + " " + progress.id} 
       onMouseDown={drag_n_drop.handleMouseDown}
       onMouseUp={(e)=>{drag_n_drop.handleMouseUp(e, store, ids)}}
@@ -52,18 +108,25 @@ export default function ProgressList( { store, ids }){
           name='title'
           className='form-add-task-input-title' 
           placeholder='Enter a title...'
-          onChange={submitAddInfo()}
+          value={input.title}
+          onChange={inputChangeHandler}
         ></input>
         <textarea 
           name='description'
           className='form-add-task-input-description' 
           placeholder='Enter a description...'
-          onChange={submitAddInfo()}
+          value={input.description}
+          onChange={inputChangeHandler}
         ></textarea>
-        <button 
-          className='form-add-task-btn-add'
-          onClick={submitAddInfo}
-        >Add Task</button>
+        {
+          <React.Fragment>
+            <button 
+              className='form-add-task-btn-add'
+              onClick={clickAddHandler}
+            >Add Task</button>
+          </React.Fragment>
+        }
+
         <button 
           className='form-add-task-btn-cancle'
           onClick={eventHandler.cancleAddInfo}
