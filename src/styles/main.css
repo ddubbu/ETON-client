@@ -32,18 +32,18 @@ a:link, a:visited {
     border: 1px solid black;
 }
 
-.myBord{
+.myBoard{
     
 }
 
-.myBordList{
+.myBoardList{
     padding: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 1rem;
 }
 
-.bordThumbNail{
+.boardThumbNail{
     border: 1px solid blue;
     width: 15rem;
     height: 8rem;
