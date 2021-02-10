@@ -21,7 +21,7 @@ export default function ProgressList( { store, ids }){
       >
       <section className="progress-head drag-drop">
         <input className="progress-title" value={progress.title} onChange={(e)=>{
-          eventHandler.inputChangeHandler(e, store, 'progress', progress.id)}}></input>
+          eventHandler.titleModifyHandler(e, store, 'progress', progress.id)}}></input>
         <button 
           name='progress'
           className="btn-progress-menu"

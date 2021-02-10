@@ -80,9 +80,12 @@ export default function Board(){
 
   // event state 감지
   const [ event, setEvent ] = useState({
-    method : '', // GET, POST, PUT, DELETE
-    target : '', // board, progress, target
-    content : null, // 무엇이든
+    method : 'PUT', // GET, POST, PUT, DELETE
+    target : 'task', // board, progress, target
+    content : { // 무엇이든
+      title: '',
+      description: ''
+    }, 
     board_id : board.id,
     progress_id : null,
     task_id : null
@@ -163,7 +166,7 @@ export default function Board(){
   return (
     <div id="main-content">
       <section id="sub-nav-bar">
-        <input className="btn-sub-nav-bar board_title" value={board.title} onChange={(e)=>{eventHandler.inputChangeHandler(e, store, 'board')}}></input>
+        <input className="btn-sub-nav-bar board_title" value={board.title} onChange={(e)=>{eventHandler.titleModifyHandler(e, store, 'board')}}></input>
         <span className="btn-sub-nav-bar divider"></span>
         <button name='member' className="btn-sub-nav-bar member" onClick={(e)=>eventHandler.toggleModal(e, store)}>member</button>
         

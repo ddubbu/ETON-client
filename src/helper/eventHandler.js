@@ -1,5 +1,19 @@
 /* 임시로 저장할거라서 component state 와 무관하게 정의함 */
 export default {
+  //TODO : progress, task 새로 추가
+  clickAddSomething : (e, target, prg_id)=>{
+    if(target === 'progress'){
+      const $form_add_progress = document.querySelector('.form-add-progress');
+      // 위에서 아래로 생기는 action은 나중에
+      $form_add_progress.style.display = 'flex'
+      e.target.style.display = 'none'
+    } else if (target === 'task'){
+      const $form_add_task = document.querySelector(`.form-add-task.prg-${prg_id}`);
+      // 위에서 아래로 생기는 action은 나중에
+      $form_add_task.style.display = 'flex'
+      e.target.style.display = 'none'
+    }
+  },
   submitAddInfo : function handler(target){  // 'progress' or 'task'
 
     // closure 변수가 여기있어야한다니...!
@@ -43,48 +57,8 @@ export default {
     }
 
   },
-  clickAddSomething : (e, target, prg_id)=>{
-    if(target === 'progress'){
-      const $form_add_progress = document.querySelector('.form-add-progress');
-      // 위에서 아래로 생기는 action은 나중에
-      $form_add_progress.style.display = 'flex'
-      e.target.style.display = 'none'
-    } else if (target === 'task'){
-      const $form_add_task = document.querySelector(`.form-add-task.prg-${prg_id}`);
-      // 위에서 아래로 생기는 action은 나중에
-      $form_add_task.style.display = 'flex'
-      e.target.style.display = 'none'
-    }
-  },
-  toggleModal : async (e, store, ids)=>{
-    // modal 띄울만한거 : member, progress-menu, task-menu
-    // task-edit 모달은 그냥 닫기만 해주세요
-    const { state: modals, setState: setModals } = store.modals;
-    const { state: event, setState: setEvent } = store.event;
 
-    await setModals({
-      [e.target.name] : !modals[e.target.name]
-    })
-
-    console.log(e.target.name)
-    if(e.target.name !== 'task_edit' && !modals[e.target.name]){ // 만약 떠있으면
-      const $drop_down = document.querySelector('.drop-down')
-      $drop_down.style.left =  `${e.target.getBoundingClientRect().x}px`; //`${e.clientX}px`
-      $drop_down.style.top = `${e.target.getBoundingClientRect().y  }px`
-    }
-
-    // 상태변경하고 event 에 넣어두기 -> dropDown요소 event 발생할 수 있어서 (삭제, 수정)
-    if(ids){ // member 모달은 click event 할 때 member_id 갖고 있으니깐 따로 작업 안해줘도 됨.
-      setEvent({
-        ...event,
-        board_id : ids.board_id,
-        progress_id : ids.progress_id,
-        task_id : ids.task_id
-      })
-    }
-
-    
-  },
+  //TODO : progress, task 삭제
   clickDeleteSomething: async (e, store)=>{
     
     const { state: board, setState: setBoard } = store.board;
@@ -149,6 +123,8 @@ export default {
       })
     }
   },
+
+  // TODO : board, progress, task 수정
   clickModifyTask: async (e, store)=>{
 
     const { state: board, setState: setBoard } = store.board;
@@ -166,8 +142,37 @@ export default {
       task_edit: true
     })
 
+  },
+  submitModifyTask : async (e, store, input)=>{
+    // TODO : axios PUT 수정사항
+
+    // global state
+    const { state: tasks, setState: setTasks } = store.tasks;
+    const { state: event, setState: setEvent } = store.event;
+    const { state: modals, setState: setModals } = store.modals;
+    const { board_id: b, progress_id: p, task_id: t } = event;
+
+    // destructuring parameters
+    const {title, description} = input;
+    console.log(`-${title}-`)
+    console.log(`-${description}-`)
+
+    await setTasks({
+      ...tasks, // 깊이 깊어지면, 이전 값 꼭 잘 넣어놓고!
+      [t]:{
+        ...tasks[t],
+        title : title === '' || title === undefined ? tasks[t].title : title,
+        description : description === '' || description === undefined ? tasks[t].description : description
+      }
+    })
+
+    await setModals({
+      ...modals,
+      task_edit: false
+    })
+    
   }, 
-  inputChangeHandler: async (e, store, target, id)=>{
+  titleModifyHandler: async (e, store, target, id)=>{
 
     const { state: board, setState: setBoard } = store.board;
     const { state: progresses, setState: setProgresses } = store.progresses;
@@ -186,6 +191,7 @@ export default {
   },
 
 
+  // TODO : board, progress 순서 수정
   /* (시작) drag-drop */
    changePrgPriority: async function changePrgPriority (store, newPrgPriority, ids){ // string type 기대
     //! Board 입장에서 Progress 순서 저장
@@ -262,5 +268,36 @@ export default {
       })
     }
 
-  }
+  },
+  /* (끝) drag-drop */
+
+  toggleModal : async (e, store, ids)=>{
+    // modal 띄울만한거 : member, progress-menu, task-menu
+    // task-edit 모달은 그냥 닫기만 해주세요
+    const { state: modals, setState: setModals } = store.modals;
+    const { state: event, setState: setEvent } = store.event;
+
+    await setModals({
+      [e.target.name] : !modals[e.target.name]
+    })
+
+    console.log(e.target.name)
+    if(e.target.name !== 'task_edit' && !modals[e.target.name]){ // 만약 떠있으면
+      const $drop_down = document.querySelector('.drop-down')
+      $drop_down.style.left =  `${e.target.getBoundingClientRect().x}px`; //`${e.clientX}px`
+      $drop_down.style.top = `${e.target.getBoundingClientRect().y  }px`
+    }
+
+    // 상태변경하고 event 에 넣어두기 -> dropDown요소 event 발생할 수 있어서 (삭제, 수정)
+    if(ids){ // member 모달은 click event 할 때 member_id 갖고 있으니깐 따로 작업 안해줘도 됨.
+      setEvent({
+        ...event,
+        board_id : ids.board_id,
+        progress_id : ids.progress_id,
+        task_id : ids.task_id
+      })
+    }
+
+    
+  },
 }
