@@ -421,17 +421,16 @@ const SignUp = (props) => {
 
     return(
         <div className = "signUpContainer">
-            
+
+            <Logo />
             <div className = "signUpDiv">
-                <div>
-                <Logo /><br/>
-                </div>
+
                 {/* <div className = "socialLoginDiv">
                     <button onClick = {socialSignUp}>GitHub</button>
                 </div> */}
                 <div className = {`email inputDiv ${validEmail ? "" : 'validError'}`}>
                     <div className = "inputSection">
-                        <span className = "item">Email</span>
+                        <span className = "item">이메일</span>
                         
                             <input type = "text"
                                     className = "emailInput"
@@ -452,7 +451,7 @@ const SignUp = (props) => {
                 </div>
                 <div className = {`name inputDiv ${validName ? "" : "validError"}`}>
                     <div className = "inputSection">
-                        <span className="item">Name</span> 
+                        <span className="item">이름</span> 
                         <input type="text"
                                 className = "nameInput"
                                 onChange = {handleName}
@@ -466,7 +465,7 @@ const SignUp = (props) => {
                 </div>
                 <div className = {`password inputDiv ${validPassword ? '' : 'validError'}`}>
                     <div className = "inputSection">
-                        <span className="item">Password</span> 
+                        <span className="item">비밀번호</span> 
                         <input type = "password"
                                 className = "passwordInput"
                                 onChange = {handlePassword}
@@ -480,7 +479,7 @@ const SignUp = (props) => {
                 </div>
                 <div className = {`passwordCheck inputDiv ${validPasswordCheck ? '' : 'validError'}`}>
                     <div className = "inputSection">
-                        <span className="item">Password Check</span>
+                        <span className="item">비밀번호 확인</span>
                         <input type = "password"
                                 className = "passwordCheckInput"
                                 onChange = {handlePasswordCheck}
