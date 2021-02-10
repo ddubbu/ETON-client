@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: "Inter", 'NotoSansKR', sans-serif;
 }
 
 .App{
@@ -74,11 +75,54 @@
   ". . ."
   ". modal ."
   ". . .";
+  font-size: 16px;
 }
 
 .userInfoEditDivContents{
   grid-area: modal;
   background: white;
+
+  border-radius: 3px;
+  padding: 40px 70px 55px 70px;
+  min-width: 30rem;
+  height: 70%;
+}
+
+.userInfoEditDivContents h1{
+  margin-top: 80px;
+  margin-bottom: 50px;
+  /* font-family: 'Cinzel', serif; */
+  font-family: 'Caveat', cursive;
+  font-weight: 400;
+  font-size: 40px;
+}
+
+.userInfoEditDivLabel {
+  font-size: 14px;
+}
+
+.userInfoEditDivButton-close{
+  float: right;
+  border: none;
+  outline: none;
+  background: white;
+  font-size: 30px;
+}
+
+.userInfoEditDivButton-submit {
+  outline: none;
+  border: none;
+  border-radius: .3em;
+  padding: .6em 1.3em;
+  /* font-size: 1em; */
+  width: 100%;
+
+  margin-top: 9px;
+}
+
+.userInfoEditDivButton-close:hover,
+.userInfoEditDivButton-submit:hover{
+  background: rgba(112, 112, 112, 0.2);
 }
 
 .logoutDropDownDiv{

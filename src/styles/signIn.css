@@ -49,6 +49,10 @@
   background: rgba(112, 112, 112, 0.2);
 }
 
+.signin-form button:first-of-type{
+  margin-top: 30px;
+}
+
 .signin-form a:last-child {
   width: 100%;
   border-top: 1px rgba(0,0,0,0.2) solid;
