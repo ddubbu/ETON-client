@@ -10,247 +10,247 @@ const mockData = {
         boardId : 1,
         boardName : 'board1',
         taskId : 1,
-        taskname : 'task1'
+        task_title : '제목입니다', taskname : 'task1'
         },
         {
         boardId : 1,
         boardName : 'board1',
         taskId : 2,
-        taskname : 'task2'
+        task_title : '제목입니다', taskname : 'task2'
         },
         {
         boardId : 1,
         boardName : 'board1',
         taskId : 3,
-        taskname : 'task3'
+        task_title : '제목입니다', taskname : 'task3'
         },
         {
         boardId : 2,
         boardName : 'board2',
         taskId : 4,
-        taskname : 'task4'
+        task_title : '제목입니다', taskname : 'task4'
         },
         {
         boardId : 3,
         boardName : 'board3',
         taskId : 5,
-        taskname : 'task5'
+        task_title : '제목입니다', taskname : 'task5'
         },
         {
         boardId : 4,
         boardName : 'board4',
         taskId : 6,
-        taskname : 'task6'
+        task_title : '제목입니다', taskname : 'task6'
         },
         {
         boardId : 5,
         boardName : 'board5',
         taskId : 7,
-        taskname : 'task7'
+        task_title : '제목입니다', taskname : 'task7'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 8,
-        taskname : 'task8'
+        task_title : '제목입니다', taskname : 'task8'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
         boardId : 6,
         boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         
     ],
@@ -333,7 +333,7 @@ const Main = () => {
                         <div className="myTaskList">
                             {/* <div className="taskItem">TaskItem</div> */}
                             {mockData.data.slice(0, numberOfTaskThumbNails).map((el,i) => {
-                                return <TaskThumNail boardId = {el.boardId} boardName = {el.boardName} taskId = {el.taskId} taskName = {el.taskname} key = {i}/>
+                                return <TaskThumNail boardId = {el.boardId} boardName = {el.boardName} taskId = {el.taskId} taskName = {el.taskname} task_title={el.task_title} key = {i}/>
                             })}
                         </div>
                         {/* <button className={`mainButton`}>Show More</button> */}

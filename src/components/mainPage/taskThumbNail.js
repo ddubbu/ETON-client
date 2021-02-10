@@ -13,6 +13,7 @@ const TaskThumNail = (props) => {
                 </div>
                 <div className = "taskEtc">
                     {props.boardName}
+                <div>{props.task_title}</div>
                 </div>
             </div>
         </Link>

@@ -47,7 +47,7 @@
 
   /* a tag 속성 제거 */
   text-decoration:none;
-  color:black;
+  /* color:black; */
 }
 
 .logo img {
@@ -59,6 +59,7 @@
   font-size: 1.4em;
   /* margin-left: 10px; */
   margin: 0 10px;
+  /* color: black; */
 }
 
 /* 모달 modal */
@@ -85,7 +86,8 @@
   border-radius: 3px;
   padding: 40px 70px 55px 70px;
   min-width: 30rem;
-  height: 70%;
+  max-width: 40rem;
+  /* height: 70%; */
 }
 
 .userInfoEditDivContents h1{
