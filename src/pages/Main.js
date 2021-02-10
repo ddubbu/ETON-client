@@ -315,8 +315,8 @@ const Main = () => {
                 </div>
             </div>
             <div className="mainBody">
-                <div className="myBord">
-                    <h3>My Bord</h3>
+                <div className="myBoard">
+                    <h3>My Board</h3>
                     <div className="myBordListContainer">
                         <div className="myBordList">
                             {bordList.slice(0, numberOfBordThumbNails).map((el, i) => {

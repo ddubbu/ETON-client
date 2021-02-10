@@ -62,6 +62,12 @@ a:link, a:visited {
     grid-template-columns: 5fr 1fr;
 }
 
+.profileHeader h2 {
+  font-family: 'Caveat', cursive;
+  font-weight: 400;
+  font-size: 30px;
+}
+
 .mainButton{
     appearance: none;
     
@@ -76,8 +82,7 @@ a:link, a:visited {
 }
 
 .profileEditButton{
-    font-size: larger;
-    font-weight: bold;
+    font-size: 28px;
 }
 
 .pictureDiv{
