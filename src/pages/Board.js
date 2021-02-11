@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import ReactDOM from 'react-dom'
 import ProgressList from '../components/board/ProgressList.js';
 import MemberDorpDown from '../components/modal/MemberDropDown.js';
@@ -16,13 +16,65 @@ import '../styles/board.css'
 export default function Board( { accessToken }){
   // 상위 컴포넌트에서 한꺼번에 관리하자!
 
-  console.log("BOARD PAGE", accessToken)
-  const [ board, setBoard ] = useState({
-    id : 1, // 숫자, 문자열 혼동 조심
-    title : 'project',
-    admin_userId : 1,
-    prg_priority : '1,53,54' // (progress_id 순서) 관계는 부모가 갖고 있음 board - prg 관계는 board가 관여
+  console.log("=========== GET INIT STATE ===========");
+  const url = new URL(window.location.href);
+  const board_id = url.pathname.split('/')[2];
+  console.log("url, ", url);
+  console.log("board_id", board_id)
+
+
+  // GET Board
+  useEffect(async ()=>{ // 우선 뭐지... 갑자기 왜 에러가 안나는 거지...
+    console.log("hello");
+    try{
+      //TODO axios
+      if(accessToken && accessToken.length !== 0){
+        console.log("accessToken", accessToken)
+        const boardResponse = await axiosRequest('/boards', accessToken, 'get', { 
+          board_id: board_id
+        })
+        await setBoard(boardResponse.data.boardInfo)
+      
+        console.log("GET Board", boardResponse)
+      }else{
+        console.log("accessToken invalid")
+      }
+    } catch(err){
+      console.log("ERROR for GET Board")
+    }
   })
+
+
+
+
+
+  console.log("BOARD PAGE", accessToken)
+  const [ board, setBoard ] = useState(
+    {
+      id : 1, // 숫자, 문자열 혼동 조심
+      title : 'project',
+      admin_userId : 1,
+      prg_priority : '1,53,54' // (progress_id 순서) 관계는 부모가 갖고 있음 board - prg 관계는 board가 관여
+    }
+  )
+
+  // try{
+  //   //TODO axios
+  //   if(accessToken.length !== 0){
+  //     console.log("accessToken", accessToken)
+  //     const boardResponse = await axiosRequest('/board', accessToken, 'get', { 
+  //       board_id: board_id
+  //     })
+  //     setBoard(boardResponse.data)
+    
+  //     console.log("GET Board", boardResponse)
+  //   }
+  // } catch(err){
+  //   console.log("ERROR for GET Board")
+  // }
+
+  // console.log("==============================");
+
 
   const [ progresses, setProgresses ] = useState({
     // 객체 형태로 주어야할 것 같음. >> 원활한 state update를 위해서
@@ -168,6 +220,10 @@ export default function Board( { accessToken }){
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
 
   /* (끝) drag-drop */
+
+  console.log("board", board);
+  console.log("progress", progresses);
+  console.log('task', tasks)
 
   return (
     <div id="main-content">
