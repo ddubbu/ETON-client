@@ -21,7 +21,7 @@ const SignIn = (props) => {
 
 	const signInHandler = (e) => {
 		axios.post("https://geteton.ga/users/signin/basic",{
-		// axios.post("http://localhost:4000/users/signin/basic",{
+		// axios.post("https://geteton.ga/users/signin/basic",{
 			email : input.email,
 			password : input.password
 		},{

@@ -410,7 +410,7 @@ const SignUp = (props) => {
 
     const getAccessToken = (authorizationCode) => {
         console.log("getAccessToken!");
-        axios.post('http://localhost:5000/users/signup/oauth',{
+        axios.post('https://geteton.ga/users/signup/oauth',{
             authorizationCode
         },{
             withCredentials : true
