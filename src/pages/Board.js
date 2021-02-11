@@ -17,6 +17,7 @@ export default function Board( { accessToken }){
   // 상위 컴포넌트에서 한꺼번에 관리하자!
 
   console.log("=========== GET INIT STATE ===========");
+  console.log("BOARD PAGE", accessToken)
   const url = new URL(window.location.href);
   const board_id = url.pathname.split('/')[2];
   console.log("url, ", url);
@@ -25,7 +26,7 @@ export default function Board( { accessToken }){
 
   // GET Board
   useEffect(async ()=>{ // 우선 뭐지... 갑자기 왜 에러가 안나는 거지...
-    console.log("hello");
+    console.log("GET Board");
     try{
       //TODO axios
       if(accessToken && accessToken.length !== 0){
@@ -42,13 +43,44 @@ export default function Board( { accessToken }){
     } catch(err){
       console.log("ERROR for GET Board")
     }
-  })
+
+    //! GET progress, task
+    if(!board.id) return; // 존재해야 시작
+
+    console.log("GET Progress");
+    try{
+      //TODO axios
+      if(accessToken && accessToken.length !== 0){
+        console.log("accessToken", accessToken)
+        const prgResponse = await axiosRequest('/progress', accessToken, 'get', { 
+          board_id: board.id
+        })
+        await setProgresses(prgResponse.data.progressList)
+      
+        console.log("GET Progress", prgResponse)
+
+        const taskResponse = await axiosRequest('/task/boards', accessToken, 'get',{
+          board_id
+        })
+        await setTasks(taskResponse.data.taskList);
+      }else{
+        console.log("accessToken invalid")
+      }
+    } catch(err){
+      console.log("ERROR for GET Progress")
+    }
+
+  }, [accessToken]) //! 얘를 키로 해야겠다. 없으면 무한 로딩...!!!
 
 
 
+  // useEffect(async ()=>{
+
+    
+  // })
 
 
-  console.log("BOARD PAGE", accessToken)
+  /* FAKE DATA */
   const [ board, setBoard ] = useState(
     {
       id : 1, // 숫자, 문자열 혼동 조심
@@ -57,24 +89,6 @@ export default function Board( { accessToken }){
       prg_priority : '1,53,54' // (progress_id 순서) 관계는 부모가 갖고 있음 board - prg 관계는 board가 관여
     }
   )
-
-  // try{
-  //   //TODO axios
-  //   if(accessToken.length !== 0){
-  //     console.log("accessToken", accessToken)
-  //     const boardResponse = await axiosRequest('/board', accessToken, 'get', { 
-  //       board_id: board_id
-  //     })
-  //     setBoard(boardResponse.data)
-    
-  //     console.log("GET Board", boardResponse)
-  //   }
-  // } catch(err){
-  //   console.log("ERROR for GET Board")
-  // }
-
-  // console.log("==============================");
-
 
   const [ progresses, setProgresses ] = useState({
     // 객체 형태로 주어야할 것 같음. >> 원활한 state update를 위해서
@@ -244,13 +258,15 @@ export default function Board( { accessToken }){
       <section id="progress-wrapper">
         {
           sortObject(progresses, board.prg_priority).map((progress, idx)=>{
+            console.log("here--------------------")
             return (
-              <>
-                <article className={`prg-dropzone prg-dropzone-${idx}`}></article>
+              <> <div>helo</div>
+                {/* <article className={`prg-dropzone prg-dropzone-${idx}`}></article>
                 <ProgressList key={idx}
-                  ids={{board_id: board.id, progress_id: progress.id}}
+                  ids={{board_id: board.id, progress_id: progress.id}} 
                   store={store}
-                />
+                /> 
+                */}
               </>
             )
           })
