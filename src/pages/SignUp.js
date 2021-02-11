@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../styles/signUp.css'
 import axios from 'axios';
 import Logo from '../components/common/Logo';
+axios.defaults.withCredentials=true;
 
 const SignUp = (props) => {
 

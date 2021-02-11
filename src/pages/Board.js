@@ -31,7 +31,8 @@ export default function Board( { accessToken }){
       //TODO axios
       if(accessToken && accessToken.length !== 0){
         console.log("accessToken", accessToken)
-        const boardResponse = await axiosRequest('/boards', accessToken, 'get', { 
+        //! TODO
+        const boardResponse = await axiosRequest('/boards/one', accessToken, 'get', { 
           board_id: board_id
         })
         await setBoard(boardResponse.data.boardInfo)
@@ -51,18 +52,13 @@ export default function Board( { accessToken }){
     try{
       //TODO axios
       if(accessToken && accessToken.length !== 0){
-        console.log("accessToken", accessToken)
+        // console.log("accessToken", accessToken)
         const prgResponse = await axiosRequest('/progress', accessToken, 'get', { 
           board_id: board.id
         })
         await setProgresses(prgResponse.data.progressList)
-      
         console.log("GET Progress", prgResponse)
 
-        const taskResponse = await axiosRequest('/task/boards', accessToken, 'get',{
-          board_id
-        })
-        await setTasks(taskResponse.data.taskList);
       }else{
         console.log("accessToken invalid")
       }
@@ -70,14 +66,22 @@ export default function Board( { accessToken }){
       console.log("ERROR for GET Progress")
     }
 
+    const pickRandomPrgId = board.prg_priority.split(',')[0];
+
+    if(!progresses[pickRandomPrgId]) return; 
+    console.log("GET Task");
+    try{
+      const taskResponse = await axiosRequest('/task/boards', accessToken, 'get', {
+        board_id
+      })
+      await setTasks(taskResponse.taskList);
+      console.log("task", taskResponse)
+    } catch(err){
+      console.log("ERROR for GET TASK")
+    }
+
   }, [accessToken]) //! 얘를 키로 해야겠다. 없으면 무한 로딩...!!!
 
-
-
-  // useEffect(async ()=>{
-
-    
-  // })
 
 
   /* FAKE DATA */
@@ -204,19 +208,6 @@ export default function Board( { accessToken }){
 
   async function clickAddHandler(e, target='progress', id){
     // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
-    const new_prg_id = '5'
-    
-    if(target === 'progress') {
-      await setProgresses({ 
-        ...progresses, 
-        [new_prg_id]: { // here
-          id : new_prg_id, // here
-          title : input.title,
-          task_priority : '', 
-        }})
-      await setBoard({ ... board, prg_priority: board['prg_priority'] + `,${new_prg_id}` }); // here
-    } 
-
     // TODO axios
     const response = await axiosRequest('/progress', accessToken, 'post', 
       { } ,
@@ -228,6 +219,19 @@ export default function Board( { accessToken }){
 
     //! (여기하면되요!!!!) new id 받아서 아래 주석 풀기
     console.log("POST new progress", response)
+
+    const new_prg_id = response.id //'5'
+    
+    if(target === 'progress') {
+      await setProgresses({ 
+        ...progresses, 
+        [new_prg_id]: { // here
+          id : new_prg_id, // here
+          title : input.title,
+          task_priority : '', 
+        }})
+      await setBoard({ ... board, prg_priority: board['prg_priority'] + `,${new_prg_id}` }); // here
+    } 
   }
  
   // drag-n-drop
@@ -258,15 +262,17 @@ export default function Board( { accessToken }){
       <section id="progress-wrapper">
         {
           sortObject(progresses, board.prg_priority).map((progress, idx)=>{
-            console.log("here--------------------")
+            // console.log("here--------------------")
+            // console.log(progresses)
+            // console.log("-----", progress, "-------")
             return (
-              <> <div>helo</div>
-                {/* <article className={`prg-dropzone prg-dropzone-${idx}`}></article>
+              <> 
+                <article className={`prg-dropzone prg-dropzone-${idx}`}></article>
                 <ProgressList key={idx}
-                  ids={{board_id: board.id, progress_id: progress.id}} 
+                  ids={{board_id: !board ? 1010100 : board.id, progress_id: !progress ? 20202 : progress.id}} 
                   store={store}
                 /> 
-                */}
+               
               </>
             )
           })
