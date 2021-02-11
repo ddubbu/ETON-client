@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
+
 // import ReactDOM from 'react-dom'
 import ProgressList from '../components/board/ProgressList.js';
 import MemberDorpDown from '../components/modal/MemberDropDown.js';
@@ -13,7 +15,7 @@ import axiosRequest from '../helper/axiosRequest.js';
 
 import '../styles/board.css'
 
-export default function Board( { accessToken }){
+function Board( { accessToken, history }){
   // 상위 컴포넌트에서 한꺼번에 관리하자!
 
   console.log("=========== GET INIT STATE ===========");
@@ -46,7 +48,7 @@ export default function Board( { accessToken }){
     }
 
     //! GET progress, task
-    if(!board.id) return; // 존재해야 시작
+    if(!board_id) return; // 존재해야 시작
 
     console.log("GET Progress");
     try{
@@ -54,7 +56,7 @@ export default function Board( { accessToken }){
       if(accessToken && accessToken.length !== 0){
         // console.log("accessToken", accessToken)
         const prgResponse = await axiosRequest('/progress', accessToken, 'get', { 
-          board_id: board.id
+          board_id: board_id
         })
         await setProgresses(prgResponse.data.progressList)
         console.log("GET Progress", prgResponse)
@@ -209,16 +211,22 @@ export default function Board( { accessToken }){
   async function clickAddHandler(e, target='progress', id){
     // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
     // TODO axios
-    const response = await axiosRequest('/progress', accessToken, 'post', 
-      { } ,
-      { 
-        board_id: board.id,
-        title: input.title,
-      }
-    );
+    let response;
+    try{
+      response = await axiosRequest('/progress', accessToken, 'post', 
+        { } ,
+        { 
+          board_id: board.id,
+          title: input.title,
+        }
+      );
+      //! (여기하면되요!!!!) new id 받아서 아래 주석 풀기
+      console.log("POST new progress", response)
+    } catch(e){ //409 error
+      console.log("ERROR - POST new progress")
 
-    //! (여기하면되요!!!!) new id 받아서 아래 주석 풀기
-    console.log("POST new progress", response)
+      history.push(`/board/${board.id}`)
+    }
 
     const new_prg_id = response.id //'5'
     
@@ -302,4 +310,6 @@ export default function Board( { accessToken }){
   )
 }
 
+
+export default withRouter(Board);
 

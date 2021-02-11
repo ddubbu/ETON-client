@@ -26,6 +26,8 @@ export default async function(subURL='', accessToken, method, queryString, paylo
   })
   .catch(e=>{
     //!403 status code 이면 만료되었다고 다시 로그인창으로 이동
+
+    
     console.log("ERROR", e)
   })
 
