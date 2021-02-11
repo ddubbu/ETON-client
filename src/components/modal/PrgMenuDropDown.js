@@ -3,11 +3,12 @@ import eventHandler from '../../helper/eventHandler.js';
 
 export default function PrgMenuDropDown ({store}) {
 	return (
-		<ul name="progress" className="drop-down">
-      <li name="progress" onClick={(e)=>eventHandler.clickDeleteSomething(e, store)}>
+		<section name="progress" className="drop-down">
+      <p className="action-title">List Actions</p>
+      <div name="progress" onClick={(e)=>eventHandler.clickDeleteSomething(e, store)}>
         삭제하기
-      </li>
-    </ul>
+      </div>
+    </section>
 	)
 }
 

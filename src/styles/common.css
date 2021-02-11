@@ -153,13 +153,53 @@
 /* board page dorp down 및 modal */
 .drop-down{
   /* display: none; */
-  background-color: rgb(163, 247, 7);
+  /* background-color: rgb(163, 247, 7); */
+  background: white;
+  border: 1px rgb(168, 168, 168) solid;
   position: absolute;
-  width: 300px;
-  /* z-index: 2; */
-  /* right: 3%; */
-  /* color:red; */
+  width: 250px;
+
+
+
+  /*liset bullet, 들여쓰기 없애기*/
+  list-style:none;
+  padding:5px;
+
 }
+
+.drop-down *:not(.drop-down .member-name, .drop-down button) {
+  border-bottom: 1px rgb(168, 168, 168) solid;
+  padding: 4px;
+}
+.drop-down div:not(.drop-down-member, .drop-down .member-name):hover {
+  background: rgba(172, 172, 172, 0.26);
+}
+
+.action-title{
+  text-align: center;
+  margin: 5px;
+}
+
+/* member list drop-down */
+.drop-down-member{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drop-down-member button {
+  border:none;
+  outline: none;
+  background: transparent;
+  font-size: 22px;
+}
+
+.drop-down-member button:hover{
+  background: rgba(133, 132, 132, 0.2);
+}
+
+
+/* task-edit-form */
 
 #task-edit-form-wrapper{
   position: absolute;

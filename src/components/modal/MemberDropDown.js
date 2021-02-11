@@ -2,17 +2,18 @@ import React, { useEffect } from 'react';
 
 export default function MemberDorpDown ({members}) {
 	return (
-		<ul className="drop-down member">
+		<section className="drop-down member">
+      <p className="action-title">List participants</p>
       {members.map((member, idx)=>{
         return (
-        <li className={`member-${member.id}`} key={idx}>
-          {member.name}
+        <div className={`member-${member.id} drop-down-member`} key={idx}>
+          <div className='member-name'>{member.name}</div>
           <button>x</button>
-        </li>
+        </div>
         )
       })}
 
-		</ul>
+		</section>
 	)
 }
 
