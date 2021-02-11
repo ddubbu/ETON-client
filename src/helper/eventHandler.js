@@ -190,7 +190,7 @@ export default {
     const { state: progresses, setState: setProgresses } = store.progresses;
     const { board_id: b, progress_id: p, task_id: t } = store.event.state;
     const accessToken = store.accessToken;
-    console.log("e", e.target)
+
     if(target === 'board') {
       await setBoard({ ... board, title: e.target.value });
     }
@@ -235,18 +235,31 @@ export default {
 
   // TODO : board, progress 순서 수정
   /* (시작) drag-drop */
-   changePrgPriority: async function changePrgPriority (store, newPrgPriority, ids){ // string type 기대
+  changePrgPriority: async function changePrgPriority (store, newPrgPriority, ids){ // string type 기대
     //! Board 입장에서 Progress 순서 저장
     // 새로운 순서 인자로 넘김.
     const { state: board, setState: setBoard } = store.board;
     const { state: progresses, setState: setProgresses } = store.progresses;
     const { state: tasks, setState: setTasks } = store.tasks;
-    const progress = progresses[ids.progress_id]
+    const { board_id: b, progress_id: p, task_id: t } = store.event.state;
+    const accessToken = store.accessToken;
 
     await setBoard({
       ...board,
       prg_priority : newPrgPriority
     }) 
+
+    //TODO axios
+    const response = await axiosRequest('/progress/order', accessToken, 'put', 
+      { } ,
+      { 
+        board_id: b,
+        progress_id: p,
+        prg_priority: newPrgPriority
+      }
+    );
+
+    console.log("PUT Prg Priority 수정", response)
   },
 
   changeTaskPriority : async function changeTaskPriority (store, ids,{  source, target }){
@@ -256,6 +269,8 @@ export default {
     const { state: board, setState: setBoard } = store.board;
     const { state: progresses, setState: setProgresses } = store.progresses;
     const { state: tasks, setState: setTasks } = store.tasks;
+    const { board_id: b, progress_id: p, task_id: t } = store.event.state;
+    const accessToken = store.accessToken;
     const progress = progresses[ids.progress_id]
 
     //같은 progress & 다른 taskDropZone 
@@ -270,6 +285,7 @@ export default {
         // 예전 task는 지우기
         // else continue;
       }
+
       // 같은 progress 니깐 한곳만 update 하면 됨.
       await setProgresses({
         ...progresses,
@@ -278,6 +294,22 @@ export default {
           task_priority : new_task_priority.join(',')
         },
       })
+
+      //TODO axios
+      const response = await axiosRequest('/task/vertical', accessToken, 'patch', 
+        { } ,
+        { 
+          board_id: b,
+          progress_id: source.prgId,
+          task_id: source.taskId,
+          task_priority: new_task_priority.join(',')
+        }
+      );
+      
+      console.log(b,source.prgId,source.taskId);
+      console.log('task_priority', new_task_priority.join(','))
+  
+      console.log("PATCH (vertical) task 순서 수정", response)
     }
 
     // 다른 progress
@@ -308,6 +340,30 @@ export default {
           task_priority : target_new_task_priority.join(',')
         }
       })
+
+      //TODO axios
+      const response = await axiosRequest('/task/horizontal', accessToken, 'patch', 
+        { } ,
+        { 
+          board_id: b,
+          progress_id: source.prgId,
+          task_id: source.taskId,
+          source: {
+            progress_id: source.prgId,
+            task_priority: source_new_task_priority.join(',')
+          },
+          target: {
+            progress_id: target.prgId,
+            task_priority: target_new_task_priority.join(',')
+          }
+        }
+      );
+      
+      console.log("source", source);
+      console.log("target", target)
+  
+      // console.log("PATCH (horizontal) task 순서 수정", response)
+
     }
 
   },

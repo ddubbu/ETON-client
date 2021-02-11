@@ -20,25 +20,25 @@ export default function Board( { accessToken }){
     id : 1, // 숫자, 문자열 혼동 조심
     title : 'project',
     admin_userId : 1,
-    prg_priority : '2,1,3' // (progress_id 순서) 관계는 부모가 갖고 있음 board - prg 관계는 board가 관여
+    prg_priority : '1,53,54' // (progress_id 순서) 관계는 부모가 갖고 있음 board - prg 관계는 board가 관여
   })
 
   const [ progresses, setProgresses ] = useState({
     // 객체 형태로 주어야할 것 같음. >> 원활한 state update를 위해서
     1 : { // key = progress_id
       id : 1, // <ProgressList /> name 세팅을 위해서 
-      title : '안녕',
-      task_priority : '1,2'
+      title : 'progress 1',
+      task_priority : '1'
     },
-    2 : {
-      id : 2,
-      title : 'progress 2',
-      task_priority : '3', //'3,4'
+    53 : {
+      id : 53,
+      title : 'progress 53',
+      task_priority : '2,3', //'3,4'
     },
-    3 : {
-      id : 3,
-      title : 'progress 3',
-      task_priority : '4', //'3,4'
+    54 : {
+      id : 54,
+      title : 'progress 54',
+      task_priority : '', //'3,4'
     },
   })
   
