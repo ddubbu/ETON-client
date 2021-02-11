@@ -86,7 +86,9 @@ export default function ProgressList( { store, ids }){
       onMouseMove={drag_n_drop.handleMouseMove}
       >
       <section className="progress-head drag-drop">
-        <input className="progress-title" value={progress.title} onChange={(e)=>{
+        <input className="progress-title" 
+          value={progress.title} 
+          onChange={(e)=>{
           eventHandler.titleModifyHandler(e, store, 'progress', progress.id)}}></input>
         <button 
           name='progress'

@@ -422,22 +422,24 @@ const SignUp = (props) => {
 
     return(
         <div className = "signUpContainer">
-            
+
+          <Logo />
+          <div id = "signUpDiv-wrapper">
+
             <div className = "signUpDiv">
-                <div>
-                <Logo /><br/>
-                </div>
+
                 {/* <div className = "socialLoginDiv">
                     <button onClick = {socialSignUp}>GitHub</button>
                 </div> */}
                 <div className = {`email inputDiv ${validEmail ? "" : 'validError'}`}>
                     <div className = "inputSection">
-                        <span className = "item">Email</span>
+                        <span className = "item">이메일</span>
                         
                             <input type = "text"
                                     className = "emailInput"
                                     onChange = {handleEmail}
                                     value = {email}
+                                    placeholder="Enter email"
                             />
                         <div className="duplicateCheck">
                             <button onClick={checkEmailDuplicate}>중복확인</button>
@@ -453,11 +455,12 @@ const SignUp = (props) => {
                 </div>
                 <div className = {`name inputDiv ${validName ? "" : "validError"}`}>
                     <div className = "inputSection">
-                        <span className="item">Name</span> 
+                        <span className="item">이름</span> 
                         <input type="text"
                                 className = "nameInput"
                                 onChange = {handleName}
                                 value = {name}
+                                placeholder="Enter name"
                         />
                     </div>
                     <div className = "errorSection">
@@ -467,11 +470,12 @@ const SignUp = (props) => {
                 </div>
                 <div className = {`password inputDiv ${validPassword ? '' : 'validError'}`}>
                     <div className = "inputSection">
-                        <span className="item">Password</span> 
+                        <span className="item">비밀번호</span> 
                         <input type = "password"
                                 className = "passwordInput"
                                 onChange = {handlePassword}
                                 value = {password}
+                                placeholder="Enter password"
                         />
                     </div>
                     <div className = "errorSection">
@@ -481,11 +485,12 @@ const SignUp = (props) => {
                 </div>
                 <div className = {`passwordCheck inputDiv ${validPasswordCheck ? '' : 'validError'}`}>
                     <div className = "inputSection">
-                        <span className="item">Password Check</span>
+                        <span className="item">비밀번호 확인</span>
                         <input type = "password"
                                 className = "passwordCheckInput"
                                 onChange = {handlePasswordCheck}
                                 value = {passwordCheck}
+                                placeholder="Enter same password "
                         />
                     </div>
                     <div className = "errorSection">
@@ -499,6 +504,7 @@ const SignUp = (props) => {
                         onClick = {submit}>Sign Up</button>
                 </div>
             </div>
+          </div>
             
         </div>
     )

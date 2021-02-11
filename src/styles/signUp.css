@@ -6,20 +6,42 @@
   grid-template-columns: 2.5fr 4fr 2.5fr;
   grid-template-rows: 1fr 6fr 1fr;
   grid-template-areas: ". . ." ". mid ." ". . ."; */
+  margin: 10vh auto;
+  width: 30rem; 
+  text-align: center;
+}
+
+/*테두리 적용*/
+#signUpDiv-wrapper{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  background-image: url("./tessellation-wallpapers/sky-orange.png");
+  padding:2rem;
+
+  margin-top: 50px;
+}
+
+#signUpDiv-wrapper .signUpDiv{
+  background:white;
 }
 
 .signUpDiv {
-  /* padding: 3rem; */
-  width: 20rem;
-  margin: 10vh auto;
+  /* margin-top: 50px; */
   /* border: solid black 3px; */
   /* grid-area: mid;
   display: grid;
   grid-template-rows: repeat(5, 1fr); */
   border: 1px solid rgba(0, 0, 0, 0.137);
-  box-shadow: 1.6px 2.4px 5px rgba(0, 0, 0, 0.14);
-  padding: 1rem;
+  box-shadow: rgba(0,0,0,0.2) 0 0 10px;
+
+  font-family: "Inter", 'NotoSansKR', sans-serif;
+  padding: 90px 40px 55px 40px;
+  font-size: 16px;
 }
+
 
 .signUpDiv>div {
   /* border: solid black 1px; */
@@ -79,17 +101,30 @@
   display: block;
 }
 
+.item {
+  font-size: 14px;
+  text-align: left;
+  /* margin-bottom: 9px; */
+}
+
 input {
-  display: block;
+  /* display: block;
   width: 100%;
   padding: 5px;
   border: 1px solid rgb(133, 133, 133);
   border-radius: 5px;
-  box-sizing: border-box;
+  box-sizing: border-box; */
+  width: 100%;
+  margin: 9px 0 1.2em;
+  padding: 8px 12px;
+  border-radius: 0.25rem;
+  height: 40px;
+  line-height: 24px;
+  outline: 0;
 }
 
-.submitButton {
-  display: block;
+.submitButton, .duplicateCheck button {
+  /* display: block;
   margin-bottom: 20px;
   width: 100%;
   padding: 5px;
@@ -97,15 +132,26 @@ input {
   border: hidden;
   color: white;
   font-weight: bold;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
+
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: .3em;
+  padding: .6em 1.3em;
+  font-size: 1em;
 }
+
+.duplicateCheck button:hover, .submitButton:hover{
+  background: rgba(112, 112, 112, 0.2);
+}
+
 
 .duplicateEmailCheckDiv {
   border: 1px solid black;
 }
 
-.item {
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.541);
+.errorSection{
+  margin-bottom:10px;
+  /* color: red; */
 }

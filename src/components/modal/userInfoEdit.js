@@ -26,17 +26,21 @@ const UserInfoEdit = (props) => {
         ReactDOM.createPortal(
             <div className = "userInfoEditDiv" >
                 <div className = "userInfoEditDivContents">
-                    Edit User Info <button onClick={closeEditModal}>&times;</button>
+                    <button onClick={closeEditModal} className="userInfoEditDivButton-close">&times;</button>
+                    <h1>Edit User Info</h1> 
+                    <div className = "userInfoEditDivLabel">이메일</div>
                     <input 
                         type = "text"
                         onChange = {handleUserEmail}
                         value = {userEmail}    
                     />
+                    <div className = "userInfoEditDivLabel">이름</div>
                     <input
                         type="text"
                         onChange={handleUserName}
                         value = {userName}
                     />
+                    <button className="userInfoEditDivButton-submit">수정하기</button>
                 </div>
             </div>,
             document.querySelector('.App')

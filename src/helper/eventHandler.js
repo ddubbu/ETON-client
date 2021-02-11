@@ -261,8 +261,8 @@ export default {
     console.log(e.target.name)
     if(e.target.name !== 'task_edit' && !modals[e.target.name]){ // 만약 떠있으면
       const $drop_down = document.querySelector('.drop-down')
-      $drop_down.style.left =  `${e.target.getBoundingClientRect().x}px`; //`${e.clientX}px`
-      $drop_down.style.top = `${e.target.getBoundingClientRect().y  }px`
+      $drop_down.style.left =  `${e.target.getBoundingClientRect().left}px`; //`${e.clientX}px`
+      $drop_down.style.top = `${e.target.getBoundingClientRect().bottom}px`
     }
 
     // 상태변경하고 event 에 넣어두기 -> dropDown요소 event 발생할 수 있어서 (삭제, 수정)

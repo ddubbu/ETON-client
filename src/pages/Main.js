@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BordThumNail from '../components/mainPage/bordThumbNail';
+import BoardThumNail from '../components/mainPage/boardThumbNail';
 import Profile from '../components/mainPage/profile';
 import TaskThumNail from '../components/mainPage/taskThumbNail';
 import '../styles/main.css';
@@ -7,250 +7,250 @@ import '../styles/main.css';
 const mockData = {              
     data : [    //서버에서 데이터 넘겨주는 형식 고민해봐야 함. 이렇게 주는 방법보다는 보드랑 태스크 각각 나눠서 주는게 제일 좋을듯.
         {
-        bordId : 1,
-        bordName : 'bord1',
+        boardId : 1,
+        boardName : 'board1',
         taskId : 1,
-        taskname : 'task1'
+        task_title : '제목입니다', taskname : 'task1'
         },
         {
-        bordId : 1,
-        bordName : 'bord1',
+        boardId : 1,
+        boardName : 'board1',
         taskId : 2,
-        taskname : 'task2'
+        task_title : '제목입니다', taskname : 'task2'
         },
         {
-        bordId : 1,
-        bordName : 'bord1',
+        boardId : 1,
+        boardName : 'board1',
         taskId : 3,
-        taskname : 'task3'
+        task_title : '제목입니다', taskname : 'task3'
         },
         {
-        bordId : 2,
-        bordName : 'bord2',
+        boardId : 2,
+        boardName : 'board2',
         taskId : 4,
-        taskname : 'task4'
+        task_title : '제목입니다', taskname : 'task4'
         },
         {
-        bordId : 3,
-        bordName : 'bord3',
+        boardId : 3,
+        boardName : 'board3',
         taskId : 5,
-        taskname : 'task5'
+        task_title : '제목입니다', taskname : 'task5'
         },
         {
-        bordId : 4,
-        bordName : 'bord4',
+        boardId : 4,
+        boardName : 'board4',
         taskId : 6,
-        taskname : 'task6'
+        task_title : '제목입니다', taskname : 'task6'
         },
         {
-        bordId : 5,
-        bordName : 'bord5',
+        boardId : 5,
+        boardName : 'board5',
         taskId : 7,
-        taskname : 'task7'
+        task_title : '제목입니다', taskname : 'task7'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 8,
-        taskname : 'task8'
+        task_title : '제목입니다', taskname : 'task8'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 9,
-        taskname : 'task9'
+        task_title : '제목입니다', taskname : 'task9'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 10,
-        taskname : 'task10'
+        task_title : '제목입니다', taskname : 'task10'
         },
         {
-        bordId : 6,
-        bordName : 'bord6',
+        boardId : 6,
+        boardName : 'board6',
         taskId : 11,
-        taskname : 'task11'
+        task_title : '제목입니다', taskname : 'task11'
         },
         
     ],
@@ -263,16 +263,16 @@ const mockData = {
 
 const Main = () => {
 
-    const [bordThumNailShowMore, setBordThumbNailShowMore] = useState(false);
+    const [boardThumNailShowMore, setBoardThumbNailShowMore] = useState(false);
     const [taskThumbNailShowMore, setTaskThumbNailShowMore] = useState(false);
 
     
-    const showMoreBordThumbNail = () => {
-        setBordThumbNailShowMore(true);
+    const showMoreBoardThumbNail = () => {
+        setBoardThumbNailShowMore(true);
     }
 
-    const showLessBordThumbNail = () => {
-        setBordThumbNailShowMore(false);
+    const showLessBoardThumbNail = () => {
+        setBoardThumbNailShowMore(false);
     }
 
     const showMoreTaskThumbNail = () => {
@@ -283,27 +283,27 @@ const Main = () => {
         setTaskThumbNailShowMore(false);
     }
 //////////////////////데이터 처리
-    let bordList = [];
+    let boardList = [];
 
     mockData.data.forEach(el => {
-        let bordId = el.bordId;
-        let bordName = el.bordName;
+        let boardId = el.boardId;
+        let boardName = el.boardName;
         let flag = true;
-        for(let i = 0; i < bordList.length; i++){
-            if(bordList[i].bordId === bordId){
+        for(let i = 0; i < boardList.length; i++){
+            if(boardList[i].boardId === boardId){
                 flag = false;
                 break;
             }
         }
         if(flag){
-            bordList.push({bordId, bordName});
+            boardList.push({boardId, boardName});
         }
     })
 
-    console.log("bordList : ", bordList);
+    console.log("boardList : ", boardList);
 //////////////////////
     
-    const numberOfBordThumbNails = bordThumNailShowMore ? bordList.length : 4;
+    const numberOfBoardThumbNails = boardThumNailShowMore ? boardList.length : 4;
     const numberOfTaskThumbNails = taskThumbNailShowMore ? mockData.data.length : 5;
 
     return (
@@ -315,16 +315,16 @@ const Main = () => {
                 </div>
             </div>
             <div className="mainBody">
-                <div className="myBord">
-                    <h3>My Bord</h3>
-                    <div className="myBordListContainer">
-                        <div className="myBordList">
-                            {bordList.slice(0, numberOfBordThumbNails).map((el, i) => {
-                                return <BordThumNail bordName = {el.bordName} bordId = {el.bordId} key = {i} />
+                <div className="myBoard">
+                    <h3>My Board</h3>
+                    <div className="myBoardListContainer">
+                        <div className="myBoardList">
+                            {boardList.slice(0, numberOfBoardThumbNails).map((el, i) => {
+                                return <BoardThumNail boardName = {el.boardName} boardId = {el.boardId} key = {i} />
                             })}
                         </div>
-                        {bordList.length <= 4 ? '' : <button className = {`mainButton`} onClick = {bordThumNailShowMore? showLessBordThumbNail : showMoreBordThumbNail}>{bordThumNailShowMore ? 'Show Less' : 'Show More'}</button> }
-                        {/* <button className = {`mainButton`} onClick = {bordThumNailShowMore? showLessBordThumbNail : showMoreBordThumbNail}>{bordThumNailShowMore ? 'Show Less' : 'Show More'}</button> */}
+                        {boardList.length <= 4 ? '' : <button className = {`mainButton`} onClick = {boardThumNailShowMore? showLessBoardThumbNail : showMoreBoardThumbNail}>{boardThumNailShowMore ? 'Show Less' : 'Show More'}</button> }
+                        {/* <button className = {`mainButton`} onClick = {boardThumNailShowMore? showLessBoardThumbNail : showMoreBoardThumbNail}>{boardThumNailShowMore ? 'Show Less' : 'Show More'}</button> */}
                     </div>
                 </div>
                 <div className="myTask">
@@ -333,7 +333,7 @@ const Main = () => {
                         <div className="myTaskList">
                             {/* <div className="taskItem">TaskItem</div> */}
                             {mockData.data.slice(0, numberOfTaskThumbNails).map((el,i) => {
-                                return <TaskThumNail bordId = {el.bordId} bordName = {el.bordName} taskId = {el.taskId} taskName = {el.taskname} key = {i}/>
+                                return <TaskThumNail boardId = {el.boardId} boardName = {el.boardName} taskId = {el.taskId} taskName = {el.taskname} task_title={el.task_title} key = {i}/>
                             })}
                         </div>
                         {/* <button className={`mainButton`}>Show More</button> */}

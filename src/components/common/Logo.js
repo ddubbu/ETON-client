@@ -5,7 +5,7 @@ export default function Logo(){
   return (
     <section className="logo">
       <Link to="/">
-        <img src= "/logo-ETON-1080.png"></img>
+        <img src= "../image/logo-ETON-1080.png"></img>
         <span> ETON </span>
       </Link>
     </section>
