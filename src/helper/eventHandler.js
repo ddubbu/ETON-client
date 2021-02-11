@@ -1,3 +1,5 @@
+import axiosRequest from '../../src/helper/axiosRequest.js';
+
 /* 임시로 저장할거라서 component state 와 무관하게 정의함 */
 export default {
   // progress, task 새로 추가를 위한 입력창 열어줌.
@@ -45,14 +47,12 @@ export default {
     const { state: modals, setState: setModals } = store.modals;
     const { state: event, setState: setEvent } = store.event;
     const { board_id: b, progress_id: p, task_id: t } = event;
+    const accessToken = store.accessToken;
 
     // modal 에서 delete 를 누르면? 해당 ids 를 갖고 행동 이행 : 어디서할까? board? 여기서 하자(그럼, state, setState 모두 가져오자)
 
     //! progress 삭제
     if( !t ) {
-      //TODO eventState ids 로 axios 요청 보내시오
-      //TODO progress 자체를 삭제하면 연관된 task도 삭제해야해서, 한번 다시 GET, render 하는게 빠를 수도
-      // console.log("delete", b, p);
       const newPrgPriority = board.prg_priority.split(',')
       .filter(el=>String(p) === el ? false : true)
       .join(',');
@@ -72,6 +72,16 @@ export default {
       await setModals({
         progress: false
       })
+
+      //TODO axios
+      const response = await axiosRequest('/progress', accessToken, 'delete', { 
+        board_id: b,
+        progress_id: p,
+        prg_priority: newPrgPriority
+      })
+
+      console.log("DELETE progress", response)
+
       
     } else { //! task 삭제
       //TODO eventState ids 로 axios 요청 보내시오
@@ -98,6 +108,15 @@ export default {
 
       await setModals({
         task: false
+      })
+
+
+      //TODO axios
+      const response = await axiosRequest('/task', accessToken, 'delete', { 
+        board_id: b,
+        progress_id: p,
+        task_id: t,
+        task_priority: newTaskPriority
       })
     }
   },
@@ -128,19 +147,23 @@ export default {
     const { state: tasks, setState: setTasks } = store.tasks;
     const { state: event, setState: setEvent } = store.event;
     const { state: modals, setState: setModals } = store.modals;
-    const { board_id: b, progress_id: p, task_id: t } = event;
+    const { board_id: b, progress_id: p, task_id: t } = store.event.state;
+    const accessToken = store.accessToken;
 
     // destructuring parameters
     const {title, description} = input;
     console.log(`-${title}-`)
     console.log(`-${description}-`)
 
+    const newTitle = title === '' || title === undefined ? tasks[t].title : title;
+    const newDescription = description === '' || description === undefined ? tasks[t].description : description;
+
     await setTasks({
       ...tasks, // 깊이 깊어지면, 이전 값 꼭 잘 넣어놓고!
       [t]:{
         ...tasks[t],
-        title : title === '' || title === undefined ? tasks[t].title : title,
-        description : description === '' || description === undefined ? tasks[t].description : description
+        title : newTitle,
+        description : newDescription
       }
     })
 
@@ -148,21 +171,63 @@ export default {
       ...modals,
       task_edit: false
     })
+
+    //TODO axios
+    const response = await axiosRequest('/task', accessToken, 'patch', {} ,{ 
+      board_id: b,
+      task_id: t,
+      title: newTitle,
+      description: newDescription
+    })
+
+    console.log("PATCH TASK 내용 수정", response)
+
     
   }, 
   titleModifyHandler: async (e, store, target, id)=>{
 
     const { state: board, setState: setBoard } = store.board;
     const { state: progresses, setState: setProgresses } = store.progresses;
-    if(target === 'board') await setBoard({ ... board, title: e.target.value });
-    if(target === 'progress') await setProgresses({ ...progresses, [id]: { ...progresses[id], title: e.target.value } })
+    const { board_id: b, progress_id: p, task_id: t } = store.event.state;
+    const accessToken = store.accessToken;
+    console.log("e", e.target)
+    if(target === 'board') {
+      await setBoard({ ... board, title: e.target.value });
+    }
+    if(target === 'progress') {
+      await setProgresses({ ...progresses, [id]: { ...progresses[id], title: e.target.value } });
+    }
+
     const inputValue = e.target.value;
-    e.target.onkeypress = (e)=>{
+    e.target.onkeypress = async (e)=>{
       if(e.keyCode === 13){
         // TODO 😁 axios : board, progress title 수정 
         console.log(e.target.value, "title 수정")
         if(inputValue === '') return alert('빈칸은 입력이 불가능해요')
         e.target.blur() // input focus 해제
+
+        if(target === 'board'){
+          //TODO axios
+          const response = await axiosRequest('/boards/title', accessToken, 'patch', 
+            { board_id: b } ,
+            { title: inputValue }
+          );
+
+          console.log("PATCH board tilte 수정", response)
+        } else if(target === 'progress'){
+          //TODO axios
+          const response = await axiosRequest('/progress/title', accessToken, 'put', 
+            { } ,
+            { 
+              board_id: b,
+              progress_id: p,
+              title: inputValue
+            }
+          );
+
+          console.log("PATCH progress tilte 수정", response)
+        }
+
       }
     }
   },

@@ -12,9 +12,10 @@ import eventHandler from '../helper/eventHandler.js';
 
 import '../styles/board.css'
 
-export default function Board(){
+export default function Board( { accessToken }){
   // 상위 컴포넌트에서 한꺼번에 관리하자!
 
+  console.log("BOARD PAGE", accessToken)
   const [ board, setBoard ] = useState({
     id : 1, // 숫자, 문자열 혼동 조심
     title : 'project',
@@ -116,7 +117,8 @@ export default function Board(){
     event: {
       state: event,
       setState: setEvent
-    }
+    },
+    accessToken: accessToken
   }
 
   //! 여기서부터 progress 추가 코드
@@ -158,6 +160,7 @@ export default function Board(){
     <div id="main-content">
       <section id="sub-nav-bar">
         <input className="btn-sub-nav-bar board_title" value={board.title} onChange={(e)=>{eventHandler.titleModifyHandler(e, store, 'board')}}></input>
+        {/* <button click=>수정</button> */}
         <span className="btn-sub-nav-bar divider"></span>
         <button name='member' className="btn-sub-nav-bar member" onClick={(e)=>eventHandler.toggleModal(e, store)}>member</button>
         
