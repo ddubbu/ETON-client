@@ -29,7 +29,7 @@ const Profile = (props) => {
                 <h3>{props.userName}</h3>
                 <h3>{props.userEmail}</h3>
             </div>
-            {showModal ? <UserInfoEdit userId = {props.userId} closeEditModal = {closeEditModal}/> : null}
+            {showModal ? <UserInfoEdit userId = {props.userId} closeEditModal = {closeEditModal} username = {props.userName} userEmail = {props.userEmail} accessToken = {props.accessToken}/> : null}
         </div>
     )
 }

@@ -50,7 +50,7 @@ function App() {
       <div className="body">
         
         <Route path="/intro" render = {() => <Intro />} />
-        <Route path="/main" render = {() => <Main />} />
+        <Route path="/main" render = {() => <Main accessToken = {accessToken}/>} />
         <Route path="/board" render = { () => <Board accessToken={accessToken}/> } />
 
         <Route exact path="/" render = {() => {
