@@ -422,7 +422,9 @@ const SignUp = (props) => {
     return(
         <div className = "signUpContainer">
 
-            <Logo />
+          <Logo />
+          <div id = "signUpDiv-wrapper">
+
             <div className = "signUpDiv">
 
                 {/* <div className = "socialLoginDiv">
@@ -501,6 +503,7 @@ const SignUp = (props) => {
                         onClick = {submit}>Sign Up</button>
                 </div>
             </div>
+          </div>
             
         </div>
     )
