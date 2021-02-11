@@ -1,37 +1,35 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-// axios.defaults.withCredentials=true;
-// axios.defaults.baseURL = 'https://geteton.ga';
+axios.defaults.withCredentials=true;
+axios.defaults.baseURL = 'https://geteton.ga';
+// axios.defaults.baseURL = 'http://localhost:4000';
 
-// export default async function(subURL='?', accessToken, method, queryString, payload){
+export default async function(subURL='', accessToken, method, queryString, payload){
 
-//   // queryString은 object로 줘서 
-//   // `?key=value&... 연속으로 여기서 작업할 수 있도록
-//   console.log(accessToken, '\n', method,'\n', queryString, '\n', payload)
-//   if(queryString !== null){
-//     subURL += '?'
-//     for(let key in queryString){
-//       subURL += `${key}=${queryString[key]}&`;
-//     }
-//   }
+  console.log(`subURL>>${subURL}`);
+  console.log(`accessToken>>${accessToken}`);
+  console.log(`method>> ${method}`);
+  console.log(`queryString>> ${queryString}`);
+  console.log(`payload>> ${payload}`);
+  console.log("==================================")
+  const response = await axios({
+    method,
+    url: subURL,
+    params: queryString,
+    data: payload,
+    headers:{
+      authorization: `bearer ${accessToken}`
+    }
+  })
+  .then(res=>{
+    return res.data;
+  })
+  .catch(e=>{
+    //!403 status code 이면 만료되었다고 다시 로그인창으로 이동
+    console.log("ERROR", e)
+  })
 
-//   console.log("==================================")
-//   const response = await axios({
-//     method,
-//     url
-//   })
-  
-  
-//   // [method](subURL, 
-//   //   payload === undefined ? 
-//   //   undefined : {
-//   //   ...payload // POST, PUT 만 payload 전달하니깐
-//   // })
-//   .then(res=>{
-//     return res.data;
-//   })
-
-//   console.log('resData', response);
-//   console.log("==================================")
-
-// }
+  console.log('resData', response);
+  console.log("==================================")
+  return response;
+}

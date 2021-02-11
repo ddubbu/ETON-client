@@ -32,6 +32,7 @@ const SignIn = (props) => {
 			// setLogin(true);
 		}).catch(err => {
 			console.log("SIGN IN - err : ", err);
+      alert('로그인 다시 시도해주세요!')
 		})
 	}
 

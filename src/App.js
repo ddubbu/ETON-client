@@ -26,7 +26,7 @@ function App() {
 
 
   const HandleLogin = (data) => {
-    console.log(data);
+    console.log("after Login", data);
     setAccessToken(data.data.accessToken);
     setLogin(true);
   }
@@ -41,13 +41,6 @@ function App() {
     // const boards = axiosRequest('/boards', accessToken, 'get', { user_id : 1 } )
   }, [accessToken])
 
-  // axios.post('http://localhost5000/users/signin/refreshToken')
-  //   .then(res => {
-  //     console.log(res.data);
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   })
   
 
 
