@@ -9,6 +9,7 @@ import TaskInfoEdit from '../components/modal/TaskInfoEdit.js';
 import sortObject from '../helper/sortObject';
 import drag_n_drop from '../helper/drag-n-drop.js';
 import eventHandler from '../helper/eventHandler.js';
+import axiosRequest from '../helper/axiosRequest.js';
 
 import '../styles/board.css'
 
@@ -149,6 +150,18 @@ export default function Board( { accessToken }){
         }})
       await setBoard({ ... board, prg_priority: board['prg_priority'] + `,${new_prg_id}` }); // here
     } 
+
+    // TODO axios
+    const response = await axiosRequest('/progress', accessToken, 'post', 
+      { } ,
+      { 
+        board_id: board.id,
+        title: input.title,
+      }
+    );
+
+    //! (여기하면되요!!!!) new id 받아서 아래 주석 풀기
+    console.log("POST new progress", response)
   }
  
   // drag-n-drop
