@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
+// import ReactDOM from 'react-dom'
 import ProgressList from '../components/board/ProgressList.js';
+import MemberDorpDown from '../components/modal/MemberDropDown.js';
+import PrgMenuDropDown from '../components/modal/PrgMenuDropDown.js';
+import TaskMenuDropDown from '../components/modal/TaskMenuDropDown.js';
+import TaskInfoEdit from '../components/modal/TaskInfoEdit.js';
 
 import sortObject from '../helper/sortObject';
 import drag_n_drop from '../helper/drag-n-drop.js';
+import eventHandler from '../helper/eventHandler.js';
 
 import '../styles/board.css'
 
@@ -13,7 +19,7 @@ export default function Board(){
     id : 1, // 숫자, 문자열 혼동 조심
     title : 'project',
     admin_userId : 1,
-    prg_priority : '2,1' // (progress_id 순서) 관계는 부모가 갖고 있음 board - prg 관계는 board가 관여
+    prg_priority : '2,1,3' // (progress_id 순서) 관계는 부모가 갖고 있음 board - prg 관계는 board가 관여
   })
 
   const [ progresses, setProgresses ] = useState({
@@ -21,12 +27,17 @@ export default function Board(){
     1 : { // key = progress_id
       id : 1, // <ProgressList /> name 세팅을 위해서 
       title : '안녕',
-      task_priority : '1,2,4'
+      task_priority : '1,2'
     },
     2 : {
       id : 2,
       title : 'progress 2',
       task_priority : '3', //'3,4'
+    },
+    3 : {
+      id : 3,
+      title : 'progress 3',
+      task_priority : '4', //'3,4'
     },
   })
   
@@ -53,102 +64,148 @@ export default function Board(){
     }
   })
 
-  //! Board 입장에서 Progress 순서 저장
-  // 새로운 순서 인자로 넘김.
-  async function changePrgPriority (newPrgPriority){ // string type 기대
-    await setBoard({
-      ...board,
-      prg_priority: newPrgPriority
+  const [ members, setMembers ] = useState([ 
+    { id: 1, name: '사람1' },
+    { id: 2, name: '사람2'}
+  ] );
+
+  // 모달 띄우고 있는지 여부
+  const [ modals, setModals ] = useState({ 
+    member : false,
+    memberSearch : false,
+    progress : false,
+    task : false,
+    task_edit: false,
+  })
+
+  // event state 감지
+  const [ event, setEvent ] = useState({
+    method : 'PUT', // GET, POST, PUT, DELETE
+    target : 'task', // board, progress, target
+    content : { // 무엇이든
+      title: '',
+      description: ''
+    }, 
+    board_id : board.id,
+    progress_id : null,
+    task_id : null
+  })
+
+  // redux 처럼 전체 state 통솔 객체
+  const store = {
+    board: { // 모두 객체 주소니깐 업데이트 안해줘도 괜찮겠지?
+      state : board,
+      setState : setBoard
+    },
+    progresses: { // 모두 객체 주소니깐 업데이트 안해줘도 괜찮겠지?
+      state : progresses,
+      setState : setProgresses
+    },
+    tasks : {
+      state: tasks,
+      setState : setTasks
+    },
+    members : {
+      state: members,
+      setState: setMembers
+    },
+    modals : {
+      state : modals,
+      setState: setModals
+    },
+    event: {
+      state: event,
+      setState: setEvent
+    }
+  }
+
+  //! 여기서부터 progress 추가 코드
+  // local state
+  const [input, setInput] = useState({
+    title: '',
+    description: ''
+  })
+
+  const inputChangeHandler = (e)=>{
+    setInput({
+      ... input,
+      [e.target.name] : e.target.value
     })
-    console.log("Update newPrgPriority", newPrgPriority); 
   }
 
-  //! Progress 입장에서 Task 순서 저장
-  // 여기서 새로운 순서 생성
-  async function changeTaskPriority ({ source, target }){
-
-    //같은 progress & 다른 taskDropZone 
-    if(source.prgId === target.prgId){ 
-      const prev_task_priority = progresses[source.prgId].task_priority.split(',');
-      let new_task_priority = [];
-      for(let i=0; i<prev_task_priority.length; i++){
-        // 새로운 위치에 넣고
-        if(i === Number(target.taskDropZone)) new_task_priority.push(source.taskId);
-        // 다른 task 들은 순서대로 넣기
-        if(prev_task_priority[i] !== source.taskId) new_task_priority.push(prev_task_priority[i]);
-        // 예전 task는 지우기
-        // else continue;
-      }
-      // 같은 progress 니깐 한곳만 update 하면 됨.
-      await setProgresses({
-        ...progresses,
-        [source.prgId] : {
-          ...progresses[source.prgId],
-          task_priority : new_task_priority.join(',')
-        },
-      })
-    }
-
-    // 다른 progress
-    else{
-      // source(출발지) 삭제
-      const source_new_task_priority = progresses[source.prgId].task_priority.split(',');
-      source_new_task_priority.splice(source_new_task_priority.indexOf(source.taskId), 1);
-      
-      // target(도착지) 추가 - taskDropZone id 에 넣으면 된다!
-      let target_new_task_priority = [];
-        // 원래 빈 task_priority 였으면 바로 추가
-      if(progresses[target.prgId].task_priority.length === 0) target_new_task_priority = [source.taskId];
-      else {
-        target_new_task_priority = progresses[target.prgId].task_priority.split(',');
-        target_new_task_priority.splice(target.taskDropZone, 0, source.taskId)
-      }
-
-      // 출발지, 도착지 모두 update
-      await setProgresses({
-        ...progresses,
-        [source.prgId] : {
-          ...progresses[source.prgId],
-          task_priority : source_new_task_priority.join(',')
-        },
-        [target.prgId] : {
-          ...progresses[target.prgId],
-          task_priority : target_new_task_priority.join(',')
-        }
-      })
-    }
-
+  async function clickAddHandler(e, target='progress', id){
+    // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
+    const new_prg_id = '5'
+    
+    if(target === 'progress') {
+      await setProgresses({ 
+        ...progresses, 
+        [new_prg_id]: { // here
+          id : new_prg_id, // here
+          title : input.title,
+          task_priority : '', 
+        }})
+      await setBoard({ ... board, prg_priority: board['prg_priority'] + `,${new_prg_id}` }); // here
+    } 
   }
-
+ 
   // drag-n-drop
   document.addEventListener('mousemove', drag_n_drop.handleMouseMove);
+
+  /* (끝) drag-drop */
 
   return (
     <div id="main-content">
       <section id="sub-nav-bar">
-        <input className="btn-sub-nav-bar board_title" value={board.title}></input>
+        <input className="btn-sub-nav-bar board_title" value={board.title} onChange={(e)=>{eventHandler.titleModifyHandler(e, store, 'board')}}></input>
         <span className="btn-sub-nav-bar divider"></span>
-        <button className="btn-sub-nav-bar member">member</button>
+        <button name='member' className="btn-sub-nav-bar member" onClick={(e)=>eventHandler.toggleModal(e, store)}>member</button>
+        
         <button className="btn-sub-nav-bar invite">invite</button>
       </section>
+      {/* 모달은 position:absolute 이므로 한꺼번에 정의하자, 누르면 활성화되도록 */}
+      { modals.member ? <MemberDorpDown members={members} />  : '' }
+      { modals.progress ? <PrgMenuDropDown store={store} /> : '' }
+      { modals.task ? <TaskMenuDropDown store={store} /> : '' }
+      { modals.task_edit ? <TaskInfoEdit store={store} /> : '' }
+
       <section id="progress-wrapper">
         {
           sortObject(progresses, board.prg_priority).map((progress, idx)=>{
             return (
               <>
                 <article className={`prg-dropzone prg-dropzone-${idx}`}></article>
-                <ProgressList key={idx} progress={progress} tasks={tasks} 
-                  changePrgPriority={changePrgPriority}
-                  prg_priority={board.prg_priority}
-                  changeTaskPriority={changeTaskPriority}
+                <ProgressList key={idx}
+                  ids={{board_id: board.id, progress_id: progress.id}}
+                  store={store}
                 />
               </>
             )
           })
         }
         <article className={`prg-dropzone prg-dropzone-${board.prg_priority.split(',').length}`}></article>
-        <button className="btn-add-progress"> + Add another progress </button>
+        {/* 누르기전까지 숨어 있음 */}
+        <article className='progress form-add-progress'>
+          <input 
+            name='title'
+            className='form-add-progress-input' 
+            placeholder='Enter progress title...'
+            onChange={inputChangeHandler}
+          ></input>
+          <button className='form-add-progress-btn-add' onClick={clickAddHandler}>Add progress</button>
+          <button 
+            className='form-add-progress-btn-cancle'
+            onClick={eventHandler.cancleAddInfo}
+          >X</button>
+        </article>
+        <button 
+          className="btn-add-progress" 
+          onClick={e=>{eventHandler.clickAddSomething(e, 'progress')}}
+        > + Add another progress 
+          </button>
       </section>
     </div>
   )
 }
+
+

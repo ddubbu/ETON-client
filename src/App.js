@@ -8,6 +8,8 @@ import SignIn from './pages/SignIn';
 import Main from './pages/Main';
 import axios from 'axios';
 
+import Board from './pages/Board';
+
 function App() {
   
   const [isLogin, setLogin] = useState(false);
@@ -50,7 +52,7 @@ function App() {
       <Header isLogin = {isLogin} HandleLogout = {HandleLogout} accessToken = {accessToken}/>
       <div className="body">
         
-        <Route path="/intro" render = {() => <Intro />} />
+        <Route path="/intro" render = {() => <Board />} />
         <Route path="/main" render = {() => <Main />} />
 
         <Route exact path="/" render = {() => {

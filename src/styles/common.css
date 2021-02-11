@@ -60,7 +60,7 @@
   margin: 0 10px;
 }
 
-/* 모달 */
+/* 모달 modal */
 .userInfoEditDiv{
   width: 100%;
   height: 100%;
@@ -101,4 +101,63 @@
 
 .logoutButton{
   width: 100%;
+}
+
+
+/* board page dorp down 및 modal */
+.drop-down{
+  /* display: none; */
+  background-color: rgb(163, 247, 7);
+  position: absolute;
+  width: 300px;
+  /* z-index: 2; */
+  /* right: 3%; */
+  /* color:red; */
+}
+
+#task-edit-form-wrapper{
+  position: absolute;
+  /* width: 100vh; */
+  /* height: 100vh; */
+  width: 100%;
+  height: 100%;
+  background:rgba(0, 0, 0, 0.527);
+
+  display: flex;
+  align-items: center;
+}
+
+#task-edit-form {
+  margin: auto;
+  width: 50%;
+  max-width: 400px;
+  padding: 20px;
+  background: white;
+}
+
+#task-edit-form textarea{
+  width: 100%;
+  min-width: 100%;
+  margin-top: 4px;
+
+  height: 200px;
+}
+
+#task-edit-form button{
+  border: none;
+  outline: none;
+  height: 27px;
+  margin: 5px 3px 0 0;
+  padding: 1px 8px;
+  background-color: #5aac44;
+  color: #fff;
+
+  border-radius: 4px;
+}
+
+#task-edit-form button{
+  /* background: transparent;
+  border: none;
+  outline: none;
+  font-size: 22px; */
 }
