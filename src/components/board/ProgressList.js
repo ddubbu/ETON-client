@@ -4,12 +4,16 @@ import TaskList from './TaskList.js';
 import sortObject from '../../helper/sortObject.js';
 import drag_n_drop from '../../helper/drag-n-drop.js';
 import eventHandler from '../../helper/eventHandler.js'
+import axiosRequest from '../../helper/axiosRequest.js';
 
 export default function ProgressList( { store, ids }){
   const { state: board, setState: setBoard } = store.board;
   const { state: progresses, setState: setProgresses } = store.progresses;
   const { state: tasks, setState: setTasks } = store.tasks;
   const { state: event, setState: setEvent } = store.event;
+  const { board_id: b, progress_id: p, task_id: t } = store.event.state;
+  const accessToken = store.accessToken;
+
   const progress = progresses[ids.progress_id];
 
   //! 여기서부터 progress 추가 코드
@@ -52,7 +56,24 @@ export default function ProgressList( { store, ids }){
     e.stopPropagation();
     // TODO 😁 서버에서 새로 생성한 새로운 id 먼저 주시고
     // id를 기반으로 정보를 update 하자!
-    const new_task_id = '100';
+    let new_task_id = '100';
+
+    // TODO axios
+    const response = await axiosRequest('/task', accessToken, 'post', 
+      { } ,
+      { 
+        board_id: b,
+        progress_id: ids.progress_id,
+        title: input.title,
+        description: input.description
+      }
+    );
+
+    //! (여기하면되요!!!!) new id 받아서 아래 주석 풀기
+    console.log("POST new task", response)
+
+    new_task_id = response.id;
+
 
     // progress.task_priority 에 추가하기위해
     await setNewTaskId(new_task_id);
@@ -66,6 +87,7 @@ export default function ProgressList( { store, ids }){
           title : input.title,
           description: input.description
       }})
+
     }
 
     // 입력창 닫기
