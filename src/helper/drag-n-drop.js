@@ -58,7 +58,7 @@ export default {
             // hover 로 하려고 했는데, $el 이 target 이라 $dropzone:hover 인식안됨.
             // 안에 들어오면 넓혀주고, 배경색로 알려주기
             $dropzone.style.width = '272px'
-            $dropzone.style.background = 'rgb(161, 161, 161, 0.2)';
+            $dropzone.style.background = 'rgba(0, 0, 0, 0.2)'; //.349
           }else {
             // 감지된거 다시 reset 해줘야함.
             $dropzone.style.width = '0px'

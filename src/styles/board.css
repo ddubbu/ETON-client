@@ -12,8 +12,6 @@
   background-size: cover;
 
   background-image: url("./tessellation-wallpapers/sky-orange.png");
-
-
 }
 
 /*! 공통, 위치잡기(flex) */
@@ -32,8 +30,8 @@
   /* color: white; */
 }
 
-#sub-nav-bar *:not(.divider):hover, .btn-add-progress:hover {
-  background-color: #d6d7db;
+#sub-nav-bar *:not(.divider, input):hover, .btn-add-progress:hover {
+  background-color: #ffffff;
   /* TODO 배경에 따라 바꿔주자
   */
 }
@@ -62,19 +60,40 @@
 
 #sub-nav-bar {
   display: flex;
+  margin-bottom: 20px;
 }
 
-.board_title {
+#sub-nav-bar .board_title {
   font-size: 18px; 
   font-weight: 700;
 
   width: fit-content;
+
+  background: rgba(0, 0, 0, 0.349);
+  color: rgb(255, 255, 255);
+
+  margin-left: 10px;
 }
+
 
 .btn-sub-nav-bar.divider {
   border-left: 1px solid rgba(255, 255, 255, 0.4);
   margin: 0 16px 0 0 ;
 }
+
+.btn-add-progress {
+  line-height: 32px;
+  /* padding: 4px 8px; */
+  outline: none;
+  border: none;
+  color: #5e6c84;
+}
+
+.btn-add-progress:hover {
+  /* background: rgba(133, 132, 132, 0.589); */
+}
+
+
 
 
 /*! progress 관련 */
@@ -90,13 +109,13 @@
 }
 
 .progress {
-  /* background-color: #ebecf0; */
-  background-color: #f6f8fa;
+  background: white;
+  /* background-color: #f6f8fa; */
   width: 272px;
   /* margin: auto 8px 0 0;  */
   padding: 8px;
 
-  user-select: auto;
+  /* user-select: auto; */
 }
 
 .progress-head {
@@ -104,6 +123,7 @@
   height: 40px;
   display: flex;
   align-items: center;
+  font-size: 19px;
 }
 
 /* ? input.board_title:focus 적용하고 싶음 
@@ -113,16 +133,29 @@
   위에로 select 하면 적용되는데 대신 input 값이 안 받아짐.
 */
 
-input.progress-title:focus {
+
+
+input.progress-title:focus,
+#sub-nav-bar .board_title:focus {
   border: 2px solid rgb(0, 98, 255);
   border-radius: 5px;
   background-color: white;
+
+  color: black;
+  /* font-size: 20px; */
+
 }
 
 .progress-title, .btn-progress-menu {
   background: transparent;
   border: none;
   outline: none;
+}
+
+/*input progress title 드디어 적용됨*/
+.progress-title {
+  margin: auto 0;
+  font-size: 18px;
 }
 
 .btn-progress-menu{
@@ -187,6 +220,7 @@ input.progress-title:focus {
 
   /* 그림자 */
   box-shadow: 0 1px rgb(189, 189, 189);
+
 }
 
 .btn-task-menu {
@@ -200,7 +234,8 @@ input.progress-title:focus {
 }
 
 .task-title {
-  font-weight: 700;
+  background-color: rgb(255, 240, 218);
+  margin-bottom: 5px;
 }
 .task-body {
   /* border: 1px brown solid; */
@@ -216,10 +251,11 @@ input.progress-title:focus {
   color: #5e6c84;
 }
 
-.btn-add-task:hover, 
+.btn-add-task:hover,
+/* .btn-add-progress:hover,  */
 .btn-progress-menu:hover, 
-.form-add-progress-btn-cancle:hover
-,.form-add-task-btn-cancle:hover {
+.form-add-progress-btn-cancle:hover,
+.form-add-task-btn-cancle:hover {
   background: rgba(133, 132, 132, 0.2);
 }
 
@@ -229,13 +265,14 @@ input.progress-title:focus {
 .prg-dropzone { /* mouse hover 인식을 위해서 */
   /* width:5px; */
   height: 40vh;
-  margin:4px; /*progress 간 간격 늘림*/
+  margin: 0 8px 0 8px; /*progress 간 간격 늘림*/
   /* border: 1px white solid; */
 }
 .prg-dropzone:hover {
   /* js 파일 에서 정의함! */
   /* background: rgba(161, 161, 161, 0.2);
   width: 272px; */
+  
 }
 
 .hold {
