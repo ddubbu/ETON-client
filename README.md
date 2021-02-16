@@ -1,8 +1,6 @@
 ## ✍ 프로젝트 소개
 ### Link
 [ETON 바로가기](https://eton-project.ga)
-### 기술 시연 영상
-[ETON 바로가기](https://eton-project.ga)
 
 ### 1. LOGO
 <img src= "https://user-images.githubusercontent.com/37296369/106476732-b4994300-64ea-11eb-8f3a-99163a7988d6.png" width=200px>
